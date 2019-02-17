@@ -1,0 +1,22 @@
+# Log file
+*.log.*
+*.log
+/.classpath
+/.project
+.settings/
+
+# Package Files #
+*.zip
+*.tar.gz
+*.rar
+
+*.project
+*.iml
+.DS_Store
+
+# dependencies
+/node_modules
+*.idea*
+
+# production
+/build
