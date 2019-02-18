@@ -62,14 +62,15 @@ function Game(player, gamefield) {
         let x, y;
         let cell;
         let split;
-        while (this.gamefield.hasEmptyCells()) {
+        let endGameFlag = false
+        while (this.gamefield.hasEmptyCells() && !endGameFlag) {
             let cellSetted = false;
             while (!cellSetted) {
                 cell = readlineSync.question("Your turn. Select cell(x,y):");
                 split = cell.split(" ");
                 x = split[0];
                 y = split[1];
-                if (x >= this.gamefield.field.length || y >= this.gamefield.field[x].length || x < 0 || y < 0) {
+                if (x === undefined || y === undefined || x >= this.gamefield.field.length || y >= this.gamefield.field[x].length || x < 0 || y < 0) {
                     CellOutOfRangeError.what();
                 } else if (this.gamefield.field[x][y] === ' ') {
                     this.gamefield.field[x][y] = 'X';
@@ -77,6 +78,9 @@ function Game(player, gamefield) {
                 } else {
                     CellIsNotEmptyError.what();
                 }
+            }
+            if(this.isPlayerWon()){
+                endGameFlag = true;
             }
             if (this.gamefield.hasEmptyCells()) {
                 cellSetted = false;
@@ -91,11 +95,72 @@ function Game(player, gamefield) {
                     }
                 }
             }
-
+            if(this.isBotWon()){
+                endGameFlag = true;
+            }
             this.printGameField();
         }
-
+        if(endGameFlag){
+            if(this.isPlayerWon()){
+                console.log(this.player.name + " won!");
+            } else {
+                console.log("bot won.")
+            }
+        }
     };
+    this.isPlayerWon = function () {
+        return (this.gamefield.field[0][0]+this.gamefield.field[0][1]+this.gamefield.field[0][2])==='XXX' ||
+            (this.gamefield.field[1][0]+this.gamefield.field[1][1]+this.gamefield.field[1][2])==='XXX'||
+            (this.gamefield.field[2][0]+this.gamefield.field[2][1]+this.gamefield.field[2][2])==='XXX'||
+            (this.gamefield.field[0][0]+this.gamefield.field[1][0]+this.gamefield.field[2][0])==='XXX'||
+            (this.gamefield.field[0][1]+this.gamefield.field[1][1]+this.gamefield.field[2][1])==='XXX'||
+            (this.gamefield.field[0][2]+this.gamefield.field[1][2]+this.gamefield.field[2][2])==='XXX'||
+            (this.gamefield.field[0][0]+this.gamefield.field[1][1]+this.gamefield.field[2][2])==='XXX'||
+            (this.gamefield.field[0][2]+this.gamefield.field[1][1]+this.gamefield.field[2][0])==='XXX'
+    };
+    this.isBotWon = function () {
+        return (this.gamefield.field[0][0]+this.gamefield.field[0][1]+this.gamefield.field[0][2])==='000' ||
+            (this.gamefield.field[1][0]+this.gamefield.field[1][1]+this.gamefield.field[1][2])==='000'||
+            (this.gamefield.field[2][0]+this.gamefield.field[2][1]+this.gamefield.field[2][2])==='000'||
+            (this.gamefield.field[0][0]+this.gamefield.field[1][0]+this.gamefield.field[2][0])==='000'||
+            (this.gamefield.field[0][1]+this.gamefield.field[1][1]+this.gamefield.field[2][1])==='000'||
+            (this.gamefield.field[0][2]+this.gamefield.field[1][2]+this.gamefield.field[2][2])==='000'||
+            (this.gamefield.field[0][0]+this.gamefield.field[1][1]+this.gamefield.field[2][2])==='000'||
+            (this.gamefield.field[0][2]+this.gamefield.field[1][1]+this.gamefield.field[2][0])==='000'
+    };
+    // this.isPlayerWon = function () { //NOT WORKING
+    //     let temp1 = '';
+    //     let temp2 = '';
+    //     for (let i = 0; i < this.gamefield.length; i++) {
+    //         for (let j = 0; j < this.gamefield[i].length; j++) {
+    //             temp1 += this.gamefield[i][j];
+    //             temp2 += this.gamefield[j][i];
+    //         }
+    //         if (temp1 === 'XXX' || temp2 === 'XXX') {
+    //             return true;
+    //         }
+    //     }
+    //     return (this.gamefield.field[0][0] + this.gamefield.field[1][1] + this.gamefield.field[2][2]) === 'XXX' ||
+    //         (this.gamefield.field[0][2] + this.gamefield.field[1][1] + this.gamefield.field[2][0]) === 'XXX'
+    // };
+    // this.isBotWon = function () {
+    //     let temp1 = '';
+    //     let temp2 = '';
+    //     for (let i = 0; i < this.gamefield.length; i++) {
+    //         for (let j = 0; j < this.gamefield[i].length; j++) {
+    //             temp1 += this.gamefield[i][j];
+    //             temp2 += this.gamefield[j][i];
+    //         }
+    //         if (temp1 === '000' || temp2 === '000') {
+    //             return true;
+    //         }
+    //         temp1 = '';
+    //         temp2 = '';
+    //     }
+    //
+    //     return (this.gamefield.field[0][0] + this.gamefield.field[1][1] + this.gamefield.field[2][2]) === '000' ||
+    //         (this.gamefield.field[0][2] + this.gamefield.field[1][1] + this.gamefield.field[2][0]) === '000'
+    // };
 }
 
 
