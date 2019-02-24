@@ -32,14 +32,14 @@ function GameField(n, m) { //todo: make setter for gamefield cell to work with e
 }
 
 var CellIsNotEmptyError = { //todo: make exception
-    what: function () {
-        console.log("Cannot set value for cell X Y. Cell is not empty.")
+    what: function (x, y) {
+        console.log("Cannot set value for cell " + x + " " + y + ". Cell is not empty.")
     }
 };
 
 var CellOutOfRangeError = {
-    what: function () {
-        console.log('Cannot set value for cell X Y. Cell is out of the field range.');
+    what: function (x, y) {
+        console.log("Cannot set value for cell " + x + " " + y + ". Cell is out of the field range.");
     }
 };
 
@@ -62,7 +62,7 @@ function Game(player, gamefield) {
         let x, y;
         let cell;
         let split;
-        let endGameFlag = false
+        let endGameFlag = false;
         while (this.gamefield.hasEmptyCells() && !endGameFlag) {
             let cellSetted = false;
             while (!cellSetted) {
@@ -71,15 +71,15 @@ function Game(player, gamefield) {
                 x = split[0];
                 y = split[1];
                 if (x === undefined || y === undefined || x >= this.gamefield.field.length || y >= this.gamefield.field[x].length || x < 0 || y < 0) {
-                    CellOutOfRangeError.what();
+                    CellOutOfRangeError.what(x, y);
                 } else if (this.gamefield.field[x][y] === ' ') {
                     this.gamefield.field[x][y] = 'X';
                     cellSetted = true;
                 } else {
-                    CellIsNotEmptyError.what();
+                    CellIsNotEmptyError.what(x, y);
                 }
             }
-            if(this.isPlayerWon()){
+            if (this.isPlayerWon()) {
                 endGameFlag = true;
             }
             if (this.gamefield.hasEmptyCells()) {
@@ -95,13 +95,13 @@ function Game(player, gamefield) {
                     }
                 }
             }
-            if(this.isBotWon()){
+            if (this.isBotWon()) {
                 endGameFlag = true;
             }
             this.printGameField();
         }
-        if(endGameFlag){
-            if(this.isPlayerWon()){
+        if (endGameFlag) {
+            if (this.isPlayerWon()) {
                 console.log(this.player.name + " won!");
             } else {
                 console.log("bot won.")
@@ -109,24 +109,24 @@ function Game(player, gamefield) {
         }
     };
     this.isPlayerWon = function () {
-        return (this.gamefield.field[0][0]+this.gamefield.field[0][1]+this.gamefield.field[0][2])==='XXX' ||
-            (this.gamefield.field[1][0]+this.gamefield.field[1][1]+this.gamefield.field[1][2])==='XXX'||
-            (this.gamefield.field[2][0]+this.gamefield.field[2][1]+this.gamefield.field[2][2])==='XXX'||
-            (this.gamefield.field[0][0]+this.gamefield.field[1][0]+this.gamefield.field[2][0])==='XXX'||
-            (this.gamefield.field[0][1]+this.gamefield.field[1][1]+this.gamefield.field[2][1])==='XXX'||
-            (this.gamefield.field[0][2]+this.gamefield.field[1][2]+this.gamefield.field[2][2])==='XXX'||
-            (this.gamefield.field[0][0]+this.gamefield.field[1][1]+this.gamefield.field[2][2])==='XXX'||
-            (this.gamefield.field[0][2]+this.gamefield.field[1][1]+this.gamefield.field[2][0])==='XXX'
+        return (this.gamefield.field[0][0] + this.gamefield.field[0][1] + this.gamefield.field[0][2]) === 'XXX' ||
+            (this.gamefield.field[1][0] + this.gamefield.field[1][1] + this.gamefield.field[1][2]) === 'XXX' ||
+            (this.gamefield.field[2][0] + this.gamefield.field[2][1] + this.gamefield.field[2][2]) === 'XXX' ||
+            (this.gamefield.field[0][0] + this.gamefield.field[1][0] + this.gamefield.field[2][0]) === 'XXX' ||
+            (this.gamefield.field[0][1] + this.gamefield.field[1][1] + this.gamefield.field[2][1]) === 'XXX' ||
+            (this.gamefield.field[0][2] + this.gamefield.field[1][2] + this.gamefield.field[2][2]) === 'XXX' ||
+            (this.gamefield.field[0][0] + this.gamefield.field[1][1] + this.gamefield.field[2][2]) === 'XXX' ||
+            (this.gamefield.field[0][2] + this.gamefield.field[1][1] + this.gamefield.field[2][0]) === 'XXX'
     };
     this.isBotWon = function () {
-        return (this.gamefield.field[0][0]+this.gamefield.field[0][1]+this.gamefield.field[0][2])==='000' ||
-            (this.gamefield.field[1][0]+this.gamefield.field[1][1]+this.gamefield.field[1][2])==='000'||
-            (this.gamefield.field[2][0]+this.gamefield.field[2][1]+this.gamefield.field[2][2])==='000'||
-            (this.gamefield.field[0][0]+this.gamefield.field[1][0]+this.gamefield.field[2][0])==='000'||
-            (this.gamefield.field[0][1]+this.gamefield.field[1][1]+this.gamefield.field[2][1])==='000'||
-            (this.gamefield.field[0][2]+this.gamefield.field[1][2]+this.gamefield.field[2][2])==='000'||
-            (this.gamefield.field[0][0]+this.gamefield.field[1][1]+this.gamefield.field[2][2])==='000'||
-            (this.gamefield.field[0][2]+this.gamefield.field[1][1]+this.gamefield.field[2][0])==='000'
+        return (this.gamefield.field[0][0] + this.gamefield.field[0][1] + this.gamefield.field[0][2]) === '000' ||
+            (this.gamefield.field[1][0] + this.gamefield.field[1][1] + this.gamefield.field[1][2]) === '000' ||
+            (this.gamefield.field[2][0] + this.gamefield.field[2][1] + this.gamefield.field[2][2]) === '000' ||
+            (this.gamefield.field[0][0] + this.gamefield.field[1][0] + this.gamefield.field[2][0]) === '000' ||
+            (this.gamefield.field[0][1] + this.gamefield.field[1][1] + this.gamefield.field[2][1]) === '000' ||
+            (this.gamefield.field[0][2] + this.gamefield.field[1][2] + this.gamefield.field[2][2]) === '000' ||
+            (this.gamefield.field[0][0] + this.gamefield.field[1][1] + this.gamefield.field[2][2]) === '000' ||
+            (this.gamefield.field[0][2] + this.gamefield.field[1][1] + this.gamefield.field[2][0]) === '000'
     };
     // this.isPlayerWon = function () { //NOT WORKING
     //     let temp1 = '';
