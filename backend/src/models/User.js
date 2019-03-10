@@ -1,4 +1,5 @@
 'use strict';
+
 const uuid = require('uuid/v4');
 
 module.exports = class User {
@@ -9,6 +10,22 @@ module.exports = class User {
         this._lastName = lastName;
         this._password = password;
         this._email = email;
+    }
+
+    set firstName(value) {
+        this._firstName = value;
+    }
+
+    set lastName(value) {
+        this._lastName = value;
+    }
+
+    set password(value) {
+        this._password = value;
+    }
+
+    set email(value) {
+        this._email = value;
     }
 
     // function validateEmail(email) {
