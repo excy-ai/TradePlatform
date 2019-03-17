@@ -1,44 +1,55 @@
 'use strict';
-
 const uuid = require('uuid/v4');
+const Sequelize = require('sequelize');
 
-module.exports = class Item {
-    constructor({
-                    name, description, category, pic, masterId,
-                }) {
-        this._id = uuid();
-        this._masterId = masterId;
-        this._name = name;
-        this._description = description;
-        this._category = category;
-        this._pic = pic;
-    }
+module.exports = (sequelize) => {
+    const Item = sequelize.define('Item', {
+            id: {
+                allowNull: false,
+                primaryKey: true,
+                type: Sequelize.UUID,
+                defaultValue: () => uuid(),
+                unique: true,
+                validate: {
+                    notEmpty: true
+                }
+            },
+            sign: {
+                type: Sequelize.STRING,
+                allowNull: false,
+                validate: {
+                    notEmpty: true
+                }
+            },
+            description: {
+                type: Sequelize.STRING,
+                allowNull: false,
+                validate: {
+                    notEmpty: true
+                }
+            },
+            category: {
+                type: Sequelize.STRING,
+                allowNull: false,
+                validate: {
+                    notEmpty: true
+                }
+            },
+            pic: {
+                type: Sequelize.BLOB,
+                allowNull: true
+            }
+        },
+        {
+            underscored: true,
+            tableName: 'items'
+        });
 
-    get id() {
-        return this._id;
-    }
+    Item.associate = (models) => {
+        Item.belongsTo(models.Inventory, {
+            onDelete: 'set null'
+        });
+    };
 
-    get name() {
-        return this._name;
-    }
-
-    get description() {
-        return this._description;
-    }
-
-    get category() {
-        return this._category;
-    }
-
-    get pic() {
-        return this._pic;
-    }
-
-    get masterId() {
-        return this._masterId;
-    }
-
-    set masterId(newMasterId) {
-        this._masterId = newMasterId;
-    }
+    return Item;
 };

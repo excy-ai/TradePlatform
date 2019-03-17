@@ -5,7 +5,6 @@ const BUILD_DIR = path.resolve(__dirname, 'public/dist');
 const FRONTEND_APP_DIR = path.resolve(__dirname, 'frontend/src');
 
 const config = {
-    mode: 'development',
     entry: FRONTEND_APP_DIR + '/index.js',
     output: {
         path: BUILD_DIR,

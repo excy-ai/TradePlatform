@@ -1,25 +1,33 @@
 'use strict';
+const uuid = require('uuid/v4');
+const Sequelize = require('sequelize');
 
-module.exports = class Item {
-    constructor({userId, inventoryId}) {
-        this._id = inventoryId;
-        this._userId = userId;
-        this._items = [];
-    }
+module.exports = (sequelize) => {
+    const Inventory = sequelize.define('Inventory', {
+            id: {
+                allowNull: false,
+                primaryKey: true,
+                type: Sequelize.UUID,
+                defaultValue: () => uuid(),
+                unique: true,
+                validate: {
+                    notEmpty: true
+                }
+            }
+        },
+        {
+            underscored: true,
+            tableName: 'inventory'
+        });
 
-    addItem(item) {
-        this._items.push(item);
-    }
+    Inventory.associate = (models) => {
+        Inventory.hasMany(models.Item, {
+            onDelete: 'cascade'
+        });
+        Inventory.belongsTo(models.User, {
+            onDelete: 'cascade'
+        });
+    };
 
-    get id() {
-        return this._id;
-    }
-
-    get userId() {
-        return this._userId;
-    }
-
-    get items() {
-        return this._items;
-    }
+    return Inventory;
 };

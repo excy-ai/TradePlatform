@@ -8,6 +8,19 @@
 6) View a list of outgoing and incoming requests for exchange
 7) Exchange confirmation
 
+#Registration:
+host:3000/api/auth/signup/ - do POST to register
+fields:
+email,
+password,
+firstName,
+lastName
+host:3000/api/auth/signin/ - do POST to auth
+fields:
+email,
+password
+host:3000/api/auth/signout/ - do POST to signout
+
 ## Requirements:
 1. Node v10.x
 2. NPM v5.x
