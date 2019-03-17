@@ -6,4 +6,5 @@ const auth = require('../controllers/auth');
 module.exports = new Router()
     .post('/signin', auth.signin)
     .post('/signup', auth.signup)
-    .post('/signout', auth.signout);
+    .post('/signout', auth.signout)
+    .get('/me', auth.getMe);

@@ -3,9 +3,10 @@
 const bcrypt = require('bcrypt');
 const passport = require('koa-passport');
 const LocalStrategy = require('passport-local').Strategy;
-const {User} = require('../models');
+const {User, Inventory} = require('../models');
 
 const SALT_ROUNDS = 10;
+const PASS_MIN_LENGTH = 8;
 
 passport.serializeUser(async (user, done) => {
     try {
@@ -78,11 +79,14 @@ async function signup(ctx) {
     try {
         const userData = ctx.request.body;
         const [email, password] = [userData.email, userData.password];
-
+        if (!isValidMail(email)) {
+            ctx.throw(400, "invalid email");
+        }
+        if (password.length < PASS_MIN_LENGTH) {
+            ctx.throw(400, "password must be more than 8 symbols");
+        }
         if (await User.findOne({where: {email}})) {
-            ctx.response.body = "User with such email already exists";
-            ctx.response.status = 400;
-            return ctx.response;
+            ctx.throw(400, "User with such email already exists");
         }
 
         const salt = await bcrypt.genSalt(SALT_ROUNDS);
@@ -93,19 +97,18 @@ async function signup(ctx) {
             firstName: userData.firstName,
             lastName: userData.lastName,
         };
-
         const createdUser = await User.create(newUser);
-        if (createdUser) {
+        const createdInventory = await Inventory.create();
+        await createdUser.setInventory(createdInventory);
+        if (createdUser && createdInventory) {
             ctx.response.body = createdUser;
             ctx.response.status = 204;
             return ctx.response;
         }
-        ctx.response.body = "NOT FOUND";
-        ctx.response.status = 404;
-        return ctx.response;
+        ctx.throw(404, "not found");
     } catch (err) {
-        ctx.response.body = "Error creating new user";
-        ctx.response.status = 400;
+        ctx.response.body = err.message;
+        ctx.response.status = err.status;
         return ctx.response;
     }
 }
@@ -121,4 +124,26 @@ async function signout(ctx) {
     }
 }
 
-module.exports = {passport, signin, signup, signout};
+async function getMe(ctx) {
+    if (ctx.isUnauthenticated()) {
+        ctx.throw(401, 'Unauthenticated');
+    }
+    ctx.status = 200;
+    let user = ctx.state.user;
+    let inventory = await user.getInventory();
+    let items = await inventory.getItems();
+    ctx.body = {
+        "user": user,
+        "inventory": inventory,
+        "items": items
+    };
+    return ctx.response;
+}
+
+function isValidMail(email) {
+    const reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return reg.test(String(email).toLowerCase());
+}
+
+
+module.exports = {passport, signin, signup, signout, getMe};
