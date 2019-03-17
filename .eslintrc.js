@@ -17,6 +17,9 @@ module.exports = {
     },
     rules: {
         // project airbnb rules customization
+        "linebreak-style": 0,
+        "indent": "off",
+        "object-curly-spacing": "off",
         "camelcase": ["off"],
         "max-len": ["off"],
         "no-underscore-dangle": ["off"],

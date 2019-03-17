@@ -56,5 +56,4 @@ module.exports = class User {
     get email() {
         return this._email;
     }
-
 };

@@ -4,12 +4,13 @@ const PORT = 3000;
 const Koa = require('koa');
 const serve = require('koa-static');
 const koaBody = require('koa-body');
-const Router = require('koa-router');
+// const Router = require('koa-router');
 const bunyan = require('bunyan');
 const koaLogger = require('koa-bunyan');
-///////////////////////////
+
+// /////////////////////////
 const userRouter = require('./routes/Users');
-///////////////////////////
+// /////////////////////////
 const port = process.env.PORT || PORT;
 const app = new Koa();
 // const router = new Router();

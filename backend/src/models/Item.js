@@ -3,7 +3,9 @@
 const uuid = require('uuid/v4');
 
 module.exports = class Item {
-    constructor({name, description, category, pic, masterId}) {
+    constructor({
+                    name, description, category, pic, masterId,
+                }) {
         this._id = uuid();
         this._masterId = masterId;
         this._name = name;
@@ -39,5 +41,4 @@ module.exports = class Item {
     set masterId(newMasterId) {
         this._masterId = newMasterId;
     }
-
 };
