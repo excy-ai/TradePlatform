@@ -1,9 +1,14 @@
 import React from 'react';
-import {render} from 'react-dom';
-import App from './components/App';
+import ReactDOM from 'react-dom';
+import SignUp from '../pages/singup/SignUp';
+import SignIn from '../pages/signin/SignIn';
+import {BrowserRouter, Route} from 'react-router-dom';
 
-render(
-    <div>
-        <App/>
-    </div>, document.getElementById('app')
+
+ReactDOM.render(
+    <BrowserRouter>
+        <Route exact path='/' component={SignUp}/>
+        <Route exact path='/signin' component={SignIn}/>
+    </BrowserRouter>,
+    document.getElementById('app')
 );
