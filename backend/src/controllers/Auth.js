@@ -102,7 +102,7 @@ async function signup(ctx) {
         await createdUser.setInventory(createdInventory);
         if (createdUser && createdInventory) {
             ctx.response.body = createdUser;
-            ctx.response.status = 204;
+            ctx.response.status = 201;//TODO: in prod change to 204
             return ctx.response;
         }
         ctx.throw(404, "not found");
@@ -124,21 +124,6 @@ async function signout(ctx) {
     }
 }
 
-async function getMe(ctx) {
-    if (ctx.isUnauthenticated()) {
-        ctx.throw(401, 'Unauthenticated');
-    }
-    ctx.status = 200;
-    let user = ctx.state.user;
-    let inventory = await user.getInventory();
-    let items = await inventory.getItems();
-    ctx.body = {
-        "user": user,
-        "inventory": inventory,
-        "items": items
-    };
-    return ctx.response;
-}
 
 function isValidMail(email) {
     const reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -146,4 +131,4 @@ function isValidMail(email) {
 }
 
 
-module.exports = {passport, signin, signup, signout, getMe};
+module.exports = {passport, signin, signup, signout};

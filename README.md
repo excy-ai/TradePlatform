@@ -20,6 +20,7 @@ fields:
 email,
 password
 host:3000/api/auth/signout/ - do POST to signout
+localhost:3000/api/user/me - do GET to get info about user\inv\items (after reg\auth)
 
 ## Requirements:
 1. Node v10.x

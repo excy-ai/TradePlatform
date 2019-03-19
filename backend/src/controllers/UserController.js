@@ -2,35 +2,20 @@
 
 const {User} = require('../models');
 
-const getAllUsers = async ctx => {
-    const users = await User.findAll();
-    ctx.res.ok(users);
-};
-
-const getMe = async ctx => {
-    ctx.params.id = ctx.state.user.id;
-    return getUserById(ctx);
-};
-
-const getUserById = async ctx => {
-    const userId = +ctx.params.id;
-
-    const user = await User.findOne({where: {id: userId}});
-
-    if (user) {
-        let result;
-        if (ctx.isAuthenticated()) {
-            result = {
-                id: user.id,
-                email: user.email,
-                firstName: user.firstName,
-                lastName: user.lastName,
-            }
-        }
-        ctx.res.ok(result);
-    } else {
-        ctx.res.notFound();
+async function getMe(ctx) {
+    if (ctx.isUnauthenticated()) {
+        ctx.throw(401, 'Unauthenticated');
     }
-};
+    ctx.status = 200;
+    let user = ctx.state.user;
+    let inventory = await user.getInventory();
+    let items = await inventory.getItems();
+    ctx.body = {
+        "user": user,
+        "inventory": inventory,
+        "items": items
+    };
+    return ctx.response;
+}
 
-module.exports = {getAllUsers, getMe, getUserById};
+module.exports = {getMe};
