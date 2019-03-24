@@ -6,20 +6,22 @@ export default class SignUp extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <NavLink exact to={'/signin'}>
-                    SIGNIN
-                </NavLink>
+                <div className="card-header">
+                    <NavLink exact to={'/signin'}>
+                        <input className="btn btn-primary mb-2" type="submit" value="Sign In"/>
+                    </NavLink>
+                </div>
 
                 <form id="signup" name="signup" method="post" action="/api/auth/signup">
                     <label htmlFor="email">Email Address</label>
-                    <input className="text" name="email" type="email"/>
+                    <input className="form-control text" name="email" type="email"/>
                     <label htmlFor="firstName">Firstname</label>
-                    <input name="firstName" type="text"/>
+                    <input className="form-control" name="firstName" type="text"/>
                     <label htmlFor="lastName">Lastname</label>
-                    <input name="lastName" type="text"/>
+                    <input className="form-control" name="lastName" type="text"/>
                     <label htmlFor="password">Password</label>
-                    <input name="password" type="password"/>
-                    <input className="btn" type="submit" value="Sign Up"/>
+                    <input className="form-control" name="password" type="password"/>
+                    <input className="btn btn-primary mb-2" type="submit" value="Sign Up"/>
                 </form>
             </React.Fragment>
         );

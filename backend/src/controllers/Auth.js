@@ -3,7 +3,7 @@
 const bcrypt = require('bcrypt');
 const passport = require('koa-passport');
 const LocalStrategy = require('passport-local').Strategy;
-const {User, Inventory} = require('../models');
+const {User, Inventory, Item} = require('../models');
 
 const SALT_ROUNDS = 10;
 const PASS_MIN_LENGTH = 8;
@@ -47,9 +47,11 @@ async function login(ctx, email, password, done) {
             ctx.response.status = 200;
             return done(null, user);
         } else {
+            ctx.response.status = 400;
             return done('Incorrect password');
         }
     } else {
+        ctx.response.status = 404;
         return done('User not found');
     }
 }
@@ -66,8 +68,8 @@ async function signin(ctx, next) {
             ctx.response.status = 200;
             return ctx.response;
         } else {
-            ctx.response.body = err || info && info.message;
-            ctx.response.status = status;
+            ctx.response.body = "cant sign in with given params";
+            ctx.response.status = 400;
             return ctx.response;
         }
 
@@ -99,7 +101,14 @@ async function signup(ctx) {
         };
         const createdUser = await User.create(newUser);
         const createdInventory = await Inventory.create();
+        const item = {
+            sign: "itemName",
+            description: "desc",
+            category: "none"
+        };
+        const createdItem = await Item.create(item);
         await createdUser.setInventory(createdInventory);
+        await createdInventory.addItem(createdItem);
         if (createdUser && createdInventory) {
             ctx.response.body = createdUser;
             ctx.response.status = 201;//TODO: in prod change to 204

@@ -3,13 +3,15 @@
 const {User} = require('../models');
 
 async function getMe(ctx) {
-    if (ctx.isUnauthenticated()) {
-        ctx.throw(401, 'Unauthenticated');
-    }
     ctx.status = 200;
     let user = ctx.state.user;
     let inventory = await user.getInventory();
-    let items = await inventory.getItems();
+    let items = await (await inventory.getItems()).map((item) => {
+        return {
+            name: item.sign,
+            description: item.description
+        }
+    });
     ctx.body = {
         "user": user,
         "inventory": inventory,
