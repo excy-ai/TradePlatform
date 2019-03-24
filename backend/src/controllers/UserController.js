@@ -6,12 +6,7 @@ async function getMe(ctx) {
     ctx.status = 200;
     let user = ctx.state.user;
     let inventory = await user.getInventory();
-    let items = await (await inventory.getItems()).map((item) => {
-        return {
-            name: item.sign,
-            description: item.description
-        }
-    });
+    let items = await (await inventory.getItems());
     ctx.body = {
         "user": user,
         "inventory": inventory,

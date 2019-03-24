@@ -14,21 +14,20 @@ export default class Me extends React.Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         fetch('api/user/me').then((response) => response.json()).then((data) => {
             this.setState({
                 userId: data.user.id,
                 user: data.user,
                 inventoryId: data.inventory.id,
                 inventory: data.inventory,
-                items: data.items
+                items: data.items[0]
             });
         });
     }
 
     render() {
         console.log(this.state.items);
-
         return (
             <React.Fragment>
                 <div className="card-header">
@@ -43,7 +42,7 @@ export default class Me extends React.Component {
                     <h3>Your inventory ID:</h3>
                     <h2>{this.state.inventoryId}</h2>
                     <h3>Your items:</h3>
-                    {/*<h2>{itemName}</h2>*/}
+                    {/*<h2>{this.state.items.description}</h2>*/}
                     {/*<ul> {*/}
                     {/*this.state.items.length === 0 ? "" :*/}
                     {/*this.state.items.map(el => (*/}
