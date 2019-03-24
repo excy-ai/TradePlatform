@@ -21,7 +21,7 @@ export default class Me extends React.Component {
                 user: data.user,
                 inventoryId: data.inventory.id,
                 inventory: data.inventory,
-                items: data.items[0]
+                items: data.items
             });
         });
     }
