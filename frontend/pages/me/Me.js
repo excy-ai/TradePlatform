@@ -10,7 +10,7 @@ export default class Me extends React.Component {
             user: null,
             inventoryId: null,
             inventory: null,
-            items: null
+            items: []
         };
     }
 
@@ -31,9 +31,6 @@ export default class Me extends React.Component {
         return (
             <React.Fragment>
                 <div className="card-header">
-                    <NavLink to={'/signin'}>
-                        <input className="btn btn-primary mb-2" type="submit" value="Sign In"/>
-                    </NavLink>
                     <NavLink to={'/me'}>
                         <input className="btn btn-primary mb-2" type="submit" value="Me"/>
                     </NavLink>
@@ -42,15 +39,14 @@ export default class Me extends React.Component {
                     <h3>Your inventory ID:</h3>
                     <h2>{this.state.inventoryId}</h2>
                     <h3>Your items:</h3>
-                    {/*<h2>{this.state.items.description}</h2>*/}
-                    {/*<ul> {*/}
-                    {/*this.state.items.length === 0 ? "" :*/}
-                    {/*this.state.items.map(el => (*/}
-                    {/*<li>*/}
-                    {/*{el.sign}: {el.category}*/}
-                    {/*</li>*/}
-                    {/*))}*/}
-                    {/*</ul>*/}
+                    <ul> {
+                        this.state.items.length === 0 ? "" :
+                            this.state.items.map(el => (
+                                <li key={el.id}>
+                                    {el.sign}: {el.category}
+                                </li>
+                            ))}
+                    </ul>
                 </span>
             </React.Fragment>
         );

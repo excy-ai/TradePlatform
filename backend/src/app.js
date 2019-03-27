@@ -12,8 +12,10 @@ const bunyan = require('bunyan');
 const router = require('./routes');
 const {sequelize} = require('./models');
 const passport = require('./controllers/Auth').passport;
+
 const app = new Koa();
 const logger = bunyan.createLogger({name: 'app'});
+
 app.context.log = logger;
 app.use(koaLogger(logger));
 app.use(serve('public'));
@@ -21,7 +23,7 @@ app.use(koaBody());
 app.keys = ['secret'];
 module.exports = sequelize.sync({force: true}).then(async () => {
     app.use(session({
-        "key": "itemtradenet:sess",
+        "key": 'itemtradenet:sess',
         "renew": true,
         "maxAge": 864000000,
         "resave": true,
@@ -44,5 +46,6 @@ module.exports = sequelize.sync({force: true}).then(async () => {
             await send(ctx, 'index.html', {root: _path});
         }
     });
+
     return app;
 });
