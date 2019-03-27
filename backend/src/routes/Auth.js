@@ -1,9 +1,9 @@
 'use strict';
 
 const Router = require('koa-router');
-const auth = require('../controllers/Auth');
+const authController = require('../controllers/AuthController');
 
 module.exports = new Router()
-    .post('/signin', auth.signin)
-    .post('/signup', auth.signup)
-    .post('/signout', auth.signout);
+    .post('/signin', authController.signin)
+    .post('/signup', authController.signup)
+    .post('/signout', authController.signout);
