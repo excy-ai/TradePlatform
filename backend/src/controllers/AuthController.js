@@ -101,14 +101,7 @@ async function signup(ctx) {
         };
         const createdUser = await User.create(newUser);
         const createdInventory = await Inventory.create();
-        const item = {
-            sign: "itemName",
-            description: "desc",
-            category: "none"
-        };
-        const createdItem = await Item.create(item);
         await createdUser.setInventory(createdInventory);
-        await createdInventory.addItem(createdItem);
         if (createdUser && createdInventory) {
             ctx.response.body = createdUser;
             ctx.response.status = 201;//TODO: in prod change to 204

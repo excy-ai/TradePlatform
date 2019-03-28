@@ -12,6 +12,7 @@ const bunyan = require('bunyan');
 const router = require('./routes');
 const {sequelize} = require('./models');
 const passport = require('./controllers/AuthController').passport;
+const {insertCategorys} = require('./controllers/CategoryLoader');
 
 const app = new Koa();
 const logger = bunyan.createLogger({name: 'app'});
@@ -36,8 +37,9 @@ module.exports = sequelize.sync({force: true}).then(async () => {
     }));
     app.use(passport.initialize());
     app.use(passport.session());
-    app.use(router.routes());
+    insertCategorys();
     app.use(router.allowedMethods());
+    app.use(router.routes());
     app.use(async (ctx) => {
         console.log(ctx.request.path);
         if (!ctx.request.path.startsWith('/api/')) {

@@ -1,9 +1,9 @@
 'use strict';
 
 const Router = require('koa-router');
-const authRouter = require('./Auth');
-const userRouter = require('./User');
-const itemRouter = require('./Item');
+const authRouter = require('./AuthRouter');
+const userRouter = require('./UserRouter');
+const itemRouter = require('./ItemRouter');
 
 const apiRouter = new Router({prefix: '/api'})
     .use('/auth', authRouter.routes(), authRouter.allowedMethods())

@@ -1,22 +1,13 @@
 'use strict';
-const uuid = require('uuid/v4');
 const Sequelize = require('sequelize');
 
 module.exports = (sequelize) => {
-    const Item = sequelize.define('Item', {
-            id: {
-                allowNull: false,
-                primaryKey: true,
-                type: Sequelize.UUID,
-                defaultValue: () => uuid(),
-                unique: true,
-                validate: {
-                    notEmpty: true
-                }
-            },
+    const ListedItem = sequelize.define('ListedItem', {
             sign: {
                 type: Sequelize.STRING,
+                primaryKey: true,
                 allowNull: false,
+                unique: true,
                 validate: {
                     notEmpty: true
                 }
@@ -42,16 +33,8 @@ module.exports = (sequelize) => {
         },
         {
             underscored: true,
-            tableName: 'items'
+            tableName: 'listed'
         });
 
-    Item.associate = (models) => {
-        Item.belongsTo(models.Inventory, {
-            onDelete: 'set null'
-        });
-        Item.belongsTo(models.Category, {
-            onDelete: 'set null'
-        })
-    };
-    return Item;
+    return ListedItem;
 };
