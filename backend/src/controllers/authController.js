@@ -93,6 +93,9 @@ async function signup(ctx) {
 
         const salt = await bcrypt.genSalt(SALT_ROUNDS);
         const hashedPassword = await bcrypt.hash(password, salt);
+        if (userData.firstName === "" || userData.lastName === "") {
+            ctx.throw(400, "Bad first/lastName fields");
+        }
         const newUser = {
             email: email,
             password: hashedPassword,

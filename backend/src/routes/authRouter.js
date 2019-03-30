@@ -1,7 +1,7 @@
 'use strict';
 
 const Router = require('koa-router');
-const authController = require('../controllers/AuthController');
+const authController = require('../controllers/authController');
 
 module.exports = new Router()
     .post('/signin', authController.signin)

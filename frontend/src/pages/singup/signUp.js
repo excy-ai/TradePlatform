@@ -1,8 +1,10 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import './style.css';
 
-export default class SignUp extends React.Component {
+class SignUp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -88,4 +90,14 @@ export default class SignUp extends React.Component {
             </React.Fragment>
         );
     };
-};
+}
+
+const mapStateToProps = (state) => ({
+    // propName: state.reducerName.propName
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    // actionName: bindActionCreators(actionName, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

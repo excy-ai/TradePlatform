@@ -1,8 +1,10 @@
 import React from 'react';
 
 import {NavLink} from "react-router-dom";
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-export default class Me extends React.Component {
+class Me extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -34,6 +36,9 @@ export default class Me extends React.Component {
                     <NavLink to={'/me'}>
                         <input className="btn btn-primary mb-2" type="submit" value="Me"/>
                     </NavLink>
+                    <NavLink exact to={'/additem'}>
+                        <input className="btn btn-primary mb-2" type="submit" value="Add Item"/>
+                    </NavLink>
                 </div>
                 <span>
                     <h3>Your inventory ID:</h3>
@@ -51,4 +56,14 @@ export default class Me extends React.Component {
             </React.Fragment>
         );
     };
-};
+}
+
+const mapStateToProps = (state) => ({
+    // propName: state.reducerName.propName
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    // actionName: bindActionCreators(actionName, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Me);

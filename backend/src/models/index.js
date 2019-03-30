@@ -7,11 +7,11 @@ const sequelize = new Sequelize(db.name, db.username, db.password, {
     dialect: db.dialect,
 });
 
-const User = require('./User')(sequelize);
-const Inventory = require('./Inventory')(sequelize);
-const Item = require('./Item')(sequelize);
-const ListedItem = require('./ListedItem')(sequelize);
-const Category = require('./Category')(sequelize);
+const User = require('./user')(sequelize);
+const Inventory = require('./inventory')(sequelize);
+const Item = require('./item')(sequelize);
+const ListedItem = require('./listedItem')(sequelize);
+const Category = require('./category')(sequelize);
 
 const models = {
     [User.name]: User,
