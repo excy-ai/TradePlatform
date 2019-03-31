@@ -2,6 +2,8 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import register from "../../actions/auth/register";
+
 import './style.css';
 
 class SignUp extends React.Component {
@@ -40,20 +42,7 @@ class SignUp extends React.Component {
     };
 
     handleSubmit = (event) => {
-        fetch('/api/auth/signup', {
-            method: "POST",
-            body: JSON.stringify(this.state),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then((response) => {
-            if (!response.ok) {
-                throw Error("bad");
-            }
-            window.location.pathname='/signin';
-        }).catch((err) => {
-            console.error("user not added");
-        });
+        this.props.register(this.state);
         event.preventDefault();
     };
 
@@ -67,7 +56,7 @@ class SignUp extends React.Component {
                 </div>
 
                 <form onSubmit={this.handleSubmit}
-                      id="signup" name="signup" method="post">
+                      id="signup" name="signup">
 
                     <label htmlFor="email">Email Address</label>
                     <input value={this.state.email} onChange={this.handleEmail}
@@ -97,7 +86,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    // actionName: bindActionCreators(actionName, dispatch)
+    register: bindActionCreators(register, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

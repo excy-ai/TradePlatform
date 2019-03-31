@@ -2,6 +2,7 @@ import React from 'react';
 import {NavLink} from "react-router-dom";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import authenticate from '../../actions/auth/authenticate';
 
 import './style.css';
 
@@ -13,7 +14,6 @@ class SignIn extends React.Component {
             password: ''
         };
     }
-
 
     handleEmail = (event) => {
         this.setState({
@@ -28,20 +28,7 @@ class SignIn extends React.Component {
     };
 
     handleSubmit = (event) => {
-        fetch('/api/auth/signin', {
-            method: "POST",
-            body: JSON.stringify(this.state),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then((response) => {
-            if (!response.ok) {
-                throw Error("bad");
-            }
-            window.location.pathname='/me';
-        }).catch((err) => {
-            console.error("user not authenticated");
-        });
+        this.props.authenticate(this.state);
         event.preventDefault();
     };
 
@@ -56,10 +43,8 @@ class SignIn extends React.Component {
                         <input className="btn btn-primary mb-2" type="submit" value="Me"/>
                     </NavLink>
                 </div>
-
-
                 <form onSubmit={this.handleSubmit}
-                    id="signin" name="signin" method="post">
+                    id="signin" name="signin">
                     <label htmlFor="email">Email Address</label>
                     <input value={this.state.email} onChange={this.handleEmail}
                         className="form-control text" name="email" type="email"/>
@@ -79,7 +64,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    // actionName: bindActionCreators(actionName, dispatch)
+    authenticate: bindActionCreators(authenticate, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

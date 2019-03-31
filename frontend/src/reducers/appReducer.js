@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux';
 import itemReducer from './itemReducer';
+import authReducer from './authReducer';
 
 const appReducer = combineReducers({
-    itemReducer
+    itemReducer,
+    authReducer
 });
 
 export default (state = {}, action) => {

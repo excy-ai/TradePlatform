@@ -1,33 +1,30 @@
-import * as types from "../actions/items/actionTypes";
+import * as types from "../actions/auth/actionTypes";
 
 const initialState = {
-    categoryList: [],
     error: null
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case types.GET_CATEGORY_LIST_SUCCESS: {
+        case types.REGISTER_SUCCESS: {
             return {
                 ...state,
-                categoryList: action.categoryList,
                 error: null
             }
         }
-        case types.GET_CATEGORY_LIST_ERROR: {
+        case types.REGISTER_ERROR: {
             return {
                 ...state,
-                categoryList: [],
                 error: action.error
             }
         }
-        case types.ITEM_ADD_SUCCESS: {
+        case types.AUTH_SUCCESS: {
             return {
                 ...state,
                 error: null
             }
         }
-        case types.ITEM_ADD_ERROR: {
+        case types.AUTH_ERROR: {
             return {
                 ...state,
                 error: action.error

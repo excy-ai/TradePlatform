@@ -47,7 +47,7 @@ class Me extends React.Component {
                     <ul> {
                         this.state.items.length === 0 ? "" :
                             this.state.items.map(el => (
-                                <li key={el.id}>
+                                <li className='list-group-item' key={el.id}>
                                     {el.sign}: {el.category}
                                 </li>
                             ))}
