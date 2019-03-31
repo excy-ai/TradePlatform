@@ -41,10 +41,8 @@ module.exports = sequelize.sync({force: true}).then(async () => {
     app.use(router.allowedMethods());
     app.use(router.routes());
     app.use(async (ctx) => {
-        console.log(ctx.request.path);
         if (!ctx.request.path.startsWith('/api/')) {
             const _path = path.resolve('public');
-            console.log(_path);
             await send(ctx, 'index.html', {root: _path});
         }
     });

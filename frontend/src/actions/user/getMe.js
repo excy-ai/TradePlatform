@@ -5,7 +5,6 @@ export default function getMe() {
     return (dispatch) => {
         return get(`api/user/me`)
             .then(response => {
-                console.log(response);
                 return response;
             })
             .then(response => {

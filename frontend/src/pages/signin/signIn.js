@@ -1,8 +1,9 @@
 import React from 'react';
-import {NavLink} from "react-router-dom";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import authenticate from '../../actions/auth/authenticate';
+import NavBar from "../../components/navBar/NavBar";
+import Form from "../../components/form/Form";
 
 import './style.css';
 
@@ -28,33 +29,36 @@ class SignIn extends React.Component {
     };
 
     handleSubmit = (event) => {
-        this.props.authenticate(this.state).then(()=>{
+        this.props.authenticate(this.state).then(() => {
             this.props.history.push('/me')
         });
         event.preventDefault();
     };
 
     render() {
+        const links = [{link: '/', value: 'Sign Up'}, {link: '/me', value: 'Me'}];
+        const fields = [
+            {
+                value: this.state.email,
+                name: "email",
+                placeholder: "enter email",
+                onChange: this.handleEmail,
+                label: "Email address"
+            },
+            {
+                value: this.state.password,
+                name: "password",
+                placeholder: "enter password",
+                onChange: this.handlePassword,
+                label: "Password"
+            }
+        ];
         return (
             <React.Fragment>
-                <div className="card-header">
-                    <NavLink exact to={'/'}>
-                        <input className="btn btn-primary mb-2" type="submit" value="Sign Up"/>
-                    </NavLink>
-                    <NavLink exact to={'/me'}>
-                        <input className="btn btn-primary mb-2" type="submit" value="Me"/>
-                    </NavLink>
-                </div>
-                <form onSubmit={this.handleSubmit}
-                    id="signin" name="signin">
-                    <label htmlFor="email">Email Address</label>
-                    <input value={this.state.email} onChange={this.handleEmail}
-                        className="form-control text" name="email" type="email"/>
-                    <label htmlFor="password">Password</label>
-                    <input value={this.state.password} onChange={this.handlePassword}
-                           className="form-control" name="password" type="password"/>
-                    <input className="btn btn-danger" type="submit" value="Sign In"/>
-                </form>
+                <NavBar data={links}/>
+                <Form handleSubmit={this.handleSubmit} id={'signin'} name={'signin'} submitBtnType={'danger'}
+                      submitBtnValue={"Sign In"} formFields={fields}
+                />
             </React.Fragment>
         );
     };

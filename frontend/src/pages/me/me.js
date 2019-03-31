@@ -1,9 +1,10 @@
 import React from 'react';
 
-import {NavLink} from "react-router-dom";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import getMe from "../../actions/user/getMe";
+import NavBar from "../../components/navBar/NavBar";
+import ProfileInfo from "../../components/profileInfo/ProfileInfo";
 
 class Me extends React.Component {
     constructor(props) {
@@ -22,29 +23,15 @@ class Me extends React.Component {
     }
 
     render() {
-        if(this.props.userData === undefined){
+        if (this.props.userData === undefined) {
             return <div>"data is loading"</div>;
         }
+        const links = [{link: '/additem', value: 'Add Item'}];
         return (
             <React.Fragment>
-                <div className="card-header">
-                    <NavLink exact to={'/additem'}>
-                        <input className="btn btn-primary mb-2" type="submit" value="Add Item"/>
-                    </NavLink>
-                </div>
-                <span>
-                    <h4>Your inventory ID:</h4>
-                    <h5>{this.props.userData.inventory.id}</h5>
-                    <h4>Your items:</h4>
-                    <ul> {
-                        this.props.userData.items.length === 0 ? "" :
-                            this.props.userData.items.map(el => (
-                                <li className='list-group-item' key={el.id}>
-                                    {el.sign}: {el.category}
-                                </li>
-                            ))}
-                    </ul>
-                </span>
+                <NavBar data={links}/>
+                <ProfileInfo userId={this.props.userData.user.id} inventoryId={this.props.userData.inventory.id}
+                items={this.props.userData.items}/>
             </React.Fragment>
         );
     };
