@@ -1,21 +1,22 @@
 import {get} from "../../fetcher/fetcher";
 import * as types from './actionTypes';
 
-export default function getCategorys() {
+export default function getMe() {
     return (dispatch) => {
-        return get(`api/user/items/categorys`)
+        return get(`api/user/me`)
             .then(response => {
-                return response.map(item => item.title);
+                console.log(response);
+                return response;
             })
             .then(response => {
                 dispatch({
-                    type: types.GET_CATEGORY_LIST_SUCCESS,
-                    categoryList: response
+                    type: types.GET_USER_SUCCESS,
+                    userData: response
                 });
             })
             .catch(err => {
                 dispatch({
-                    type: types.GET_CATEGORY_LIST_ERROR,
+                    type: types.GET_USER_ERROR,
                     error: err
                 });
             });

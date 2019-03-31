@@ -9,8 +9,8 @@ class AddItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            sign:'',
-            description:'',
+            sign: '',
+            description: '',
             category: ''
         };
     }
@@ -21,7 +21,7 @@ class AddItem extends React.Component {
         });
     };
 
-    handleDescription = (event)=>{
+    handleDescription = (event) => {
         this.setState({
             description: event.target.value
         });
@@ -35,7 +35,11 @@ class AddItem extends React.Component {
 
     handleSubmit = (event) => {
         console.log(this.state);
-        this.props.addItem(this.state);
+        this.props.addItem(this.state).then((response) => {
+            if (response.ok) {
+                this.props.history.push('/me');
+            }
+        });
         event.preventDefault();
     };
 

@@ -28,7 +28,9 @@ class SignIn extends React.Component {
     };
 
     handleSubmit = (event) => {
-        this.props.authenticate(this.state);
+        this.props.authenticate(this.state).then(()=>{
+            this.props.history.push('/me')
+        });
         event.preventDefault();
     };
 
@@ -48,7 +50,6 @@ class SignIn extends React.Component {
                     <label htmlFor="email">Email Address</label>
                     <input value={this.state.email} onChange={this.handleEmail}
                         className="form-control text" name="email" type="email"/>
-
                     <label htmlFor="password">Password</label>
                     <input value={this.state.password} onChange={this.handlePassword}
                            className="form-control" name="password" type="password"/>

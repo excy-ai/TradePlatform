@@ -3,14 +3,12 @@ import * as types from './actionTypes';
 
 export default function register(body) {
     return (dispatch) => {
-        return post(`http://localhost:3000/api/auth/signup/`, body)
+        return post(`api/auth/signup/`, body)
             .then(response => {
                 dispatch({
                     type: types.REGISTER_SUCCESS,
                 });
-                if(response.ok){
-                    window.location.pathname='/signin';
-                }
+                return response;
             })
             .catch(err => {
                 dispatch({

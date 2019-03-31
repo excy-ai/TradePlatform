@@ -42,7 +42,11 @@ class SignUp extends React.Component {
     };
 
     handleSubmit = (event) => {
-        this.props.register(this.state);
+        this.props.register(this.state).then((response)=>{
+            if(response.ok){
+                window.location.pathname='/signin';
+            }
+        });;
         event.preventDefault();
     };
 

@@ -3,20 +3,19 @@ import * as types from './actionTypes';
 
 export default function addItem(body) {
     return (dispatch) => {
-        return post(`http://localhost:3000/api/user/items/add`, body)
+        return post(`api/user/items/add`, body)
             .then(response => {
-                console.log(response.json());
-                return response.json();
+                return response;
             })
             .then(response => {
                 dispatch({
-                    type: types.GET_CATEGORY_LIST_SUCCESS,
-                    id: response.id
+                    type: types.ITEM_ADD_SUCCESS
                 });
+                return response;
             })
             .catch(err => {
                 dispatch({
-                    type: types.GET_CATEGORY_LIST_ERROR,
+                    type: types.ITEM_ADD_ERROR,
                     error: err
                 });
             });

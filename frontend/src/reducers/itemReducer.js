@@ -6,6 +6,7 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
+    debugger;
     switch (action.type) {
         case types.GET_CATEGORY_LIST_SUCCESS: {
             return {
