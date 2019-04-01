@@ -6,15 +6,15 @@ export default class FormField extends React.Component {
         const {className, value, type, name, placeholder, onChange, label} = this.props;
         return (
             <React.Fragment>
-                    <label htmlFor={name}>{label}</label>
-                    <input
-                        className={`${className}`}
-                        value={value}
-                        type={type}
-                        name={name}
-                        placeholder={placeholder}
-                        onChange={onChange}
-                    />
+                <label htmlFor={name}>{label}</label>
+                <input
+                    className={`${className}`}
+                    value={value}
+                    type={type}
+                    name={name}
+                    placeholder={placeholder}
+                    onChange={onChange}
+                />
             </React.Fragment>
         );
     }
@@ -23,7 +23,7 @@ export default class FormField extends React.Component {
 FormField.defaultProps = {
     className: '',
     type: 'text',
-    value:'',
+    value: '',
     name: '',
     placeholder: '',
     onChange: () => {
@@ -34,7 +34,7 @@ FormField.propTypes = {
     value: PropTypes.string,
     className: PropTypes.string,
     type: PropTypes.string,
-    name:'',
+    name: PropTypes.string,
     placeholder: PropTypes.string,
     onChange: PropTypes.func
 };

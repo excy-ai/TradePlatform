@@ -2,14 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class ProfileInfo extends React.Component {
-    renderItems=()=>{
+    renderItems = () => {
+        if (this.props.items.length === 0) {
+            return <span className={"alert alert-warning"}> You have no items </span>
+        }
         return <ul> {
-            this.props.items.length === 0 ? "" :
-                this.props.items.map(el => (
-                    <li className='list-group-item mb-1' key={el.id}>
-                        {el.sign}: {el.category}
-                    </li>
-                ))}
+            this.props.items.map(el => (
+                <li className='list-group-item mb-1' key={el.id}>
+                    {el.sign}: {el.category} | on Trade: {el.onTrade ? 'Yes' : 'No'}
+                </li>
+            ))}
         </ul>
     };
 
@@ -30,9 +32,9 @@ export default class ProfileInfo extends React.Component {
 
 
 ProfileInfo.defaultProps = {
-    userId:'',
-    inventoryId:'',
-    items:[]
+    userId: '',
+    inventoryId: '',
+    items: []
 };
 
 ProfileInfo.propTypes = {

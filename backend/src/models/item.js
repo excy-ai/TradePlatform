@@ -38,6 +38,11 @@ module.exports = (sequelize) => {
             pic: {
                 type: Sequelize.BLOB,
                 allowNull: true
+            },
+            onTrade: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false,
+                allowNull: false
             }
         },
         {
