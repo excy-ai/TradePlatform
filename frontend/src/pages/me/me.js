@@ -3,8 +3,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import getMe from "../../actions/user/getMe";
+import switchTradeStatus from "../../actions/user/switchTradeStatus";
 import NavBar from "../../components/navBar/NavBar";
-import ProfileInfo from "../../components/profileInfo/ProfileInfo";
+import UserProfile from "../../components/userProfile/userProfile";
 
 class Me extends React.Component {
     constructor(props) {
@@ -23,26 +24,29 @@ class Me extends React.Component {
     }
 
     render() {
-        if (this.props.userData === undefined) {
+        if (this.props.items.length === 0) {
             return <div>"data is loading"</div>;
         }
         const links = [{link: '/additem', value: 'Add Item'}];
         return (
             <React.Fragment>
                 <NavBar data={links}/>
-                <ProfileInfo userId={this.props.userData.user.id} inventoryId={this.props.userData.inventory.id}
-                items={this.props.userData.items}/>
+                <UserProfile userId={this.props.userId} inventoryId={this.props.inventoryId}
+                             items={this.props.items} onItemClick={this.props.switchTradeStatus}/>
             </React.Fragment>
         );
     };
 }
 
 const mapStateToProps = (state) => ({
-    userData: state.userReducer.userData
+    inventoryId: state.userReducer.inventoryId,
+    userId: state.userReducer.userId,
+    items: state.userReducer.items,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    getMe: bindActionCreators(getMe, dispatch)
+    getMe: bindActionCreators(getMe, dispatch),
+    switchTradeStatus: bindActionCreators(switchTradeStatus, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Me);

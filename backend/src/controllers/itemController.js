@@ -37,6 +37,28 @@ async function addItem(ctx) {
     }
 }
 
+async function switchOnTradeStatus(ctx) {
+    let user = ctx.state.user;
+    let items = await (await user.getInventory()).getItems();
+    let id = ctx.request.body.id;
+    if (items.map((item) => {
+        if (id === item.id) {
+            return item;
+        }
+    }).length === 0) {
+        ctx.response.body = 'current user doesnt have specified item';
+        ctx.response.status = 404;
+        return ctx.response;
+    }
+    let specItem = await Item.findOne({where: {id}});
+    specItem.update({
+        onTrade:!specItem.onTrade
+    });
+    ctx.response.body = 'onTrade status of specified item switched';
+    ctx.response.status = 200;
+    return ctx.response;
+}
+
 async function getListed(ctx) {
     await ListedItem.findAll().then((items) => {
         ctx.response.body = items;
@@ -53,4 +75,4 @@ async function getCategorys(ctx) {
     return ctx.response;
 }
 
-module.exports = {addItem, getListed, getCategorys};
+module.exports = {addItem, switchOnTradeStatus, getListed, getCategorys};

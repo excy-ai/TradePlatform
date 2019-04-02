@@ -6,5 +6,6 @@ const itemController = require('../controllers/itemController');
 
 module.exports = new Router()
     .post('/items/add', authCheck, itemController.addItem)
+    .post('/items/trade/switchStatus', authCheck, itemController.switchOnTradeStatus)
     .get('/items/listed', itemController.getListed)
     .get('/items/categorys', itemController.getCategorys);
