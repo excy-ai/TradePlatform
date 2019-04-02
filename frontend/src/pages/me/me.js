@@ -24,7 +24,7 @@ class Me extends React.Component {
     }
 
     render() {
-        if (this.props.items.length === 0) {
+        if (this.props.userId === '') {
             return <div>"data is loading"</div>;
         }
         const links = [{link: '/additem', value: 'Add Item'}];

@@ -6,7 +6,7 @@ export default class Form extends React.Component {
     renderFields = () => {
         return this.props.formFields.map((child, index) => {
             const {value, name, placeholder, onChange, label} = child;
-            return <FormField key={index} className={'form-control text'} name={name}
+            return <FormField key={index} className={'form-control text'} name={name} type={name}
                               label={label} onChange={onChange} value={value} placeholder={placeholder}/>
         })
     };

@@ -52,7 +52,7 @@ async function switchOnTradeStatus(ctx) {
     }
     let specItem = await Item.findOne({where: {id}});
     specItem.update({
-        onTrade:!specItem.onTrade
+        onTrade: !specItem.onTrade
     });
     ctx.response.body = 'onTrade status of specified item switched';
     ctx.response.status = 200;
