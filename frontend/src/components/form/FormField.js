@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// Why not functional component? (Please check all your components with this question)
+// --mrurenko 2019-04-06
 export default class FormField extends React.Component {
     render() {
         const {className, value, type, name, placeholder, onChange, label} = this.props;

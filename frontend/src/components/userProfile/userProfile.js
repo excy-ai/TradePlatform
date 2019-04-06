@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
+// 1. Extract all not connected to this component classes into separate component
+// 2. Fix formating of your components
+// 3. Extract 'renderItems' into its separate component
+// --mrurenko 2019-04-06
 export default class UserProfile extends React.Component {
     renderItems = () => {
         if (this.props.items.length === 0) {

@@ -53,6 +53,9 @@ class SignUp extends React.Component {
 
     render() {
         const links = [{link: '/signin', value: 'Sign In'}];
+        // These 'fields' looks like components.
+        // Maybe they should be components?
+        // --mrurenko 2019-04-06
         const fields = [
             {
                 value: this.state.email,

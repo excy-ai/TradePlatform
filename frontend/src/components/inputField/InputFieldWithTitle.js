@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// Why this input not in 'form' folder?
+// --mrurenko 2019-04-06
 export default class InputFieldWithTitle extends React.Component {
     render() {
         return (
