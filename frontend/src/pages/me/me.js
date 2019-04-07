@@ -30,6 +30,9 @@ class Me extends React.Component {
         const links = [{link: '/additem', value: 'Add Item'}];
         return (
             <React.Fragment>
+                {/* NavBar should be a part of your root component, not handled on each page. */}
+                {/* Why do you need this? */}
+                {/* --mrurenko 2019-04-06 */}
                 <NavBar data={links}/>
                 <UserProfile userId={this.props.userId} inventoryId={this.props.inventoryId}
                              items={this.props.items} onItemClick={this.props.switchTradeStatus}/>

@@ -17,6 +17,8 @@ class AddItem extends React.Component {
         };
     }
 
+    // You could use 'event.target.name' and have one handler for all of them
+    // --mrurenko 2019-04-06
     handleSign = (event) => {
         this.setState({
             sign: event.target.value
@@ -37,6 +39,9 @@ class AddItem extends React.Component {
 
     handleSubmit = (event) => {
         this.props.addItem(this.state).then((response) => {
+            // We should not check the response here.
+            // It sould be internal logic of 'addItem'.
+            // --mrurenko 2019-04-06
             if (response.ok) {
                 this.props.history.push('/me');
             }
@@ -53,6 +58,8 @@ class AddItem extends React.Component {
         return (
             <React.Fragment>
                 <NavBar data={links}/>
+                {/* You should use your 'From' component here */}
+                {/* --mrurenko 2019-04-06 */}
                 <form onSubmit={this.handleSubmit}>
                     <InputFieldWithTitle value={this.state.sign} onChange={this.handleSign} title={'Item Sign'}/>
                     <InputFieldWithTitle value={this.state.description} onChange={this.handleDescription} title={'Description'}/>

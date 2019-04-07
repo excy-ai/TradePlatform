@@ -2,8 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FormField from "./FormField";
 
+// It could be 'functional' component. Why have you used the 'class' one here?
+// --mrurenko 2019-04-06
 export default class Form extends React.Component {
     renderFields = () => {
+        // 1. Why do not have this render logic in 'render()' function of your component?
+        // 2. Classnames should be inside components.
+        // --mrurenko 2019-04-06
         return this.props.formFields.map((child, index) => {
             const {value, name, placeholder, onChange, label} = child;
             return <FormField key={index} className={'form-control text'} name={name} type={name}
@@ -13,6 +18,9 @@ export default class Form extends React.Component {
 
     render() {
         let subBtnClass = '';
+        // 1. Components that will use this 'Form' component should know nothing about classnames.
+        // 2. Button classnames should be defined in 'Button' component.
+        // --mrurenko 2019-04-06
         if (this.props.submitBtnType === 'danger') {
             subBtnClass = "btn-danger";
         } else {
