@@ -3,7 +3,7 @@
 const {Item, User} = require('../models');
 const PAGINATION_LIMIT = 25;
 
-async function getAllOnTrade(ctx) {
+async function getAllOnTradeFiltered(ctx) {
     let {category, order, page, userID} = ctx.request.body;
 
     if (!order || (order !== "ASC" && order !== "DESC")) {
@@ -92,5 +92,5 @@ function getOffset(count, page) {
     let offset = PAGINATION_LIMIT * (page - 1);
     return offset;
 }
-
-module.exports = {getAllOnTrade};
+//do function with args ({where}) to make getAllOnTradeFiltered method smaller
+module.exports = {getAllOnTradeFiltered};

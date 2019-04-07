@@ -3,9 +3,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import getCategorys from "../../actions/items/getCategorys";
 import addItem from "../../actions/items/addItem";
-import NavBar from "../../components/navBar/NavBar";
 import SelectList from "../../components/selectList/SelectList";
-import InputFieldWithTitle from "../../components/inputField/InputFieldWithTitle";
+import InputFieldWithTitle from "../../components/form/InputFieldWithTitle";
 
 class AddItem extends React.Component {
     constructor(props) {
@@ -38,13 +37,8 @@ class AddItem extends React.Component {
     };
 
     handleSubmit = (event) => {
-        this.props.addItem(this.state).then((response) => {
-            // We should not check the response here.
-            // It sould be internal logic of 'addItem'.
-            // --mrurenko 2019-04-06
-            if (response.ok) {
-                this.props.history.push('/me');
-            }
+        this.props.addItem(this.state).then(() => {
+            this.props.history.push('/me');
         });
         event.preventDefault();
     };
@@ -54,17 +48,17 @@ class AddItem extends React.Component {
     }
 
     render() {
-        const links = [{link:'/me',value:'Me'}];
+        const links = [{link: '/me', value: 'Me'}];
         return (
             <React.Fragment>
-                <NavBar data={links}/>
                 {/* You should use your 'From' component here */}
                 {/* --mrurenko 2019-04-06 */}
                 <form onSubmit={this.handleSubmit}>
                     <InputFieldWithTitle value={this.state.sign} onChange={this.handleSign} title={'Item Sign'}/>
-                    <InputFieldWithTitle value={this.state.description} onChange={this.handleDescription} title={'Description'}/>
-                    <SelectList currentValue = {this.state.category} onChange={this.handleCategory}
-                                list = {this.props.categoryList} listLabel={'Category:'} listName={'category'}/>
+                    <InputFieldWithTitle value={this.state.description} onChange={this.handleDescription}
+                                         title={'Description'}/>
+                    <SelectList currentValue={this.state.category} onChange={this.handleCategory}
+                                list={this.props.categoryList} listLabel={'Category:'} listName={'category'}/>
                     <input className="btn btn-danger" type="submit" value="Submit"/>
                 </form>
             </React.Fragment>
@@ -73,7 +67,7 @@ class AddItem extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    categoryList: state.itemReducer.categoryList
+    categoryList: state.itemReducer.categoryList.map(item => item.title)
 });
 
 const mapDispatchToProps = (dispatch) => ({

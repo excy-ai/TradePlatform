@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import getMe from "../../actions/user/getMe";
 import switchTradeStatus from "../../actions/user/switchTradeStatus";
-import NavBar from "../../components/navBar/NavBar";
 import UserProfile from "../../components/userProfile/userProfile";
 
 class Me extends React.Component {
@@ -27,13 +26,8 @@ class Me extends React.Component {
         if (this.props.userId === '') {
             return <div>"data is loading"</div>;
         }
-        const links = [{link: '/additem', value: 'Add Item'}];
         return (
             <React.Fragment>
-                {/* NavBar should be a part of your root component, not handled on each page. */}
-                {/* Why do you need this? */}
-                {/* --mrurenko 2019-04-06 */}
-                <NavBar data={links}/>
                 <UserProfile userId={this.props.userId} inventoryId={this.props.inventoryId}
                              items={this.props.items} onItemClick={this.props.switchTradeStatus}/>
             </React.Fragment>

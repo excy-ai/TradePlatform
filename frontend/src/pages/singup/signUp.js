@@ -2,10 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import register from "../../actions/auth/register";
-import NavBar from "../../components/navBar/NavBar";
 import Form from "../../components/form/Form";
 
 import './style.css';
+import FormField from "../../components/form/FormField";
 
 class SignUp extends React.Component {
     constructor(props) {
@@ -18,81 +18,37 @@ class SignUp extends React.Component {
         };
     }
 
-    handleEmail = (event) => {
+    handleInput = (event) => {
         this.setState({
-            email: event.target.value
-        });
-    };
-
-    handleFirstName = (event) => {
-        this.setState({
-            firstName: event.target.value
-        });
-    };
-
-    handleLastName = (event) => {
-        this.setState({
-            lastName: event.target.value
-        });
-    };
-
-    handlePassword = (event) => {
-        this.setState({
-            password: event.target.value
+            [event.target.name]: event.target.value
         });
     };
 
     handleSubmit = (event) => {
-        this.props.register(this.state).then((response) => {
-            if (response.ok) {
-                window.location.pathname = '/signin';
-            }
+        this.props.register(this.state).then(() => {
+                this.props.history.push('/signin')
         });
         event.preventDefault();
     };
 
     render() {
-        const links = [{link: '/signin', value: 'Sign In'}];
-        // These 'fields' looks like components.
-        // Maybe they should be components?
-        // --mrurenko 2019-04-06
-        const fields = [
-            {
-                value: this.state.email,
-                name: "email",
-                placeholder: "enter email",
-                onChange: this.handleEmail,
-                label: "Email address"
-            },
-            {
-                value: this.state.firstName,
-                name: "firstName",
-                placeholder: "enter firstName",
-                onChange: this.handleFirstName,
-                label: "First Name"
-            },
-            {
-                value: this.state.lastName,
-                name: "lastName",
-                placeholder: "enter lastName",
-                onChange: this.handleLastName,
-                label: "Last Name"
-            },
-            {
-                value: this.state.password,
-                name: "password",
-                placeholder: "enter password",
-                onChange: this.handlePassword,
-                label: "Password"
-            }
-        ];
-
         return (
             <React.Fragment>
-                <NavBar data={links}/>
-                <Form handleSubmit={this.handleSubmit} id={'signup'} name={'signup'} submitBtnType={'danger'}
-                      submitBtnValue={"Sign Up"} formFields={fields}
-                />
+                <Form handleSubmit={this.handleSubmit} id={'signup'} name="signup" submitBtnType={'danger'}
+                      submitBtnValue={"Sign Up"}
+                >
+                    <FormField className={'form-control text'} name={'email'} type={'email'}
+                               label={'Email address'} onChange={this.handleInput} value={this.state.email}
+                               placeholder={'enter email'}/>
+                    <FormField className={'form-control text'} name={'firstName'}
+                               label={'enter firstName'} onChange={this.handleInput} value={this.state.firstName}
+                               placeholder={'First Name'}/>
+                    <FormField className={'form-control text'} name={'lastName'}
+                               label={'Last Name'} onChange={this.handleInput} value={this.state.lastName}
+                               placeholder={'enter lastName'}/>
+                    <FormField className={'form-control text'} name={'password'} type={'password'}
+                               label={'Password'} onChange={this.handleInput} value={this.state.password} placeholder={'enter password'}/>
+                </Form>
             </React.Fragment>
         );
     };

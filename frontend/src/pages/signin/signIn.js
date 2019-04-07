@@ -2,10 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import authenticate from '../../actions/auth/authenticate';
-import NavBar from "../../components/navBar/NavBar";
 import Form from "../../components/form/Form";
 
 import './style.css';
+import FormField from "../../components/form/FormField";
 
 class SignIn extends React.Component {
     constructor(props) {
@@ -36,29 +36,18 @@ class SignIn extends React.Component {
     };
 
     render() {
-        const links = [{link: '/', value: 'Sign Up'}, {link: '/me', value: 'Me'}];
-        const fields = [
-            {
-                value: this.state.email,
-                name: "email",
-                placeholder: "enter email",
-                onChange: this.handleEmail,
-                label: "Email address"
-            },
-            {
-                value: this.state.password,
-                name: "password",
-                placeholder: "enter password",
-                onChange: this.handlePassword,
-                label: "Password"
-            }
-        ];
         return (
             <React.Fragment>
-                <NavBar data={links}/>
                 <Form handleSubmit={this.handleSubmit} id={'signin'} name={'signin'} submitBtnType={'danger'}
-                      submitBtnValue={"Sign In"} formFields={fields}
-                />
+                      submitBtnValue={"Sign In"}
+                >
+                    <FormField className={'form-control text'} name={'email'} type={'email'}
+                               label={'Email address'} onChange={this.handleEmail} value={this.state.email}
+                               placeholder={'enter email'}/>
+                    <FormField className={'form-control text'} name={'password'} type={'password'}
+                               label={'Password'} onChange={this.handlePassword} value={this.state.password}
+                               placeholder={'enter password'}/>
+                </Form>
             </React.Fragment>
         );
     };

@@ -11,6 +11,7 @@ import AddItem from './pages/addItem/addItem';
 import {newStore} from './store/store';
 
 import './vendor/normalize.css';
+import NavBar from "./components/navBar/NavBar";
 
 const history = createBrowserHistory();
 const store = newStore();
@@ -18,6 +19,8 @@ const store = newStore();
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
+            <NavBar data={[{link: '/', value: 'Sign Up'}, {link: '/signin', value: 'Sign In'},
+                {link: '/me', value: 'Me'}, {link: '/additem', value: 'Add Item'}]}/>
             <Route exact path='/' component={SignUp}/>
             <Route path='/signin' component={SignIn}/>
             <Route path='/me' component={Me}/>
