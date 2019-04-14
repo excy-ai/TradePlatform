@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function FormField(props) {
-    const {className, value, type, name, placeholder, onChange, label} = props;
+export default function FormField({className, value, type, name, placeholder, onChange, label}) {
     return (
         <React.Fragment>
             <label htmlFor={name}>{label}</label>

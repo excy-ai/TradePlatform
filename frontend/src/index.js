@@ -8,6 +8,7 @@ import SignUp from './pages/singup/signUp';
 import SignIn from './pages/signin/signIn';
 import Me from './pages/me/me';
 import AddItem from './pages/addItem/addItem';
+import Market from './pages/market/Market';
 import {newStore} from './store/store';
 
 import './vendor/normalize.css';
@@ -19,12 +20,16 @@ const store = newStore();
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
-            <NavBar data={[{link: '/', value: 'Sign Up'}, {link: '/signin', value: 'Sign In'},
-                {link: '/me', value: 'Me'}, {link: '/additem', value: 'Add Item'}]}/>
+            <NavBar data={[
+                {link: '/', value: 'Sign Up'}, {link: '/signin', value: 'Sign In'},
+                {link: '/me', value: 'Me'}, {link: '/additem', value: 'Add Item'},
+                {link: '/market', value: 'Market'}
+            ]}/>
             <Route exact path='/' component={SignUp}/>
             <Route path='/signin' component={SignIn}/>
             <Route path='/me' component={Me}/>
             <Route path='/additem' component={AddItem}/>
+            <Route path='/market' component={Market}/>
         </Router>
     </Provider>,
     document.getElementById('app')

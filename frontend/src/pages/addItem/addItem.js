@@ -47,6 +47,10 @@ class AddItem extends React.Component {
         this.props.getCategorys();
     }
 
+    componentDidUpdate() {
+        this.props.getCategorys();
+    }
+
     render() {
         const links = [{link: '/me', value: 'Me'}];
         return (
