@@ -1,24 +1,19 @@
-import {post} from "../../fetcher/fetcher";
+import {get} from "../../fetcher/fetcher";
 import * as types from './actionTypes';
 
-export default function getOnTrade() {
-    let body = {
-        // userID:,
-        // category:,
-        // order:,
-        page: 1
-    };
+export default function getOnTrade({userID = "", category = "", order = "", page = ""}) {
     return (dispatch) => {
-        return post(`api/market/search`, body)
+        return get(`api/market/search?userID=${userID || ""}` +
+            `&order=${order || ""}&category=${category || ""}&page=${page || ""}`)
             .then(response => {
                 dispatch({
-                    type: types.GET_CATEGORY_LIST_SUCCESS,
+                    type: types.ITEM_ON_TRADE_LIST_SUCCESS,
                     itemsOnTrade: response.items
                 });
             })
             .catch(err => {
                 dispatch({
-                    type: types.GET_CATEGORY_LIST_ERROR,
+                    type: types.ITEM_ON_TRADE_LIST_ERROR,
                     error: err
                 });
             });

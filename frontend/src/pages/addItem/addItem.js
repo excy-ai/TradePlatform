@@ -16,23 +16,9 @@ class AddItem extends React.Component {
         };
     }
 
-    // You could use 'event.target.name' and have one handler for all of them
-    // --mrurenko 2019-04-06
-    handleSign = (event) => {
+    handleEvent = (event) => {
         this.setState({
-            sign: event.target.value
-        });
-    };
-
-    handleDescription = (event) => {
-        this.setState({
-            description: event.target.value
-        });
-    };
-
-    handleCategory = (event) => {
-        this.setState({
-            category: event.target.value
+            [event.target.name]: event.target.value
         });
     };
 
@@ -44,24 +30,23 @@ class AddItem extends React.Component {
     };
 
     componentDidMount() {
+        if(!this.props.authenticated){
+            this.props.history.push('/signin');
+        }
         this.props.getCategorys();
     }
 
-    componentDidUpdate() {
-        this.props.getCategorys();
-    }
 
     render() {
-        const links = [{link: '/me', value: 'Me'}];
         return (
             <React.Fragment>
                 {/* You should use your 'From' component here */}
                 {/* --mrurenko 2019-04-06 */}
                 <form onSubmit={this.handleSubmit}>
-                    <InputFieldWithTitle value={this.state.sign} onChange={this.handleSign} title={'Item Sign'}/>
-                    <InputFieldWithTitle value={this.state.description} onChange={this.handleDescription}
+                    <InputFieldWithTitle value={this.state.sign} name={"sign"} onChange={this.handleEvent} title={'Item Sign'}/>
+                    <InputFieldWithTitle value={this.state.description} name={"description"} onChange={this.handleEvent}
                                          title={'Description'}/>
-                    <SelectList currentValue={this.state.category} onChange={this.handleCategory}
+                    <SelectList currentValue={this.state.category} onChange={this.handleEvent}
                                 list={this.props.categoryList} listLabel={'Category:'} listName={'category'}/>
                     <input className="btn btn-danger" type="submit" value="Submit"/>
                 </form>
@@ -71,7 +56,8 @@ class AddItem extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    categoryList: state.itemReducer.categoryList.map(item => item.title)
+    categoryList: state.itemReducer.categoryList.map(item => item.title),
+    authenticated: state.authReducer.authenticated
 });
 
 const mapDispatchToProps = (dispatch) => ({

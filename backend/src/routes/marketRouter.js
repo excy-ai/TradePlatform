@@ -6,4 +6,4 @@ const marketController = require('../controllers/marketController');
 
 
 module.exports = new Router()
-    .post('/search', marketController.getAllOnTradeFiltered);
+    .get('/search', marketController.getAllOnTradeFiltered);

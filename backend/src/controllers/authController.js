@@ -3,7 +3,7 @@
 const bcrypt = require('bcrypt');
 const passport = require('koa-passport');
 const LocalStrategy = require('passport-local').Strategy;
-const {User, Inventory, Item} = require('../models');
+const {User, Item} = require('../models');
 
 const SALT_ROUNDS = 10;
 const PASS_MIN_LENGTH = 8;
@@ -103,9 +103,7 @@ async function signup(ctx) {
             lastName: userData.lastName,
         };
         const createdUser = await User.create(newUser);
-        const createdInventory = await Inventory.create();
-        await createdUser.setInventory(createdInventory);
-        if (createdUser && createdInventory) {
+        if (createdUser) {
             ctx.response.body = createdUser;
             ctx.response.status = 201;//TODO: in prod change to 204
             return ctx.response;

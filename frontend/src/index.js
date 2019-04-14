@@ -20,11 +20,7 @@ const store = newStore();
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
-            <NavBar data={[
-                {link: '/', value: 'Sign Up'}, {link: '/signin', value: 'Sign In'},
-                {link: '/me', value: 'Me'}, {link: '/additem', value: 'Add Item'},
-                {link: '/market', value: 'Market'}
-            ]}/>
+            <NavBar/>
             <Route exact path='/' component={SignUp}/>
             <Route path='/signin' component={SignIn}/>
             <Route path='/me' component={Me}/>

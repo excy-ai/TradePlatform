@@ -9,7 +9,7 @@ export default class InputFieldWithTitle extends React.Component {
                     <span className="input-group-text" id="inputGroup-sizing-default">{this.props.title}</span>
                 </div>
                 <input value={this.props.value} onChange={this.props.onChange}
-                       type="text" className="form-control" name="description"/>
+                       type="text" className="form-control" name={this.props.name}/>
             </div>
         );
     }

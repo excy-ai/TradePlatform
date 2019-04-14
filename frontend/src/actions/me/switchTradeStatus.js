@@ -1,5 +1,5 @@
 import {post} from "../../fetcher/fetcher";
-import * as types from '../user/actionTypes';
+import * as types from './actionTypes';
 
 export default function switchTradeStatus(id) {
     let body = {id};

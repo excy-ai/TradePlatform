@@ -6,12 +6,13 @@ export default function authenticate(body) {
         return post(`api/auth/signin/`, body)
             .then(response => {
                 dispatch({
-                    type: types.REGISTER_SUCCESS,
+                    type: types.AUTH_SUCCESS,
+                    authenticated: (response.status > 199 && response.status < 300)
                 });
             })
             .catch(err => {
                 dispatch({
-                    type: types.REGISTER_ERROR,
+                    type: types.AUTH_ERROR,
                     error: err
                 });
             });

@@ -5,7 +5,6 @@ const {Item, ListedItem, Category} = require('../models');
 async function addItem(ctx) {
     ctx.status = 200;
     let user = ctx.state.user;
-    let inventory = await user.getInventory();
     const itemData = ctx.request.body;
     const {sign, description, category, pic} = itemData;
     let newItem = {
@@ -16,15 +15,19 @@ async function addItem(ctx) {
     };
     try {
         if (!(await Category.findOne({where: {title: category}}))) {
-            ctx.throw(400, "no such category");
+            ctx.response.status = 400;
+            ctx.response.body = "no such category";
+            return ctx.response;
         }
-        if (await ListedItem.findOne({where: {sign}})) {
-            ctx.throw(400, "Item with such sign already exist, you can add it, instead of creating new");
+        if (await ListedItem.findOne({where: {sign, category}})) {
+            ctx.response.status = 400;
+            ctx.response.body = "Item with such sign already exist, you can add it, instead of creating new";
+            return ctx.response;
         }
         await ListedItem.create(newItem);
         let createdItem = await Item.create(newItem);
         await (await Category.findOne({where: {title: category}})).addItem(createdItem);
-        await inventory.addItem(createdItem);
+        await user.addItem(createdItem);
         if (createdItem) {
             ctx.response.status = 200;
             ctx.response.body = createdItem;
@@ -39,7 +42,7 @@ async function addItem(ctx) {
 
 async function switchOnTradeStatus(ctx) {
     let user = ctx.state.user;
-    let items = await (await user.getInventory()).getItems();
+    let items = await user.getItems();
     let id = ctx.request.body.id;
     if (items.map((item) => {
         if (id === item.id) {

@@ -2,25 +2,28 @@ import React from 'react';
 
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import getMe from "../../actions/user/getMe";
-import switchTradeStatus from "../../actions/user/switchTradeStatus";
+import getMe from "../../actions/me/getMe";
+import switchTradeStatus from "../../actions/me/switchTradeStatus";
 import UserProfile from "../../components/userProfile/userProfile";
 
 class Me extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            userId: '',
-            user: {},
-            inventoryId: '',
-            inventory: {},
-            items: []
-        };
     }
 
     componentDidMount() {
         this.props.getMe();
+        if(!this.props.authenticated){
+            this.props.history.push('/signin');
+        }
     }
+
+    componentDidUpdate() {
+        if(!this.props.authenticated){
+            this.props.history.push('/signin');
+        }
+    }
+
 
     render() {
         if (this.props.userId === '') {
@@ -28,7 +31,7 @@ class Me extends React.Component {
         }
         return (
             <React.Fragment>
-                <UserProfile userId={this.props.userId} inventoryId={this.props.inventoryId}
+                <UserProfile userId={this.props.userId}
                              items={this.props.items} onItemClick={this.props.switchTradeStatus}/>
             </React.Fragment>
         );
@@ -36,9 +39,9 @@ class Me extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    inventoryId: state.userReducer.inventoryId,
-    userId: state.userReducer.userId,
-    items: state.userReducer.items,
+    userId: state.meReducer.userId,
+    items: state.meReducer.items,
+    authenticated: state.authReducer.authenticated
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,6 +1,7 @@
 import * as types from "../actions/auth/actionTypes";
 
 const initialState = {
+    authenticated: false,
     error: null
 };
 
@@ -21,6 +22,7 @@ export default (state = initialState, action) => {
         case types.AUTH_SUCCESS: {
             return {
                 ...state,
+                authenticated: action.authenticated,
                 error: null
             }
         }

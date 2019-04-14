@@ -50,7 +50,7 @@ module.exports = (sequelize) => {
         });
 
     User.associate = (models) => {
-        User.hasOne(models.Inventory, {
+        User.hasMany(models.Item, {
             onDelete: 'cascade'
         });
     };

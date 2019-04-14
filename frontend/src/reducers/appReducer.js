@@ -1,12 +1,14 @@
 import {combineReducers} from 'redux';
 import itemReducer from './itemReducer';
 import authReducer from './authReducer';
-import userReducer from './userReducer';
+import marketReducer from './marketReducer';
+import meReducer from './meReducer';
 
 const appReducer = combineReducers({
     itemReducer,
     authReducer,
-    userReducer
+    marketReducer,
+    meReducer
 });
 
 export default (state = {}, action) => {

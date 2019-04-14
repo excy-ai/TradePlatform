@@ -4,27 +4,20 @@ const {Item, User} = require('../models');
 const PAGINATION_LIMIT = 25;
 
 async function getAllOnTradeFiltered(ctx) {
-    let {category, order, page, userID} = ctx.request.body;
+    let {category, order, page, userID} = ctx.query;
 
     if (!order || (order !== "ASC" && order !== "DESC")) {
         order = "ASC";
     }
-    let inventoryId;
-    if (userID !== undefined && userID !== null) {
-        let user = await User.findOne({where: {id: userID}});
-        if (user) {
-            inventoryId = (await user.getInventory()).id;
-        }
-    }
     let items;
     let count;
-    if (category && inventoryId) {
+    if (category && userID) {
         count = (await Item.findAndCountAll({
-            where: {onTrade: true, category: category, inventory_id: inventoryId},
+            where: {onTrade: true, category: category, user_id: userID},
 
         })).count;
         items = await Item.findAll({
-            where: {onTrade: true, category: category, inventory_id: inventoryId},
+            where: {onTrade: true, category: category, user_id: userID},
             order: [
                 ['created_at', order]
             ],
@@ -46,11 +39,11 @@ async function getAllOnTradeFiltered(ctx) {
         });
     } else if (userID) {
         count = (await Item.findAndCountAll({
-            where: {onTrade: true, inventory_id: inventoryId},
+            where: {onTrade: true, user_id: userID},
 
         })).count;
         items = await Item.findAll({
-            where: {onTrade: true, inventory_id: inventoryId},
+            where: {onTrade: true, user_id: userID},
             order: [
                 ['created_at', order]
             ],

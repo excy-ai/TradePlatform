@@ -51,7 +51,7 @@ module.exports = (sequelize) => {
         });
 
     Item.associate = (models) => {
-        Item.belongsTo(models.Inventory, {
+        Item.belongsTo(models.User, {
             onDelete: 'set null'
         });
         Item.belongsTo(models.Category, {

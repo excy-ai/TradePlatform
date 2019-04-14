@@ -1,7 +1,6 @@
-import * as types from "../actions/user/actionTypes";
+import * as types from "../actions/me/actionTypes";
 
 const initialState = {
-    inventoryId: '',
     userId: '',
     items: [],
     error: null
@@ -13,7 +12,6 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 items: action.userData.items,
-                inventoryId: action.userData.inventory.id,
                 userId: action.userData.user.id,
                 error: null
             }
@@ -21,7 +19,6 @@ export default (state = initialState, action) => {
         case types.GET_USER_ERROR: {
             return {
                 ...state,
-                inventoryId: '',
                 userId: '',
                 items: [],
                 error: action.error

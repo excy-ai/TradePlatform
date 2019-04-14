@@ -31,8 +31,6 @@ export default class UserProfile extends React.Component {
                 <span>
                     <h4>User ID:</h4>
                     <h5>{this.props.userId}</h5>
-                    <h4>Inventory ID:</h4>
-                    <h5>{this.props.inventoryId}</h5>
                     {this.renderItems()}
                 </span>
             </div>
@@ -43,14 +41,12 @@ export default class UserProfile extends React.Component {
 
 UserProfile.defaultProps = {
     userId: '',
-    inventoryId: '',
     onItemClick: () => {},
     items: []
 };
 
 UserProfile.propTypes = {
     userId: PropTypes.string,
-    inventoryId: PropTypes.string,
     onItemClick: PropTypes.func,
     items: PropTypes.array
 };

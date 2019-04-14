@@ -8,14 +8,12 @@ const sequelize = new Sequelize(db.name, db.username, db.password, {
 });
 
 const User = require('./user')(sequelize);
-const Inventory = require('./inventory')(sequelize);
 const Item = require('./item')(sequelize);
 const ListedItem = require('./listedItem')(sequelize);
 const Category = require('./category')(sequelize);
 
 const models = {
     [User.name]: User,
-    [Inventory.name]: Inventory,
     [Item.name]: Item,
     [Category.name]: Category,
     [ListedItem.name]: ListedItem
