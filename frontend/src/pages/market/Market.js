@@ -13,7 +13,6 @@ function Market(props) {
             props.getOnTrade({});
         }
     },[]);
-    console.log(props.itemsOnTrade);
     if (props.itemsOnTrade.length === 0) {
         return ("no items on trade");
     } else {

@@ -9,6 +9,7 @@ import SignIn from './pages/signin/signIn';
 import Me from './pages/me/me';
 import AddItem from './pages/addItem/addItem';
 import Market from './pages/market/Market';
+import UserPage from './pages/userPage/UserPage';
 import {newStore} from './store/store';
 
 import './vendor/normalize.css';
@@ -26,6 +27,7 @@ ReactDOM.render(
             <Route path='/me' component={Me}/>
             <Route path='/additem' component={AddItem}/>
             <Route path='/market' component={Market}/>
+            <Route path="/user/:id" component={UserPage}/>
         </Router>
     </Provider>,
     document.getElementById('app')

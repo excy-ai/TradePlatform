@@ -1,4 +1,5 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default function OnTradeItem(props) {
@@ -16,7 +17,7 @@ export default function OnTradeItem(props) {
             </div>
             <div className="card-footer">
                 <small className="text-muted">
-                    <a href={"/users/" + props.userId}>offerer</a>
+                    <NavLink to={"/user/" + props.userId}>offerer</NavLink>
                 </small>
             </div>
         </div>

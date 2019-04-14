@@ -18,7 +18,7 @@ export function get(url) {
             return response;
         })
         .then((response) => {
-            return response.json()
+            return response.json();
         })
         .catch((err) => {
             return err;

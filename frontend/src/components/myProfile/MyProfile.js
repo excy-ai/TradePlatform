@@ -6,7 +6,7 @@ import './style.css';
 // 2. Fix formating of your components
 // 3. Extract 'renderItems' into its separate component
 // --mrurenko 2019-04-06
-export default class UserProfile extends React.Component {
+export default class MyProfile extends React.Component {
     renderItems = () => {
         if (this.props.items.length === 0) {
             return <span className={"alert alert-warning"}> You have no items </span>
@@ -39,13 +39,13 @@ export default class UserProfile extends React.Component {
 }
 
 
-UserProfile.defaultProps = {
+MyProfile.defaultProps = {
     userId: '',
     onItemClick: () => {},
     items: []
 };
 
-UserProfile.propTypes = {
+MyProfile.propTypes = {
     userId: PropTypes.string,
     onItemClick: PropTypes.func,
     items: PropTypes.array

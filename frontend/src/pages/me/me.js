@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import getMe from "../../actions/me/getMe";
 import switchTradeStatus from "../../actions/me/switchTradeStatus";
-import UserProfile from "../../components/userProfile/userProfile";
+import MyProfile from "../../components/myProfile/MyProfile";
 
 class Me extends React.Component {
     constructor(props) {
@@ -31,8 +31,8 @@ class Me extends React.Component {
         }
         return (
             <React.Fragment>
-                <UserProfile userId={this.props.userId}
-                             items={this.props.items} onItemClick={this.props.switchTradeStatus}/>
+                <MyProfile userId={this.props.userId}
+                           items={this.props.items} onItemClick={this.props.switchTradeStatus}/>
             </React.Fragment>
         );
     };

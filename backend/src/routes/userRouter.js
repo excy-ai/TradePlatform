@@ -5,4 +5,5 @@ const {authCheck} = require('../middlewares/authCheck');
 const userController = require('../controllers/userController');
 
 module.exports = new Router()
-    .get('/me', authCheck, userController.getMe);
+    .get('/me', authCheck, userController.getMe)
+    .get('/info', authCheck, userController.getUserItemList);
