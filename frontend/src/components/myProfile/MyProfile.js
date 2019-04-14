@@ -29,7 +29,7 @@ export default class MyProfile extends React.Component {
         return (
             <div className={'profile_info'}>
                 <span>
-                    <h4>User ID:</h4>
+                    <h4>My ID:</h4>
                     <h5>{this.props.userId}</h5>
                     {this.renderItems()}
                 </span>

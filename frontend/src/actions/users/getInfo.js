@@ -3,7 +3,7 @@ import * as types from './actionTypes';
 
 export default function getInfo(id) {
     return (dispatch) => {
-        return get(`http://localhost:3000/api/user/info?id=${id}`)
+        return get(`/api/user/info?id=${id}`)
             .then(response => {
                 console.log(response);
                 dispatch({
