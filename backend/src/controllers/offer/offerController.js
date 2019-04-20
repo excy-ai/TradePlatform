@@ -78,6 +78,9 @@ async function rejectOffer(ctx) {
             offer.update({
                 status: types.REJECTED
             });
+            //todo:return success statuses
+        } else {
+            //todo:return error status
         }
     }
 }
