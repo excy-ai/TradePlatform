@@ -1,47 +1,50 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import List from '../list/List';
+import ListItem from '../listItem/ListItem';
+import Alert from '../alert/Alert';
+import Button from "../button/Button";
+
 import './style.css';
 
-// 1. Extract all not connected to this component classes into separate component
-// 2. Fix formating of your components
-// 3. Extract 'renderItems' into its separate component
-// --mrurenko 2019-04-06
-export default class MyProfile extends React.Component {
-    renderItems = () => {
-        if (this.props.items.length === 0) {
-            return <span className={"alert alert-warning"}> You have no items </span>
-        }
-        return <ul> {
-            this.props.items.map(el => {
+export default function MyProfile(props) {
+    let renderItems = () => {
+        return <List> {
+            props.items.map(el => {
                 let tradeStyle = el.onTrade ? 'danger' : 'warning';
-                return (<li className='list-group-item mb-1' key={el.id}>
+                return (<ListItem key={el.id}>
                         {el.sign}: {el.description} | {el.category}
-                        <button type="button" className={`btn btn-${tradeStyle} trade__btn`}
-                                onClick={()=>{this.props.onItemClick(el.id)}}>
-                            {el.onTrade ? 'Stop Trading' : 'Trade this'}</button>
-                    </li>
+                        <Button type="button" className={`btn-${tradeStyle} trade__btn`}
+                                onButtonClick={(onClickBody) => {
+                                    props.onItemClick(onClickBody)
+                                }} onClickBody={el.id}
+                                value={el.onTrade ? 'Stop Trading' : 'Trade this'}
+                        />
+                    </ListItem>
                 )
             })}
-        </ul>
+        </List>
     };
 
-    render() {
-        return (
-            <div className={'profile_info'}>
-                <span>
-                    <h4>My ID:</h4>
-                    <h5>{this.props.userId}</h5>
-                    {this.renderItems()}
-                </span>
-            </div>
-        );
-    }
+    return (
+        <div className={'profile_info'}>
+            <h4>My ID:</h4>
+            <h5>{props.userId}</h5>
+            {
+                props.items.length === 0 ?
+                    <Alert> You have no items </Alert>
+                    : renderItems()
+            }
+        </div>
+    );
+
 }
 
 
 MyProfile.defaultProps = {
     userId: '',
-    onItemClick: () => {},
+    onItemClick: () => {
+    },
     items: []
 };
 

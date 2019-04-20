@@ -6,9 +6,8 @@ import UserProfile from "../../components/userProfile/UserProfile";
 
 function UserPage(props) {
     useEffect(() => {
-            props.getInfo(props.match.params.id);
+        props.getInfo(props.match.params.id);
     }, []);
-    console.log(props.items);
     if (props.items === null || props.items === undefined) {
         return <div>"data is loading"</div>;
     }

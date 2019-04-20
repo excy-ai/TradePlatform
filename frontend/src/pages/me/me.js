@@ -13,13 +13,13 @@ class Me extends React.Component {
 
     componentDidMount() {
         this.props.getMe();
-        if(!this.props.authenticated){
+        if (!this.props.authenticated) {
             this.props.history.push('/signin');
         }
     }
 
     componentDidUpdate() {
-        if(!this.props.authenticated){
+        if (!this.props.authenticated) {
             this.props.history.push('/signin');
         }
     }
