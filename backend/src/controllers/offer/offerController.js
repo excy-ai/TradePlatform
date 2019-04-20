@@ -40,13 +40,46 @@ async function getTargeted(ctx) {
     return ctx.response;
 }
 
-async function cancelOffer(ctx) {
+async function acceptOffer(ctx) {
+    let user = ctx.state.user;
+    const {offerId} = ctx.state.body;
+    let offers = await user.getTradeOffers();
+    let offer = await offers.find({where: {id: offerId}});
+    if (offer) {
+        if (offer.status === types.PENDING) {
+            offer.update({
+                status: types.COMPLETED
+            });
+        }
+    }
 }
 
-async function acceptOffer(ctx) {
+async function cancelOffer(ctx) {
+    let user = ctx.state.user;
+    const {offerId} = ctx.state.body;
+    let offers = await user.getTradeOffers();
+    let offer = await offers.find({where: {id: offerId}});
+    if (offer) {
+        if (offer.status === types.PENDING) {
+            offer.update({
+                status: types.CANCELED
+            });
+        }
+    }
 }
 
 async function rejectOffer(ctx) {
+    let user = ctx.state.user;
+    const {offerId} = ctx.state.body;
+    let offers = await user.getTradeOffers();
+    let offer = await offers.find({where: {id: offerId}});
+    if (offer) {
+        if (offer.status === types.PENDING) {
+            offer.update({
+                status: types.REJECTED
+            });
+        }
+    }
 }
 
-module.exports = {create, getSended, getTargeted};
+module.exports = {create, getSended, getTargeted, acceptOffer, cancelOffer, rejectOffer};
