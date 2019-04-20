@@ -3,7 +3,7 @@
 const bcrypt = require('bcrypt');
 const passport = require('koa-passport');
 const LocalStrategy = require('passport-local').Strategy;
-const {User, Item} = require('../models');
+const {User, Item} = require('../../models');
 
 const SALT_ROUNDS = 10;
 const PASS_MIN_LENGTH = 8;

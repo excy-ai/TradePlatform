@@ -11,7 +11,7 @@ const send = require('koa-send');
 const bunyan = require('bunyan');
 const router = require('./routes');
 const {sequelize} = require('./models');
-const passport = require('./controllers/authController').passport;
+const passport = require('./controllers/auth/authController').passport;
 const {insertCategorys} = require('./controllers/categoryLoader');
 
 const app = new Koa();

@@ -1,6 +1,6 @@
 'use strict';
 
-const {Item, ListedItem, Category} = require('../models');
+const {Item, ListedItem, Category} = require('../../models');
 
 async function addItem(ctx) {
     ctx.status = 200;

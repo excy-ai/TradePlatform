@@ -2,7 +2,7 @@
 
 const Router = require('koa-router');
 const {authCheck} = require('../middlewares/authCheck');
-const itemController = require('../controllers/itemController');
+const itemController = require('../controllers/item/itemController');
 
 module.exports = new Router()
     .post('/items/add', authCheck, itemController.addItem)

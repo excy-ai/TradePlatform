@@ -1,6 +1,6 @@
 'use strict';
 
-const {Item, User} = require('../models');
+const {Item, User} = require('../../models');
 const PAGINATION_LIMIT = 25;
 
 async function getAllOnTradeFiltered(ctx) {

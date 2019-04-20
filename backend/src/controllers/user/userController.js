@@ -1,6 +1,6 @@
 'use strict';
 
-const {Item, User} = require('../models');
+const {Item, User} = require('../../models');
 
 async function getMe(ctx) {
     ctx.status = 200;

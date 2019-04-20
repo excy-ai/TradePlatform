@@ -11,12 +11,14 @@ const User = require('./user')(sequelize);
 const Item = require('./item')(sequelize);
 const ListedItem = require('./listedItem')(sequelize);
 const Category = require('./category')(sequelize);
+const TradeOffer = require('./tradeOffer')(sequelize);
 
 const models = {
     [User.name]: User,
     [Item.name]: Item,
     [Category.name]: Category,
-    [ListedItem.name]: ListedItem
+    [ListedItem.name]: ListedItem,
+    [TradeOffer.name]: TradeOffer
 };
 
 Object.keys(models).forEach((modelName) => {

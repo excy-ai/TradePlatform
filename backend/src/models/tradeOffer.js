@@ -3,7 +3,7 @@ const uuid = require('uuid/v4');
 const Sequelize = require('sequelize');
 
 module.exports = (sequelize) => {
-    const User = sequelize.define('User', {
+    const TradeOffer = sequelize.define('TradeOffer', {
             id: {
                 allowNull: false,
                 primaryKey: true,
@@ -14,30 +14,29 @@ module.exports = (sequelize) => {
                     notEmpty: true
                 }
             },
-            email: {
-                type: Sequelize.STRING,
-                unique: true,
-                allowNull: false,
-                validate: {
-                    notEmpty: true
-                }
-            },
-            password: {
+            status: {
                 type: Sequelize.STRING,
                 allowNull: false,
                 validate: {
                     notEmpty: true
                 }
             },
-            firstName: {
-                type: Sequelize.STRING,
+            target: {
+                type: Sequelize.UUID,
                 allowNull: false,
                 validate: {
                     notEmpty: true
                 }
             },
-            lastName: {
-                type: Sequelize.STRING,
+            targetItem: {
+                type: Sequelize.UUID,
+                allowNull: false,
+                validate: {
+                    notEmpty: true
+                }
+            },
+            offeredItem: {
+                type: Sequelize.UUID,
                 allowNull: false,
                 validate: {
                     notEmpty: true
@@ -46,17 +45,13 @@ module.exports = (sequelize) => {
         },
         {
             underscored: true,
-            tableName: 'users'
+            tableName: 'offers'
         });
 
-    User.associate = (models) => {
-        User.hasMany(models.Item, {
-            onDelete: 'cascade'
-        });
-        User.hasMany(models.TradeOffer, {
+    TradeOffer.associate = (models) => {
+        TradeOffer.belongsTo(models.User, {
             onDelete: 'cascade'
         });
     };
-
-    return User;
+    return TradeOffer;
 };
