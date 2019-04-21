@@ -5,7 +5,7 @@ export default function ListItem(props) {
     useEffect(() => {
     }, []);
     return (
-        <li className='list-group-item mb-1'>
+        <li className={`list-group-item ${props.className}`}>
             {props.children}
         </li>
     );

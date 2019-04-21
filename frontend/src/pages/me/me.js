@@ -1,52 +1,56 @@
 import React from 'react';
 
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import getMe from "../../actions/me/getMe";
-import switchTradeStatus from "../../actions/me/switchTradeStatus";
-import MyProfile from "../../components/myProfile/MyProfile";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import getMe from '../../actions/me/getMe';
+import switchTradeStatus from '../../actions/me/switchTradeStatus';
+import MyProfile from '../../components/myProfile/MyProfile';
 
 class Me extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    if (!this.props.authenticated) {
+      this.props.history.push('/signin');
     }
+  }
 
-    componentDidMount() {
-        this.props.getMe();
-        if (!this.props.authenticated) {
-            this.props.history.push('/signin');
-        }
+  componentDidUpdate() {
+    if (!this.props.authenticated) {
+      this.props.history.push('/signin');
     }
+  }
 
-    componentDidUpdate() {
-        if (!this.props.authenticated) {
-            this.props.history.push('/signin');
-        }
+  render() {
+    if (this.props.userId === '') {
+      return <div>"data is loading"</div>;
     }
-
-
-    render() {
-        if (this.props.userId === '') {
-            return <div>"data is loading"</div>;
-        }
-        return (
-            <React.Fragment>
-                <MyProfile userId={this.props.userId}
-                           items={this.props.items} onItemClick={this.props.switchTradeStatus}/>
-            </React.Fragment>
-        );
-    };
+    return (
+      <React.Fragment>
+        <MyProfile
+          userId={this.props.userId}
+          items={this.props.items}
+          onItemClick={this.props.switchTradeStatus}
+        />
+      </React.Fragment>
+    );
+  }
 }
 
-const mapStateToProps = (state) => ({
-    userId: state.meReducer.userId,
-    items: state.meReducer.items,
-    authenticated: state.authReducer.authenticated
+const mapStateToProps = state => ({
+  userId: state.meReducer.userId,
+  items: state.meReducer.items,
+  authenticated: state.authReducer.authenticated,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    getMe: bindActionCreators(getMe, dispatch),
-    switchTradeStatus: bindActionCreators(switchTradeStatus, dispatch)
+const mapDispatchToProps = dispatch => ({
+  getMe: bindActionCreators(getMe, dispatch),
+  switchTradeStatus: bindActionCreators(switchTradeStatus, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Me);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Me);
