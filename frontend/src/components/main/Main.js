@@ -11,15 +11,14 @@ function Main(props) {
   //todo: fetch user and other info here, after it check on other pages to check existence of needed info.
   const [isAuthPending, setIsAuthPending] = useState(true);
   useEffect(() => {
-    props.getMe().then(()=>{
+    props.getMe().then(() => {
       setIsAuthPending(false);
     });
   });
   if (!isAuthPending) {
     return <React.Fragment>{props.children}</React.Fragment>;
-  } else {
-    return <div>data is loading.</div>;
   }
+  return <div>data is loading.</div>;
 }
 
 Main.defaultProps = {};
