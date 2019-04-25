@@ -3,8 +3,8 @@ import * as types from '../actions/me/actionTypes';
 const initialState = {
   userId: '',
   items: [],
-  //move items, switchstatus action to itemReducer +
-  // divide actions getuserinfo/getuseritems
+  //TODO:move items, switchstatus action to itemReducer +
+  //TODO:divide actions getuserinfo/getuseritems
   error: null,
 };
 

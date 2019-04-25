@@ -10,6 +10,7 @@ export default function UserProfile(props) {
       return <Alert> This user has no items </Alert>;
     }
     //TODO: add card class for Item (with img) image.substring("public/".length)
+    //TODO: trade button will work different (will redirect to trade page for selected item)
     return (
       <List>
         {' '}
