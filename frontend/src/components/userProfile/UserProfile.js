@@ -17,7 +17,7 @@ export default function UserProfile(props) {
         {props.items.map(el => {
           let tradeStyle = el.onTrade ? 'danger' : 'warning';
           return (
-            <ListItem key={el.id}>
+            <ListItem key={el.Id}>
               {el.sign}: {el.description} | {el.category}
               <span className={`btn btn-${tradeStyle}`}>
                 {el.onTrade ? 'On Trade' : 'Not On Trade'}

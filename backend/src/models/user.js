@@ -1,63 +1,63 @@
-"use strict";
-const uuid = require("uuid/v4");
-const Sequelize = require("sequelize");
+'use strict';
+const uuid = require('uuid/v4');
+const Sequelize = require('sequelize');
 
 module.exports = sequelize => {
   const User = sequelize.define(
-    "User",
+    'User',
     {
-      id: {
+      Id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: () => uuid(),
         unique: true,
         validate: {
-          notEmpty: true
-        }
+          notEmpty: true,
+        },
       },
       email: {
         type: Sequelize.STRING,
         unique: true,
         allowNull: false,
         validate: {
-          notEmpty: true
-        }
+          notEmpty: true,
+        },
       },
       password: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-          notEmpty: true
-        }
+          notEmpty: true,
+        },
       },
       firstName: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-          notEmpty: true
-        }
+          notEmpty: true,
+        },
       },
       lastName: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-          notEmpty: true
-        }
-      }
+          notEmpty: true,
+        },
+      },
     },
     {
       underscored: true,
-      tableName: "users"
-    }
+      tableName: 'users',
+    },
   );
 
   User.associate = models => {
     User.hasMany(models.Item, {
-      onDelete: "cascade"
+      onDelete: 'cascade',
     });
     User.hasMany(models.TradeOffer, {
-      onDelete: "cascade"
+      onDelete: 'cascade',
     });
   };
 

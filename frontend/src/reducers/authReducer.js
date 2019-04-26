@@ -23,7 +23,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         authenticated: action.authenticated,
-        error: action.error
+        error: action.error,
       };
     }
     case types.AUTH_SUCCESS: {

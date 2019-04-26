@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
-const bcrypt = require("bcrypt");
-const passport = require("koa-passport");
-const LocalStrategy = require("passport-local").Strategy;
-const { User, Item } = require("../../models");
+const bcrypt = require('bcrypt');
+const passport = require('koa-passport');
+const LocalStrategy = require('passport-local').Strategy;
+const { User, Item } = require('../../models');
 
 const SALT_ROUNDS = 10;
 const PASS_MIN_LENGTH = 8;
@@ -13,7 +13,7 @@ passport.serializeUser(async (user, done) => {
     if (!user) {
       return done(null, false);
     }
-    return done(null, user.id);
+    return done(null, user.Id);
   } catch (err) {
     return done(err);
   }
@@ -21,7 +21,7 @@ passport.serializeUser(async (user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await User.findOne({ where: { id } });
+    const user = await User.findOne({ where: { Id: id } });
     if (!user) {
       return done(null, false);
     }
@@ -33,16 +33,16 @@ passport.deserializeUser(async (id, done) => {
 });
 
 passport.use(
-  "local.signin",
+  'local.signin',
   new LocalStrategy(
     {
-      usernameField: "email",
-      passwordField: "password",
+      usernameField: 'email',
+      passwordField: 'password',
       session: true,
-      passReqToCallback: true
+      passReqToCallback: true,
     },
-    login
-  )
+    login,
+  ),
 );
 
 async function login(ctx, email, password, done) {
@@ -54,35 +54,35 @@ async function login(ctx, email, password, done) {
       return done(null, user);
     } else {
       ctx.response.status = 400;
-      return done("Incorrect password");
+      return done('Incorrect password');
     }
   } else {
     ctx.response.status = 404;
-    return done("User not found");
+    return done('User not found');
   }
 }
 
 async function signin(ctx, next) {
   await passport.authenticate(
-    "local.signin",
+    'local.signin',
     async (err, user, info, status) => {
       if (!err && user) {
         await ctx.login(user);
         const userDataResponse = await {
-          id: user.id,
-          email: user.email
+          id: user.Id,
+          email: user.email,
         };
         ctx.response.body = userDataResponse;
         ctx.response.status = 200;
         return ctx.response;
       } else {
-        ctx.response.body = "cant sign in with given params";
+        ctx.response.body = 'cant sign in with given params';
         ctx.response.status = 400;
         return ctx.response;
       }
 
       await next();
-    }
+    },
   )(ctx, next);
 }
 
@@ -91,33 +91,33 @@ async function signup(ctx) {
     const userData = ctx.request.body;
     const [email, password] = [userData.email, userData.password];
     if (!isValidMail(email)) {
-      ctx.throw(400, "invalid email");
+      ctx.throw(400, 'invalid email');
     }
     if (password.length < PASS_MIN_LENGTH) {
-      ctx.throw(400, "password must be more than 8 symbols");
+      ctx.throw(400, 'password must be more than 8 symbols');
     }
     if (await User.findOne({ where: { email } })) {
-      ctx.throw(400, "User with such email already exists");
+      ctx.throw(400, 'User with such email already exists');
     }
 
     const salt = await bcrypt.genSalt(SALT_ROUNDS);
     const hashedPassword = await bcrypt.hash(password, salt);
-    if (userData.firstName === "" || userData.lastName === "") {
-      ctx.throw(400, "Bad first/lastName fields");
+    if (userData.firstName === '' || userData.lastName === '') {
+      ctx.throw(400, 'Bad first/lastName fields');
     }
     const newUser = {
       email: email,
       password: hashedPassword,
       firstName: userData.firstName,
-      lastName: userData.lastName
+      lastName: userData.lastName,
     };
     const createdUser = await User.create(newUser);
     if (createdUser) {
-      ctx.response.body = createdUser;
-      ctx.response.status = 201; //TODO: in prod change to 204
+      ctx.response.body = createdUser; //remove body and
+      ctx.response.status = 201;       //TODO: in prod change to 204
       return ctx.response;
     }
-    ctx.throw(404, "not found");
+    ctx.throw(404, 'not found');
   } catch (err) {
     ctx.response.body = err.message;
     ctx.response.status = err.status;

@@ -13,39 +13,37 @@ async function addItem(ctx) {
     category: category,
     pic: pic,
   };
-  try {
-    if (!(await Category.findOne({ where: { title: category } }))) {
-      ctx.response.status = 400;
-      ctx.response.body = 'no such category';
-      return ctx.response;
-    }
-    if (await ListedItem.findOne({ where: { sign, category } })) {
-      ctx.response.status = 400;
-      ctx.response.body =
-        'Item with such sign already exist, you can add it, instead of creating new';
-      return ctx.response;
-    }
-    await ListedItem.create(newItem);
-    let createdItem = await Item.create(newItem);
-    await (await Category.findOne({ where: { title: category } })).addItem(
-      createdItem,
-    );
-    await user.addItem(createdItem);
-    if (createdItem) {
-      ctx.response.status = 200;
-      ctx.response.body = createdItem;
-    }
-    return ctx.response;
-  } catch (err) {
-    ctx.response.body = err.message;
-    ctx.response.status = err.status;
+  if (!(await Category.findOne({ where: { title: category } }))) {
+    ctx.response.status = 400;
+    ctx.response.body = 'no such category';
     return ctx.response;
   }
+  if (await ListedItem.findOne({ where: { sign, category } })) {
+    ctx.response.status = 400;
+    ctx.response.body =
+      'Item with such sign & category already exist, you can add it, instead of creating new';
+    return ctx.response;
+  }
+  await ListedItem.create(newItem);
+  let createdItem = await Item.create(newItem);
+  console.log(createdItem.Id);
+  if (createdItem) {
+    ctx.response.status = 200;
+    ctx.response.body = createdItem;
+  } else {
+    ctx.response.status = 400;
+    return ctx.response;
+  }
+  await (await Category.findOne({ where: { title: category } })).addItem(
+    createdItem,
+  );
+  await user.addItem(createdItem);
+  return ctx.response;
 }
 
 async function addImageForItem(ctx) {
   const { id } = ctx.params;
-  let item = await Item.findOne({ where: { id } });
+  let item = await Item.findOne({ where: { Id: id } });
 
   if (item) {
     item.update({
@@ -65,7 +63,7 @@ async function switchOnTradeStatus(ctx) {
   let id = ctx.request.body.id;
   if (
     items.map(item => {
-      if (id === item.id) {
+      if (id === item.Id) {
         return item;
       }
     }).length === 0
@@ -74,7 +72,7 @@ async function switchOnTradeStatus(ctx) {
     ctx.response.status = 404;
     return ctx.response;
   }
-  let specItem = await Item.findOne({ where: { id } });
+  let specItem = await Item.findOne({ where: { Id: id } });
   specItem.update({
     onTrade: !specItem.onTrade,
   });

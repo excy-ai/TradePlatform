@@ -1,9 +1,9 @@
-"use strict";
-const Sequelize = require("sequelize");
+'use strict';
+const Sequelize = require('sequelize');
 
 module.exports = sequelize => {
   const ListedItem = sequelize.define(
-    "ListedItem",
+    'ListedItem',
     {
       sign: {
         type: Sequelize.STRING,
@@ -11,32 +11,32 @@ module.exports = sequelize => {
         allowNull: false,
         unique: true,
         validate: {
-          notEmpty: true
-        }
+          notEmpty: true,
+        },
       },
       description: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-          notEmpty: true
-        }
+          notEmpty: true,
+        },
       },
       category: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-          notEmpty: true
-        }
+          notEmpty: true,
+        },
       },
       pic: {
         type: Sequelize.BLOB,
-        allowNull: true
-      }
+        allowNull: true,
+      },
     },
     {
       underscored: true,
-      tableName: "listed"
-    }
+      tableName: 'listed',
+    },
   );
 
   return ListedItem;

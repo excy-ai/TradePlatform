@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import getItems from '../../actions/items/getItems';
 import getMe from '../../actions/me/getMe';
 
 import './style.css';
@@ -12,6 +13,8 @@ function Main(props) {
   useEffect(() => {
     props.getMe().then(() => {
       setIsAuthPending(false);
+    }).then(() => {
+      props.getItems();
     });
   });
   if (!isAuthPending) {
@@ -31,6 +34,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  getItems: bindActionCreators(getItems, dispatch),
   getMe: bindActionCreators(getMe, dispatch),
 });
 

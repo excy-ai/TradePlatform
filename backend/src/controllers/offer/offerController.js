@@ -6,14 +6,14 @@ async function create(ctx) {
   ctx.status = 200;
   let user = ctx.state.user;
   const { target, targetItem, offeredItem } = ctx.request.body;
-  let offered = await (await user.getItems()).findOne({ where: { id: offeredItem } });
+  let offered = await (await user.getItems()).findOne({ where: { Id: offeredItem } });
   if (!offered) {
     ctx.response.status = 400;
     return ctx.response;
   }
-  let targetUser = await User.findOne({ where: { id: target } });
+  let targetUser = await User.findOne({ where: { Id: target } });
   if (targetUser) {
-    let item = await (await targetUser.getItems()).findOne({ where: { id: targetItem, onTrade: true } });
+    let item = await (await targetUser.getItems()).findOne({ where: { Id: targetItem, onTrade: true } });
     //check if item ontrade status === true, else send status 400 PS added
     //check existance of selected items on targeted user
     //TODO: check how works
@@ -41,7 +41,7 @@ async function create(ctx) {
 
 async function getSended(ctx) {
   let user = ctx.state.user;
-  await TradeOffer.findAll({ where: { user_id: user.id } }).then(offers => {
+  await TradeOffer.findAll({ where: { user_id: user.Id } }).then(offers => {
     ctx.response.body = offers;
   });
   ctx.response.status = 200;
@@ -51,7 +51,7 @@ async function getSended(ctx) {
 async function getTargeted(ctx) {
   let user = ctx.state.user;
   await TradeOffer.findAll({
-    where: { target: user.id, status: types.PENDING },
+    where: { target: user.Id, status: types.PENDING },
   }).then(offers => {
     ctx.response.body = offers;
   });
@@ -63,10 +63,10 @@ async function acceptOffer(ctx) {
   let user = ctx.state.user;
   const { offerId } = ctx.state.body;
   let offers = await user.getTradeOffers();
-  let offer = await offers.find({ where: { id: offerId } });
+  let offer = await offers.find({ where: { Id: offerId } });
   //TODO:integrate this to frontend
   if (offer) {
-    if (offer.target !== user.id) {
+    if (offer.target !== user.Id) {
       ctx.response.status = 400;
       return ctx.response;
     }
@@ -74,11 +74,11 @@ async function acceptOffer(ctx) {
       //swap target/offered item holders
       //remove other offers where items used
       //TODO: check how works
-      let offerer = await User.findOne({ where: { id: offer.user_id } });
+      let offerer = await User.findOne({ where: { Id: offer.user_id } });
       let userItem = await (await user.getItems())
-        .findOne({ where: { id: offer.targetItem } });
+        .findOne({ where: { Id: offer.targetItem } });
       let offeredItem = await (await offerer.getItems())
-        .findOne({ where: { id: offer.offeredItem } });
+        .findOne({ where: { Id: offer.offeredItem } });
       if (userItem && offeredItem) {
         user.removeItem(userItem);
         user.addItem(offeredItem);
@@ -110,7 +110,7 @@ async function cancelOffer(ctx) {
   let user = ctx.state.user;
   const { offerId } = ctx.state.body;
   let offers = await user.getTradeOffers();
-  let offer = await offers.find({ where: { id: offerId } });
+  let offer = await offers.find({ where: { Id: offerId } });
   if (offer) {
     if (offer.status === types.PENDING) {
       offer.update({
@@ -132,7 +132,7 @@ async function rejectOffer(ctx) {
   let user = ctx.state.user;
   const { offerId } = ctx.state.body;
   let offers = await user.getTradeOffers();
-  let offer = await offers.find({ where: { id: offerId } });
+  let offer = await offers.find({ where: { Id: offerId } });
   if (offer) {
     if (offer.status === types.PENDING) {
       offer.update({

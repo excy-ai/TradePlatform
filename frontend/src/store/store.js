@@ -1,12 +1,12 @@
-import {createStore, applyMiddleware} from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 import appReducer from '../reducers/appReducer';
 
 
 export const newStore = () => {
-    return createStore(
-        appReducer,
-        applyMiddleware(thunk)
-    );
+  return createStore(
+    appReducer,
+    applyMiddleware(thunk),
+  );
 };

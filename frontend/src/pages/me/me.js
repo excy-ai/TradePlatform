@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import getMe from '../../actions/me/getMe';
-import switchTradeStatus from '../../actions/me/switchTradeStatus';
+import switchTradeStatus from '../../actions/items/switchTradeStatus';
 import MyProfile from '../../components/myProfile/MyProfile';
 
 class Me extends React.Component {
@@ -41,7 +41,7 @@ class Me extends React.Component {
 
 const mapStateToProps = state => ({
   userId: state.meReducer.userId,
-  items: state.meReducer.items,
+  items: state.itemReducer.items,
   authenticated: state.authReducer.authenticated,
 });
 

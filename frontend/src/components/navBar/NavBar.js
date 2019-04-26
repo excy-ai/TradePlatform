@@ -24,7 +24,7 @@ function NavBar(props) {
           return (
             <div key={item.link} style={linkStyle}>
               <NavLink exact to={item.link}>
-                <input className="btn btn-primary mb-2" value={item.value} readOnly />
+                <input className="btn btn-primary mb-2" value={item.value} readOnly/>
               </NavLink>
             </div>
           );

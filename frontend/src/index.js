@@ -22,14 +22,14 @@ const store = newStore();
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <NavBar />
-      <Route exact path="/" component={SignUp} />
-      <Route path="/signin" component={SignIn} />
+      <NavBar/>
+      <Route exact path="/" component={SignUp}/>
+      <Route path="/signin" component={SignIn}/>
       <Main>
-        <Route path="/me" component={Me} />
-        <Route path="/additem" component={AddItem} />
-        <Route path="/market" component={Market} />
-        <Route path="/user/:id" component={UserPage} />
+        <Route path="/me" component={Me}/>
+        <Route path="/additem" component={AddItem}/>
+        <Route path="/market" component={Market}/>
+        <Route path="/user/:id" component={UserPage}/>
       </Main>
     </Router>
   </Provider>,

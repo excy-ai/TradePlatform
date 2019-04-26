@@ -1,24 +1,24 @@
-"use strict";
+'use strict';
 
-const { Item, User } = require("../../models");
+const { Item, User } = require('../../models');
 
 async function getMe(ctx) {
   ctx.status = 200;
   let user = ctx.state.user;
   let items = await Item.findAll({
     where: { user_id: user.id },
-    order: [["sign", "ASC"]]
+    order: [['sign', 'ASC']],
   });
   ctx.body = {
     user: user,
-    items: items
+    items: items,
   };
   return ctx.response;
 }
 
 async function getUserItemList(ctx) {
   let { id } = ctx.query;
-  let user = await User.find({ where: { id } });
+  let user = await User.find({ where: { Id: id } });
   if (!user) {
     ctx.response.status = 404;
     return ctx.response;

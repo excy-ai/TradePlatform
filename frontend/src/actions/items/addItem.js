@@ -7,10 +7,12 @@ export default function addItem(body, file) {
       .then(response => {
         return response.json();
       }).then(response => {
-        return multiPartFormPost(`api/user/items/${response.id}/image`, file)
+        let item = response;
+        return multiPartFormPost(`api/user/items/${response.Id}/image`, file)
           .then(response => {
             dispatch({
               type: types.ITEM_ADD_SUCCESS,
+              item: item,
             });
           });
       })

@@ -16,7 +16,7 @@ export default function MyProfile(props) {
         {props.items.map(el => {
           let tradeStyle = el.onTrade ? 'danger' : 'warning';
           return (
-            <ListItem className={'inv_item'} key={el.id}>
+            <ListItem className={'inv_item'} key={el.Id}>
               {el.sign}: {el.description} | {el.category}
               <Button
                 type="button"
@@ -24,7 +24,7 @@ export default function MyProfile(props) {
                 onButtonClick={onClickBody => {
                   props.onItemClick(onClickBody);
                 }}
-                onClickBody={el.id}
+                onClickBody={el.Id}
                 value={el.onTrade ? 'Stop Trading' : 'Trade this'}
               />
             </ListItem>
@@ -45,7 +45,8 @@ export default function MyProfile(props) {
 
 MyProfile.defaultProps = {
   userId: '',
-  onItemClick: () => {},
+  onItemClick: () => {
+  },
   items: [],
 };
 

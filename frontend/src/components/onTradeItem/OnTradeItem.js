@@ -9,10 +9,9 @@ export default function OnTradeItem(props) {
   };
   //TODO: add card comp with title/img/description/button(with action)/bottom text and images
 
-  console.log(props);
   return (
     <div className="card" style={style}>
-      <img className="card-img-top" src={props.image.substring("public/".length) || '...'}
+      <img className="card-img-top" src={props.image ? props.image.substring('public/'.length) : '...'}
            alt="Card image cap"/>
       <div className="card-body">
         <h5 className="card-title">{props.name}</h5>

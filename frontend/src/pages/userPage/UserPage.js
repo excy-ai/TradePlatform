@@ -13,7 +13,7 @@ function UserPage(props) {
   }
   return (
     <React.Fragment>
-      <UserProfile userId={props.match.params.id} items={props.items} />
+      <UserProfile userId={props.match.params.id} items={props.items}/>
     </React.Fragment>
   );
 }

@@ -1,3 +1,10 @@
 {
-  "data": ["common", "uncommon", "rare", "mythical", "legendary", "immortal"]
+  "data": [
+    "common",
+    "uncommon",
+    "rare",
+    "mythical",
+    "legendary",
+    "immortal"
+  ]
 }

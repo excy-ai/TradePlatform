@@ -1,10 +1,10 @@
-"use strict";
-const uuid = require("uuid/v4");
-const Sequelize = require("sequelize");
+'use strict';
+const uuid = require('uuid/v4');
+const Sequelize = require('sequelize');
 
 module.exports = sequelize => {
   const Category = sequelize.define(
-    "Category",
+    'Category',
     {
       title: {
         allowNull: false,
@@ -12,19 +12,19 @@ module.exports = sequelize => {
         type: Sequelize.STRING,
         primaryKey: true,
         validate: {
-          notEmpty: true
-        }
-      }
+          notEmpty: true,
+        },
+      },
     },
     {
       underscored: true,
-      tableName: "category"
-    }
+      tableName: 'category',
+    },
   );
 
   Category.associate = models => {
     Category.hasMany(models.Item, {
-      onDelete: "cascade"
+      onDelete: 'cascade',
     });
   };
 

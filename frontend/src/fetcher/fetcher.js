@@ -79,7 +79,7 @@ export function multiPartFormPost(url, file) {
   formData.append('image', file);
   return fetch(url, {
     method: 'POST',
-    body: formData
+    body: formData,
   })
     .then(response => {
       checkStatus(response);

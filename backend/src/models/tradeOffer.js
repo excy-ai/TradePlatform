@@ -1,10 +1,10 @@
-"use strict";
-const uuid = require("uuid/v4");
-const Sequelize = require("sequelize");
+'use strict';
+const uuid = require('uuid/v4');
+const Sequelize = require('sequelize');
 
 module.exports = sequelize => {
   const TradeOffer = sequelize.define(
-    "TradeOffer",
+    'TradeOffer',
     {
       id: {
         allowNull: false,
@@ -13,47 +13,47 @@ module.exports = sequelize => {
         defaultValue: () => uuid(),
         unique: true,
         validate: {
-          notEmpty: true
-        }
+          notEmpty: true,
+        },
       },
       status: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-          notEmpty: true
-        }
+          notEmpty: true,
+        },
       },
       target: {
         type: Sequelize.UUID,
         allowNull: false,
         validate: {
-          notEmpty: true
-        }
+          notEmpty: true,
+        },
       },
       targetItem: {
         type: Sequelize.UUID,
         allowNull: false,
         validate: {
-          notEmpty: true
-        }
+          notEmpty: true,
+        },
       },
       offeredItem: {
         type: Sequelize.UUID,
         allowNull: false,
         validate: {
-          notEmpty: true
-        }
-      }
+          notEmpty: true,
+        },
+      },
     },
     {
       underscored: true,
-      tableName: "offers"
-    }
+      tableName: 'offers',
+    },
   );
 
   TradeOffer.associate = models => {
     TradeOffer.belongsTo(models.User, {
-      onDelete: "cascade"
+      onDelete: 'cascade',
     });
   };
   return TradeOffer;
