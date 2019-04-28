@@ -14,24 +14,13 @@ module.exports = sequelize => {
           notEmpty: true,
         },
       },
-      description: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
-      },
       category: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
-      },
-      pic: {
-        type: Sequelize.BLOB,
-        allowNull: true,
-      },
+      }
     },
     {
       underscored: true,

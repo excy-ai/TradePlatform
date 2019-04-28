@@ -3,25 +3,29 @@ import PropTypes from 'prop-types';
 import List from '../../components/list/List';
 import ListItem from '../../components/listItem/ListItem';
 import Alert from '../../components/alert/Alert';
+import Card from '../../components/card/Card';
 
 export default function UserProfile(props) {
   let renderItems = () => {
+    const style = {
+      margin: '5px 0 5px 10px',
+      maxWidth: 'calc(50% - 20px)',
+    };
     if (props.items.length === 0) {
       return <Alert> This user has no items </Alert>;
     }
-    //TODO: add card class for Item (with img) image.substring("public/".length)
     //TODO: trade button will work different (will redirect to trade page for selected item)
     return (
       <List>
-        {' '}
         {props.items.map(el => {
           let tradeStyle = el.onTrade ? 'danger' : 'warning';
+          let button = <span className={`btn btn-${tradeStyle}`}>
+                {el.onTrade ? 'On Trade' : 'Not On Trade'}
+              </span>;
           return (
             <ListItem key={el.Id}>
-              {el.sign}: {el.description} | {el.category}
-              <span className={`btn btn-${tradeStyle}`}>
-                {el.onTrade ? 'On Trade' : 'Not On Trade'}
-              </span>
+              <Card style={style} image={el.image} content={button} name={el.sign}
+                    description={el.description} footer={el.category}/>
             </ListItem>
           );
         })}

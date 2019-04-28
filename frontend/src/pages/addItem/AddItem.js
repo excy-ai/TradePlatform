@@ -5,6 +5,8 @@ import getCategorys from '../../actions/items/getCategorys';
 import addItem from '../../actions/items/addItem';
 import SelectList from '../../components/selectList/SelectList';
 import InputFieldWithTitle from '../../components/form/InputFieldWithTitle';
+import FileInputField from '../../components/form/FileInputField';
+import Form from '../../components/form/Form';
 
 class AddItem extends React.Component {
   constructor(props) {
@@ -53,9 +55,13 @@ class AddItem extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {/* You should use your 'From' component here */}
-        {/* --mrurenko 2019-04-06 */}
-        <form onSubmit={this.handleSubmit}>
+        <Form
+          handleSubmit={this.handleSubmit}
+          id={'additem'}
+          name={'additem'}
+          submitBtnType={'danger'}
+          submitBtnValue={'Add item'}
+        >
           <InputFieldWithTitle
             value={this.state.sign}
             name={'sign'}
@@ -68,14 +74,13 @@ class AddItem extends React.Component {
             onChange={this.handleEvent}
             title={'Description'}
           />
-          <InputFieldWithTitle
+          <FileInputField
             value={this.state.fileName}
+            title={'Choose file'}
             name={'file'}
             type={'file'}
             onChange={this.handleImage}
-            title={'File'}
           />
-
           <SelectList
             currentValue={this.state.category}
             onChange={this.handleEvent}
@@ -83,8 +88,7 @@ class AddItem extends React.Component {
             listLabel={'Category:'}
             listName={'category'}
           />
-          <input className="btn btn-danger" type="submit" value="Submit"/>
-        </form>
+        </Form>
       </React.Fragment>
     );
   }

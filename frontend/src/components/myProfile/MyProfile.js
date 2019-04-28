@@ -3,30 +3,34 @@ import PropTypes from 'prop-types';
 import List from '../list/List';
 import ListItem from '../listItem/ListItem';
 import Alert from '../alert/Alert';
+import Card from '../card/Card';
 import Button from '../button/Button';
 
 import './style.css';
 
 export default function MyProfile(props) {
   let renderItems = () => {
-    //TODO: add card class for Item (with img) image.substring("public/".length)
+    const style = {
+      margin: '5px 0 5px 10px',
+      maxWidth: 'calc(50% - 20px)',
+    };
     return (
       <List>
-        {' '}
         {props.items.map(el => {
-          let tradeStyle = el.onTrade ? 'danger' : 'warning';
+          const tradeStyle = el.onTrade ? 'danger' : 'warning';
+          const button = <Button
+            type="button"
+            className={`btn-${tradeStyle} trade__btn`}
+            onButtonClick={onClickBody => {
+              props.onItemClick(onClickBody);
+            }}
+            onClickBody={el.Id}
+            value={el.onTrade ? 'Stop Trading' : 'Trade this'}
+          />;
           return (
             <ListItem className={'inv_item'} key={el.Id}>
-              {el.sign}: {el.description} | {el.category}
-              <Button
-                type="button"
-                className={`btn-${tradeStyle} trade__btn`}
-                onButtonClick={onClickBody => {
-                  props.onItemClick(onClickBody);
-                }}
-                onClickBody={el.Id}
-                value={el.onTrade ? 'Stop Trading' : 'Trade this'}
-              />
+              <Card style={style} image={el.image} content={button} name={el.sign}
+                    description={el.description} footer={el.category}/>
             </ListItem>
           );
         })}

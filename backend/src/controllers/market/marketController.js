@@ -7,7 +7,7 @@ async function getAllOnTradeFiltered(ctx) {
   let { category, order, page, userID } = ctx.query;
 
   if (!order || (order !== 'ASC' && order !== 'DESC')) {
-    order = 'ASC';
+    order = 'DESC';
   }
   let items;
   let count;

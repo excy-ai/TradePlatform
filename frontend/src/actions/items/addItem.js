@@ -10,9 +10,11 @@ export default function addItem(body, file) {
         let item = response;
         return multiPartFormPost(`api/user/items/${response.Id}/image`, file)
           .then(response => {
+            return response.json();
+          }).then(response => {
             dispatch({
               type: types.ITEM_ADD_SUCCESS,
-              item: item,
+              item: { ...item, image: response.image },
             });
           });
       })

@@ -16,7 +16,7 @@ fields: email, password
 3) host:3000/api/auth/signout/ - do POST to signout
 host:3000/api/user/me - do GET to get info about user\inv\items (after reg\auth)
 4) host:3000/api/user/items/add - do POST to add item(if authenticated),
-fields: sign, description, category, pic
+fields: sign, description, category, image
 5) host:3000/api/user/items/listed - do GET to get list of already listed items in system
 6) host:3000/api/user/items/categorys - do GET to get all available categorys for items
 

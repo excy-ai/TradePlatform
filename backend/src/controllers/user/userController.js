@@ -6,8 +6,8 @@ async function getMe(ctx) {
   ctx.status = 200;
   let user = ctx.state.user;
   let items = await Item.findAll({
-    where: { user_id: user.id },
-    order: [['sign', 'ASC']],
+    where: { user_id: user.Id },
+    order: [['created_at', 'DESC']],
   });
   ctx.body = {
     user: user,
@@ -18,7 +18,10 @@ async function getMe(ctx) {
 
 async function getUserItemList(ctx) {
   let { id } = ctx.query;
-  let user = await User.find({ where: { Id: id } });
+  let user = await User.find({
+    where: { Id: id },
+    order: [['created_at', 'DESC']],
+  });
   if (!user) {
     ctx.response.status = 404;
     return ctx.response;

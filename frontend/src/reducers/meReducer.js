@@ -2,8 +2,6 @@ import * as types from '../actions/me/actionTypes';
 
 const initialState = {
   userId: '',
-  //TODO: move items, switchstatus action to itemReducer +
-  //TODO: divide actions getuserinfo/getuseritems
   error: null,
 };
 

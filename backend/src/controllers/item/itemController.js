@@ -6,27 +6,26 @@ async function addItem(ctx) {
   ctx.status = 200;
   let user = ctx.state.user;
   const itemData = ctx.request.body;
-  const { sign, description, category, pic } = itemData;
+  const { sign, description, category, image } = itemData;
   let newItem = {
     sign: sign,
     description: description,
     category: category,
-    pic: pic,
+    image: image,
   };
   if (!(await Category.findOne({ where: { title: category } }))) {
     ctx.response.status = 400;
     ctx.response.body = 'no such category';
     return ctx.response;
   }
-  if (await ListedItem.findOne({ where: { sign, category } })) {
+  if (await ListedItem.findOne({ where: { sign } })) {
     ctx.response.status = 400;
     ctx.response.body =
-      'Item with such sign & category already exist, you can add it, instead of creating new';
+      'Item with such sign already exist, you can add it, instead of creating new';
     return ctx.response;
   }
-  await ListedItem.create(newItem);
+  await ListedItem.create({ sign, category });
   let createdItem = await Item.create(newItem);
-  console.log(createdItem.Id);
   if (createdItem) {
     ctx.response.status = 200;
     ctx.response.body = createdItem;
@@ -45,15 +44,17 @@ async function addImageForItem(ctx) {
   const { id } = ctx.params;
   let item = await Item.findOne({ where: { Id: id } });
 
+  let imgLink = ctx.req.file.path.substring('public/'.length);
   if (item) {
     item.update({
-      pic: ctx.req.file.path,
+      image: `/${imgLink}`
     });
   } else {
     ctx.response.status = 400;
     return ctx.response;
   }
   ctx.response.status = 200;
+  ctx.response.body = { image: `/${imgLink}` };
   return ctx.response;
 }
 

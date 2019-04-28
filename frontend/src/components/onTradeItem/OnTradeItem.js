@@ -1,31 +1,19 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Card from '../../components/card/Card';
 
 export default function OnTradeItem(props) {
   const style = {
     margin: '5px 0 5px 10px',
     maxWidth: 'calc(50% - 20px)',
   };
-  //TODO: add card comp with title/img/description/button(with action)/bottom text and images
+  let button = <NavLink to={'/user/' + props.userId}>offerer</NavLink>;
 
-  return (
-    <div className="card" style={style}>
-      <img className="card-img-top" src={props.image ? props.image.substring('public/'.length) : '...'}
-           alt="Card image cap"/>
-      <div className="card-body">
-        <h5 className="card-title">{props.name}</h5>
-        <p className="card-text">{props.description}</p>
-        <a href="#" className="btn btn-primary">
-          Trade
-        </a>
-      </div>
-      <div className="card-footer">
-        <small className="text-muted">
-          <NavLink to={'/user/' + props.userId}>offerer</NavLink>
-        </small>
-      </div>
-    </div>
+  return (<React.Fragment>
+      <Card style={style} image={props.image} content={button} name={props.name}
+            description={props.description} footer={props.category}/>
+    </React.Fragment>
   );
 }
 
@@ -33,10 +21,12 @@ OnTradeItem.defaultProps = {
   image: '...',
   name: '',
   description: '',
+  category: ''
 };
 
 OnTradeItem.propTypes = {
   image: PropTypes.string,
   name: PropTypes.string,
+  category: PropTypes.string,
   description: PropTypes.string,
 };
