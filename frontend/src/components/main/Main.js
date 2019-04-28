@@ -9,12 +9,14 @@ import getMe from '../../actions/me/getMe';
 import './style.css';
 
 function Main(props) {
+  debugger;
   const [isAuthPending, setIsAuthPending] = useState(true);
   useEffect(() => {
     props.getMe().then(() => {
       setIsAuthPending(false);
     }).then(() => {
       props.getItems();
+      console.log(props.authenticated);
     });
   });
   if (!isAuthPending) {

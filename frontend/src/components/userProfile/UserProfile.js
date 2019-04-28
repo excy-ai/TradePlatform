@@ -7,10 +7,6 @@ import Card from '../../components/card/Card';
 
 export default function UserProfile(props) {
   let renderItems = () => {
-    const style = {
-      margin: '5px 0 5px 10px',
-      maxWidth: 'calc(50% - 20px)',
-    };
     if (props.items.length === 0) {
       return <Alert> This user has no items </Alert>;
     }
@@ -24,7 +20,7 @@ export default function UserProfile(props) {
               </span>;
           return (
             <ListItem key={el.Id}>
-              <Card style={style} image={el.image} content={button} name={el.sign}
+              <Card image={el.image} content={button} name={el.sign}
                     description={el.description} footer={el.category}/>
             </ListItem>
           );

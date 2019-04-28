@@ -8,7 +8,7 @@ function UserPage(props) {
   useEffect(() => {
     if (!props.authenticated) {
       props.history.push('/signin');
-    }//FIXME: fix redirect after page reload
+    }
     props.getInfo(props.match.params.id);
   }, []);
   if (props.items === null || props.items === undefined) {

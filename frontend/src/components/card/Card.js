@@ -8,8 +8,13 @@ export default function Card(props) {
     maxWidth: '480x',
     maxHeight: '240px'
   };
+  const fullStyle = {
+    margin: '10px 0 5px 10px',
+    maxWidth: 'calc(25%)',
+    ...style,
+  };
   return (
-    <div className="card" style={style}>
+    <div className="card" style={fullStyle}>
       <img className="card-img-top" style={imgStyle} src={image || '...'}
            alt="Card image cap"/>
       <div className="card-body">

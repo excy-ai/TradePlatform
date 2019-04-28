@@ -4,7 +4,7 @@ import { AUTH_SUCCESS } from '../auth/actionTypes';
 
 export default function getMe() {
   return dispatch => {
-    return get(`api/user/me`)
+    return get(`/api/user/me`)
       .then(response => {
         dispatch({
           type: types.GET_USER_DATA_SUCCESS,

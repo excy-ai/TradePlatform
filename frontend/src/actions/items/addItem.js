@@ -3,12 +3,12 @@ import * as types from './actionTypes';
 
 export default function addItem(body, file) {
   return (dispatch) => {
-    return post(`api/user/items/add`, body)
+    return post(`/api/user/items/add`, body)
       .then(response => {
         return response.json();
       }).then(response => {
         let item = response;
-        return multiPartFormPost(`api/user/items/${response.Id}/image`, file)
+        return multiPartFormPost(`/api/user/items/${response.Id}/image`, file)
           .then(response => {
             return response.json();
           }).then(response => {

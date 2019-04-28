@@ -1,7 +1,7 @@
 import * as types from '../actions/users/actionTypes';
 
 const initialState = {
-  items: null,
+  items: [],
   error: null,
 };
 
@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
     case types.GET_INFO_ERROR: {
       return {
         ...state,
-        items: null,
+        items: [],
         error: action.error,
       };
     }

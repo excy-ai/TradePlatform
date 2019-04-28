@@ -4,7 +4,7 @@ import * as types from '../items/actionTypes';
 export default function switchTradeStatus(id) {
   let body = { id };
   return dispatch => {
-    return post(`api/user/items/trade/switchStatus`, body)
+    return post(`/api/user/items/trade/switchStatus`, body)
       .then(response => {
         dispatch({
           type: types.ITEM_STATUS_SWITCH_SUCCESS,

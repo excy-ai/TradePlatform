@@ -10,10 +10,6 @@ import './style.css';
 
 export default function MyProfile(props) {
   let renderItems = () => {
-    const style = {
-      margin: '5px 0 5px 10px',
-      maxWidth: 'calc(50% - 20px)',
-    };
     return (
       <List>
         {props.items.map(el => {
@@ -29,7 +25,7 @@ export default function MyProfile(props) {
           />;
           return (
             <ListItem className={'inv_item'} key={el.Id}>
-              <Card style={style} image={el.image} content={button} name={el.sign}
+              <Card image={el.image} content={button} name={el.sign}
                     description={el.description} footer={el.category}/>
             </ListItem>
           );

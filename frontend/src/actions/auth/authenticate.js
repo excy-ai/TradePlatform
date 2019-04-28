@@ -8,7 +8,7 @@ export default function authenticate(body) {
       authenticated: false,
       error: null,
     });
-    return post(`api/auth/signin/`, body)
+    return post(`/api/auth/signin/`, body)
       .then(response => {
         dispatch({
           type: types.AUTH_SUCCESS,
