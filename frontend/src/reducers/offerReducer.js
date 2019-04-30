@@ -3,15 +3,33 @@ import * as types from '../actions/offers/actionTypes';
 const initialState = {
   sended: [],
   targeted: [],
+  targetItem: '',
+  selectedItem: '',
+  creating: false,
   error: null,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case types.OFFER_CREATE_PENDING: {
+      return {
+        ...state,
+        creating: true,
+        error: null,
+      };
+    }
+    case types.OFFER_CREATE_CANCELED: {
+      return {
+        ...state,
+        creating: false,
+        error: null,
+      };
+    }
     case types.OFFER_CREATE_SUCCESS: {
       return {
         ...state,
         sended: [action.offer, ...state.sended],
+        creating: false,
         error: null,
       };
     }
