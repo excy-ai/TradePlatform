@@ -20,6 +20,12 @@ import Main from './components/main/Main';
 const history = createBrowserHistory();
 const store = newStore();
 
+//TODO:
+//<Route path="/offers/creating" component={OfferCreate}/>
+// <Route path="/offers/creating/confirmation" component={OfferConfirm}/>
+// make in reducer field creating: false, after user clicks button trade on user profile
+// it changes to true, after confirmation/cancelling creation it backs to false
+// if field false redirect user to me!!!
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
