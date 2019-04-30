@@ -13,8 +13,9 @@ function NavBar(props) {
   let data = [
     { link: '/', value: 'Sign Up', auth: false },
     { link: '/signin', value: 'Sign In', auth: false },
-    { link: '/me', value: 'Me', auth: true },
     { link: '/additem', value: 'Add Item', auth: true },
+    { link: '/offers', value: 'Offers', auth: true },
+    { link: '/me', value: 'Me', auth: true },
     { link: '/market', value: 'Market', auth: true },
   ];
   return (
