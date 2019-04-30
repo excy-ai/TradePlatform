@@ -11,6 +11,9 @@ export default function UserProfile(props) {
       return <Alert> This user has no items </Alert>;
     }
     //TODO: trade button will work different (will redirect to trade page for selected item)
+    //make onclick to redirect to page with selected item,
+    //then after user chooses his item for trade, redirect to confirmation page,
+    //where showed 2 both items and only after confirmation it sends to selected user
     return (
       <List>
         {props.items.map(el => {
@@ -28,6 +31,7 @@ export default function UserProfile(props) {
       </List>
     );
   };
+
   return (
     <div className={'profile_info'}>
       <span>

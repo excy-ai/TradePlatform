@@ -2,8 +2,9 @@
 
 const Router = require('koa-router');
 const OfferController = require('../controllers/offer/offerController');
+const { authCheck } = require('../middlewares/authCheck');
 
 module.exports = new Router()
-  .patch('/accept', OfferController.acceptOffer)
-  .patch('/reject', OfferController.rejectOffer)
-  .delete('/cancel', OfferController.cancelOffer);
+  .patch('/accept', authCheck, OfferController.acceptOffer)
+  .patch('/reject', authCheck, OfferController.rejectOffer)
+  .delete('/cancel', authCheck, OfferController.cancelOffer);
