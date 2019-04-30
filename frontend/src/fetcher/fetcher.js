@@ -38,14 +38,9 @@ export function del(url) {
     });
 }
 
-export function patch(url, body) {
+export function patch(url) {
   return fetch(url, {
     method: 'PATCH',
-    body: JSON.stringify(body),
-    headers: new Headers({
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    }),
   })
     .then(response => {
       checkStatus(response);
