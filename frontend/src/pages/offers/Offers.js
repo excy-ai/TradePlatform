@@ -20,8 +20,6 @@ function Offers(props) {
   let onClick = () => {
     setIsSended(!isSended);
   };
-  console.log(props.sended);
-  console.log(props.targeted);
   const btnStyle = {
     margin: '10px auto 10px auto',
     maxWidth: '160px',
@@ -41,7 +39,7 @@ function Offers(props) {
                 You have no sended offers
               </Alert>
               : props.sended.map((offer) => {
-                return <Offer offer={offer}/>;
+                return <Offer type={'sended'} offer={offer} key={offer.id}/>;
               })
             :
             props.targeted.length === 0 ?
@@ -49,7 +47,7 @@ function Offers(props) {
                 You have no targeted offers
               </Alert> :
               props.targeted.map((offer) => {
-                return <Offer offer={offer}/>;
+                return <Offer type={'targeted'} offer={offer} key={offer.id}/>;
               })
           }
         </div>

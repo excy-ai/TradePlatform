@@ -5,8 +5,6 @@ export default function getSended() {
   return (dispatch) => {
     return get(`/api/offers/sended`)
       .then(response => {
-        return response.json();
-      }).then(response => {
         dispatch({
           type: types.GET_SENDED_SUCCESS,
           sended: response,

@@ -5,8 +5,6 @@ export default function getTargeted() {
   return (dispatch) => {
     return get(`/api/offers/targeted`)
       .then(response => {
-        return response.json();
-      }).then(response => {
         dispatch({
           type: types.GET_TARGETED_SUCCESS,
           targeted: response,

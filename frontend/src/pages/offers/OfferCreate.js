@@ -27,9 +27,10 @@ function OfferCreate(props) {
           onClickBody={{
             Id: el.Id,
             image: el.image,
-            sign: el.name,
+            sign: el.sign,
             description: el.description,
             category: el.category,
+            userId: el.user_Id,
           }}
           value={'Select'}
         />;

@@ -29,6 +29,7 @@ function OnTradeItem(props) {
           sign: props.name,
           description: props.description,
           category: props.category,
+          userId: props.userId,
         }}
         value={'Target for trade'}
       />;

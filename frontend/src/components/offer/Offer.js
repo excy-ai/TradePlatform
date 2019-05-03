@@ -6,41 +6,46 @@ import getOfferItems from '../../actions/offers/getOfferItems';
 import connect from 'react-redux/es/connect/connect';
 
 function Offer(props) {
-  const { Id } = props.offer;
-  const [target, setTarget] = useState({});
-  const [offered, setOffered] = useState({});
+  const id = props.offer.id;
+  const type = props.type;
   useEffect(() => {
-    props.getOfferItems(Id).then((res) => {
-      if (res) {
-        setTarget(res.target);
-        setOffered(res.offered);
-      }
-    }).catch(() => {
+    props.getOfferItems(id).catch(() => {
       return ('Data is loading');
     });
   }, []);
-  return (<React.Fragment>
-      <div className="card-group">
-        <Card image={offered.image} name={offered.sign}
-              description={offered.description} footer={offered.category}/>
-        <Card image={target.image} name={target.sign}
-              description={target.description} footer={target.category}/>
-      </div>
-    </React.Fragment>
+  let offerItems = props.offers.find((item) => item.id === id);
+  //TODO: add buttons after offer: {id} for accept/reject/cancel (depends on offer type)
+  //sended: cancel
+  //targeted: accept/reject
+  return (
+    <div className="card-group">
+      <h5>Offer: {id}</h5>
+      {offerItems ?
+        <React.Fragment>
+          <h6>Offered item:</h6>
+          <Card image={offerItems.offered.image} name={offerItems.offered.sign}
+                description={offerItems.offered.description} footer={offerItems.offered.category}/>
+          <h6>Targeted item:</h6>
+          <Card image={offerItems.target.image} name={offerItems.target.sign}
+                description={offerItems.target.description} footer={offerItems.target.category}/>
+        </React.Fragment>
+        : 'Data is loading'}
+    </div>
   );
 }
 
 Offer.defaultProps = {
   offer: {},
+  type: '',
 };
 
 Offer.propTypes = {
   offer: PropTypes.object,
+  type: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
-  target: state.offerReducer.target,
-  offered: state.offerReducer.offered,
+  offers: state.offerReducer.offers,
 });
 
 const mapDispatchToProps = dispatch => ({
