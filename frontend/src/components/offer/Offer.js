@@ -14,9 +14,9 @@ function Offer(props) {
       if (res) {
         setTarget(res.target);
         setOffered(res.offered);
-      } else {
-        return ('Data is loading');
       }
+    }).catch(() => {
+      return ('Data is loading');
     });
   }, []);
   return (<React.Fragment>

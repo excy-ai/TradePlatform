@@ -10,7 +10,7 @@ import './style.css';
 
 function Market(props) {
   useEffect(() => {
-      props.getOnTrade({});
+    props.getOnTrade({});
   }, []);
   if (props.itemsOnTrade.length === 0) {
     return (
@@ -23,13 +23,14 @@ function Market(props) {
       <React.Fragment>
         {props.itemsOnTrade.map(item => {
           return (
-            <OnTradeItem
-              name={item.sign}
-              description={item.description}
-              userId={item.user_Id}
-              key={item.Id}
-              image={item.image}
-              category={item.category}
+            <OnTradeItem history={props.history}
+                         name={item.sign}
+                         description={item.description}
+                         userId={item.user_Id}
+                         Id={item.Id}
+                         key={item.Id}
+                         image={item.image}
+                         category={item.category}
             />
           );
         })}

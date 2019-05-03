@@ -11,6 +11,8 @@ import AddItem from './pages/addItem/AddItem';
 import Market from './pages/market/Market';
 import UserPage from './pages/userPage/UserPage';
 import Offers from './pages/offers/Offers';
+import OfferConfirm from './pages/offers/OfferConfirm';
+import OfferCreate from './pages/offers/OfferCreate';
 import { newStore } from './store/store';
 
 import './vendor/normalize.css';
@@ -34,9 +36,11 @@ ReactDOM.render(
       <Route path="/signin" component={SignIn}/>
       <Main>
         <Route path="/me" component={Me}/>
-        <Route path="/offers" component={Offers}/>
+        <Route exact path="/offers" component={Offers}/>
+        <Route exact path="/offers/creating" component={OfferCreate}/>
+        <Route path="/offers/creating/confirmation" component={OfferConfirm}/>
         <Route path="/additem" component={AddItem}/>
-        <Route path="/market" component={Market}/>
+        <Route path="/market" component={Market} history={history}/>
         <Route path="/user/:id" component={UserPage}/>
       </Main>
     </Router>

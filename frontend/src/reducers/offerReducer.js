@@ -3,10 +3,8 @@ import * as types from '../actions/offers/actionTypes';
 const initialState = {
   sended: [],
   targeted: [],
-  targetItem: '',
-  selectedItem: '',
-  target: {},
-  offered: {},
+  targetItem: {},
+  selectedItem: {},
   creating: false,
   error: null,
 };
@@ -27,6 +25,20 @@ export default (state = initialState, action) => {
         error: null,
       };
     }
+    case types.OFFER_CREATE_SET_TARGET: {
+      return {
+        ...state,
+        targetItem: action.item,
+        error: null,
+      };
+    }
+    case types.OFFER_CREATE_SET_SELECTED: {
+      return {
+        ...state,
+        selectedItem: action.item,
+        error: null,
+      };
+    }
     case types.OFFER_CREATE_SUCCESS: {
       return {
         ...state,
@@ -36,21 +48,6 @@ export default (state = initialState, action) => {
       };
     }
     case types.OFFER_CREATE_ERROR: {
-      return {
-        ...state,
-        error: action.error,
-      };
-    }
-
-    case types.OFFER_ITEMS_GET_SUCCESS: {
-      return {
-        ...state,
-        target: action.target,
-        offered: action.offered,
-        error: null,
-      };
-    }
-    case types.OFFER_ITEMS_GET_ERROR: {
       return {
         ...state,
         error: action.error,

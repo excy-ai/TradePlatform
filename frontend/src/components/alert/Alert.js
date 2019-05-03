@@ -5,17 +5,19 @@ export default function List(props) {
   useEffect(() => {
   }, []);
   return (
-    <span className={`alert alert-warning ${props.className}`}>
+    <span style={props.style} className={`alert alert-warning ${props.className}`}>
             {props.children}
         </span>
   );
 }
 
 List.defaultProps = {
+  style: {},
   className: '',
 };
 
 List.propTypes = {
+  style: PropTypes.object,
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
 };
