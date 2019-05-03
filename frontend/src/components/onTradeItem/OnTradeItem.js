@@ -14,7 +14,7 @@ function OnTradeItem(props) {
     fontSize: '11px',
   };
   const button =
-    props.userId === props.ctxId ? <Alert style={alertStyle}>You cant trade with yourself</Alert> :
+    props.userId === props.ctxId ? <Alert style={alertStyle}>You can't trade with yourself</Alert> :
       <Button
         type="button"
         className={`btn-secondary`}

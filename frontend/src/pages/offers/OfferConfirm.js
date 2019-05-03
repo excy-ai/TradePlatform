@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import Card from '../../components/card/Card';
 import Button from '../../components/button/Button';
 import createOffer from '../../actions/offers/createOffer';
+import cancelCreatingOffer from '../../actions/offers/cancelCreatingOffer';
 
 function OfferConfirm(props) {
   useEffect(() => {
@@ -15,10 +16,12 @@ function OfferConfirm(props) {
     display: 'inline-block',
     float: 'right',
   };
+  const btnStyle = { marginTop: '10px' };
   //TODO: create confirm button that creates offer
   return (<React.Fragment>
     <aside style={buttonsBlockStyle}>
       <Button
+        style={btnStyle}
         type="button"
         className={`btn-dark`}
         onButtonClick={() => {
@@ -31,6 +34,16 @@ function OfferConfirm(props) {
           });
         }}
         value={'Confirm'}
+      />
+      <Button
+        style={btnStyle}
+        type="button"
+        className={`btn-dark`}
+        onButtonClick={() => {
+          props.cancelCreatingOffer();
+          props.history.push('/offers');
+        }}
+        value={'Cancel'}
       />
     </aside>
     <h2>Your item:</h2>
@@ -50,6 +63,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   createOffer: bindActionCreators(createOffer, dispatch),
+  cancelCreatingOffer: bindActionCreators(cancelCreatingOffer, dispatch),
 });
 
 export default connect(

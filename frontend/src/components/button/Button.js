@@ -5,9 +5,9 @@ import './style.css';
 
 export default class Button extends React.Component {
   render() {
-    const { className, value, type, disabled, onButtonClick, onClickBody } = this.props;
+    const { style, className, value, type, disabled, onButtonClick, onClickBody } = this.props;
     return (
-      <button className={`btn ${className}`} type={type} disabled={disabled}
+      <button style={style} className={`btn ${className}`} type={type} disabled={disabled}
               onClick={() => onButtonClick(onClickBody)}>
         {value}
       </button>
@@ -16,6 +16,7 @@ export default class Button extends React.Component {
 }
 
 Button.defaultProps = {
+  style: {},
   className: '',
   type: 'button',
   disabled: false,
@@ -25,6 +26,7 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
+  style: PropTypes.object,
   value: PropTypes.string,
   className: PropTypes.string,
   type: PropTypes.string,
