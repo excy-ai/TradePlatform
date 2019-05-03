@@ -1,6 +1,6 @@
 'use strict';
 const types = require('./offerTypes');
-const { TradeOffer, User } = require('../../models');
+const { TradeOffer, User, Item } = require('../../models');
 
 async function create(ctx) {
   ctx.status = 200;
@@ -147,6 +147,22 @@ async function rejectOffer(ctx) {
   }
 }
 
+async function getOfferItems(ctx) {
+  let user = ctx.state.user;
+  const offerId = ctx.params.id;
+  let offer = await TradeOffer.find({ where: { Id: offerId } });
+  let offered = await Item.findOne({ where: { Id: offer.offeredItem } });
+  let target = await Item.findOne({ where: { Id: offer.targetItem } });
+  if (offered && target) {
+    ctx.response.body = { target, offered };
+    ctx.response.status = 200;
+    return ctx.response;
+  } else {
+    ctx.response.status = 404;
+    return ctx.response;
+  }
+}
+
 module.exports = {
   create,
   getSended,
@@ -154,4 +170,5 @@ module.exports = {
   acceptOffer,
   cancelOffer,
   rejectOffer,
+  getOfferItems,
 };

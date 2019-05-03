@@ -5,6 +5,8 @@ const initialState = {
   targeted: [],
   targetItem: '',
   selectedItem: '',
+  target: {},
+  offered: {},
   creating: false,
   error: null,
 };
@@ -34,6 +36,21 @@ export default (state = initialState, action) => {
       };
     }
     case types.OFFER_CREATE_ERROR: {
+      return {
+        ...state,
+        error: action.error,
+      };
+    }
+
+    case types.OFFER_ITEMS_GET_SUCCESS: {
+      return {
+        ...state,
+        target: action.target,
+        offered: action.offered,
+        error: null,
+      };
+    }
+    case types.OFFER_ITEMS_GET_ERROR: {
       return {
         ...state,
         error: action.error,

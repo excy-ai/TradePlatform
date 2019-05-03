@@ -5,6 +5,7 @@ import Card from '../../components/card/Card';
 
 export default function OnTradeItem(props) {
   let button = <NavLink to={'/user/' + props.userId}>offerer</NavLink>;
+  //TODO:button that forwards to offer creation
 
   return (<React.Fragment>
       <Card image={props.image} content={button} name={props.name}
