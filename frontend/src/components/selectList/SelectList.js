@@ -24,7 +24,6 @@ export default class SelectList extends React.Component {
           value={this.props.currentValue}
           onChange={this.props.onChange}
         >
-          <option defaultValue={'nothing'}>Choose...</option>
           {this.renderList()}
         </select>
       </div>
