@@ -7,5 +7,5 @@ const { authCheck } = require('../middlewares/authCheck');
 module.exports = new Router()
   .patch('/accept', authCheck, OfferController.acceptOffer)
   .patch('/reject', authCheck, OfferController.rejectOffer)
-  .delete('/cancel', authCheck, OfferController.cancelOffer)
+  .del('/cancel', authCheck, OfferController.cancelOffer)
   .get('/info', authCheck, OfferController.getOfferItems);

@@ -24,7 +24,7 @@ function Offers(props) {
     margin: '10px auto 10px auto',
     maxWidth: '160px',
   };
-  if (props.sended && props.targeted)
+  if (props.sended && props.targeted) {
     return (
       <React.Fragment>
         <div style={btnStyle} className={'justify-content-center'}>
@@ -53,6 +53,7 @@ function Offers(props) {
         </div>
       </React.Fragment>
     );
+  }
 }
 
 const mapStateToProps = state => ({

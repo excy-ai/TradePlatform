@@ -1,7 +1,7 @@
 import { patch } from '../../fetcher/fetcher';
 import * as types from './actionTypes';
 
-export default function cancelOffer(id) {
+export default function acceptOffer(id) {
   return (dispatch) => {
     return patch(`/api/offers/${id}/accept`)
       .then(response => {

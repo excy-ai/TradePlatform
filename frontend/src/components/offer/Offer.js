@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../../components/card/Card';
+import List from '../../components/list/List';
+import Alert from '../../components/alert/Alert';
+import ListItem from '../../components/listItem/ListItem';
+import Button from '../../components/button/Button';
 import { bindActionCreators } from 'redux';
 import getOfferItems from '../../actions/offers/getOfferItems';
+import acceptOffer from '../../actions/offers/acceptOffer';
+import rejectOffer from '../../actions/offers/rejectOffer';
+import cancelOffer from '../../actions/offers/cancelOffer';
 import connect from 'react-redux/es/connect/connect';
 
 function Offer(props) {
@@ -20,6 +27,43 @@ function Offer(props) {
   return (
     <div className="card-group">
       <h5>Offer: {id}</h5>
+      {props.offer.status.toUpperCase() === 'PENDING' ? <List>
+          <ListItem>
+            {props.type === 'sended' ?
+              <React.Fragment>
+                <Button
+                  type="button"
+                  className={`btn-dark`}
+                  onButtonClick={(onClickBody) => {
+                    props.cancelOffer(onClickBody);
+                  }}
+                  onClickBody={id}
+                  value={'Cancel'}
+                />
+              </React.Fragment> :
+              <React.Fragment>
+                <Button
+                  type="button"
+                  className={`btn-dark`}
+                  onButtonClick={(onClickBody) => {
+                    props.acceptOffer(onClickBody);
+                  }}
+                  onClickBody={id}
+                  value={'Accept'}
+                />
+                <Button
+                  type="button"
+                  className={`btn-dark`}
+                  onButtonClick={(onClickBody) => {
+                    props.rejectOffer(onClickBody);
+                  }}
+                  onClickBody={id}
+                  value={'Reject'}
+                />
+              </React.Fragment>}
+          </ListItem>
+        </List> :
+        <Alert>Offer status: {props.offer.status}</Alert>}
       {offerItems ?
         <React.Fragment>
           <h6>Offered item:</h6>
@@ -50,6 +94,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getOfferItems: bindActionCreators(getOfferItems, dispatch),
+  acceptOffer: bindActionCreators(acceptOffer, dispatch),
+  rejectOffer: bindActionCreators(rejectOffer, dispatch),
+  cancelOffer: bindActionCreators(cancelOffer, dispatch),
 });
 
 export default connect(
