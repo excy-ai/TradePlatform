@@ -80,7 +80,7 @@ function Offer(props) {
 
 Offer.defaultProps = {
   offer: {},
-  type: '',
+  type: 'sended',
 };
 
 Offer.propTypes = {

@@ -31,21 +31,19 @@ export default function Card(props) {
 }
 
 Card.defaultProps = {
+  style: {},
   className: '',
+  value: '',
   type: 'button',
-  disabled: false,
-  onButtonClick: () => {
-  },
-  onClickBody: '',
   content: null,
   footer: null
 };
 
 Card.propTypes = {
-  value: PropTypes.string,
+  style: PropTypes.object,
   className: PropTypes.string,
+  value: PropTypes.string,
   type: PropTypes.string,
-  disabled: PropTypes.bool,
   content: PropTypes.node,
   footer: PropTypes.node
 };
