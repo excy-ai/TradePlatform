@@ -18,10 +18,10 @@ async function addItem(ctx) {
     ctx.response.body = 'no such category';
     return ctx.response;
   }
-  if (await ListedItem.findOne({ where: { sign } })) {
+  if (await ListedItem.findOne({ where: { sign, category } })) {
     ctx.response.status = 400;
     ctx.response.body =
-      'Item with such sign already exist, you can add it, instead of creating new';
+      'Item with such sign&category already exist, you can add it, instead of creating new';
     return ctx.response;
   }
   await ListedItem.create({ sign, category });
@@ -40,6 +40,45 @@ async function addItem(ctx) {
   return ctx.response;
 }
 
+async function addAlreadyListed(ctx) {
+  ctx.status = 200;
+  let user = ctx.state.user;
+  const itemData = ctx.request.body;
+  const { sign, description, category, image } = itemData;
+  if (!(await Category.findOne({ where: { title: category } }))) {
+    ctx.response.status = 400;
+    ctx.response.body = 'no such category';
+    return ctx.response;
+  }
+  if (await ListedItem.findOne({ where: { sign, category } })) {
+    const newItem = {
+      sign: sign,
+      description: description,
+      category: category,
+      image: image,
+    };
+    let createdItem = await Item.create(newItem);
+    if (createdItem) {
+      ctx.response.status = 200;
+      ctx.response.body = createdItem;
+    } else {
+      ctx.response.status = 400;
+      return ctx.response;
+    }
+    await (await Category.findOne({ where: { title: category } })).addItem(
+      createdItem,
+    );
+    await user.addItem(createdItem);
+    return ctx.response;
+  } else {
+    ctx.response.status = 400;
+    ctx.response.body =
+      'Item with such sign&category not listed, you can create it';
+    return ctx.response;
+  }
+
+}
+
 async function addImageForItem(ctx) {
   const { id } = ctx.params;
   let item = await Item.findOne({ where: { Id: id } });
@@ -47,7 +86,7 @@ async function addImageForItem(ctx) {
   let imgLink = ctx.req.file.path.substring('public/'.length);
   if (item) {
     item.update({
-      image: `/${imgLink}`
+      image: `/${imgLink}`,
     });
   } else {
     ctx.response.status = 400;
@@ -98,4 +137,4 @@ async function getCategorys(ctx) {
   return ctx.response;
 }
 
-module.exports = { addItem, switchOnTradeStatus, getListed, getCategorys, addImageForItem };
+module.exports = { addItem, switchOnTradeStatus, getListed, getCategorys, addImageForItem, addAlreadyListed };

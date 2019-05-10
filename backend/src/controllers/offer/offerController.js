@@ -8,18 +8,20 @@ async function create(ctx) {
   const { target, targetItem, offeredItem } = ctx.request.body;
   let offered = (await user.getItems()).find((item) => item.Id === offeredItem);
   if (!offered) {
+    ctx.response.body = 'current user does not have offered item';
     ctx.response.status = 400;
     return ctx.response;
   }
   let targetUser = await User.findOne({ where: { Id: target } });
   if (targetUser) {
     let item = (await targetUser.getItems()).find((item) => item.Id === targetItem && item.onTrade === true);
-    //TODO: check how works
     if (!item) {
+      ctx.response.body = 'target user does not have specified item';
       ctx.response.status = 400;
       return ctx.response;
     }
   } else {
+    ctx.response.body = 'target user does not exists';
     ctx.response.status = 400;
     return ctx.response;
   }

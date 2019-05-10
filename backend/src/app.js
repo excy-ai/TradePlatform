@@ -22,7 +22,8 @@ app.use(koaLogger(logger));
 app.use(serve('public'));
 app.use(koaBody());
 app.keys = ['secret'];
-module.exports = sequelize.sync({ force: true }).then(async () => {
+//for tests disable force true and comment 41 line
+module.exports = sequelize.sync(/*{ force: true }*/).then(async () => {
   app.use(
     session({
       key: 'itemtradenet:sess',
@@ -37,7 +38,7 @@ module.exports = sequelize.sync({ force: true }).then(async () => {
   );
   app.use(passport.initialize());
   app.use(passport.session());
-  insertCategorys();
+  // insertCategorys();
   app.use(router.allowedMethods());
   app.use(router.routes());
   app.use(async ctx => {

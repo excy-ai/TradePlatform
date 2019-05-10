@@ -7,6 +7,7 @@ const itemController = require('../controllers/item/itemController');
 
 module.exports = new Router()
   .post('/items/add', authCheck, itemController.addItem)
+  .post('/items/addlisted', authCheck, itemController.addAlreadyListed) //TODO:add to frontend
   .post('/items/:id/image', authCheck, imageMulter, itemController.addImageForItem)
   .post('/items/trade/switchStatus', authCheck, itemController.switchOnTradeStatus)
   .get('/items/listed', itemController.getListed)

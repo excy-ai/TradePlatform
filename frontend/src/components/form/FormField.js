@@ -21,6 +21,7 @@ FormField.defaultProps = {
   className: '',
   type: 'text',
   value: '',
+  label: '',
   name: '',
   placeholder: '',
   onChange: () => {
@@ -31,6 +32,7 @@ FormField.propTypes = {
   value: PropTypes.string,
   className: PropTypes.string,
   type: PropTypes.string,
+  label: PropTypes.string,
   name: PropTypes.string,
   placeholder: PropTypes.string,
   onChange: PropTypes.func,

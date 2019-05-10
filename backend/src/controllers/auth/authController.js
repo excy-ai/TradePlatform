@@ -87,42 +87,44 @@ async function signin(ctx, next) {
 }
 
 async function signup(ctx) {
-  try {
-    const userData = ctx.request.body;
-    const [email, password] = [userData.email, userData.password];
-    if (!isValidMail(email)) {
-      ctx.throw(400, 'invalid email');
-    }
-    if (password.length < PASS_MIN_LENGTH) {
-      ctx.throw(400, 'password must be more than 8 symbols');
-    }
-    if (await User.findOne({ where: { email } })) {
-      ctx.throw(400, 'User with such email already exists');
-    }
-
-    const salt = await bcrypt.genSalt(SALT_ROUNDS);
-    const hashedPassword = await bcrypt.hash(password, salt);
-    if (userData.firstName === '' || userData.lastName === '') {
-      ctx.throw(400, 'Bad first/lastName fields');
-    }
-    const newUser = {
-      email: email,
-      password: hashedPassword,
-      firstName: userData.firstName,
-      lastName: userData.lastName,
-    };
-    const createdUser = await User.create(newUser);
-    if (createdUser) {
-      ctx.response.body = createdUser; //remove body and
-      ctx.response.status = 201;       //TODO: in prod change to 204
-      return ctx.response;
-    }
-    ctx.throw(404, 'not found');
-  } catch (err) {
-    ctx.response.body = err.message;
-    ctx.response.status = err.status;
+  const userData = ctx.request.body;
+  const [email, password] = [userData.email, userData.password];
+  if (!isValidMail(email)) {
+    ctx.response.status = 400;
+    ctx.response.body = 'invalid email';
     return ctx.response;
   }
+  if (password.length < PASS_MIN_LENGTH) {
+    ctx.response.status = 400;
+    ctx.response.body = 'password must be more than 8 symbols';
+    return ctx.response;
+  }
+  if (await User.findOne({ where: { email } })) {
+    ctx.response.status = 400;
+    ctx.response.body = 'User with such email already exists';
+    return ctx.response;
+  }
+
+  const salt = await bcrypt.genSalt(SALT_ROUNDS);
+  const hashedPassword = await bcrypt.hash(password, salt);
+  if (userData.firstName === '' || userData.lastName === '') {
+    ctx.throw(400, 'Bad first/lastName fields');
+  }
+  const newUser = {
+    email: email,
+    password: hashedPassword,
+    firstName: userData.firstName,
+    lastName: userData.lastName,
+  };
+  const createdUser = await User.create(newUser);
+  if (createdUser) {
+    ctx.response.body = createdUser; //remove body and
+    ctx.response.status = 201;       //TODO: in prod change to 204
+    return ctx.response;
+  }
+  ctx.response.status = 404;
+  ctx.response.body = 'not found';
+  return ctx.response;
 }
 
 async function signout(ctx) {
