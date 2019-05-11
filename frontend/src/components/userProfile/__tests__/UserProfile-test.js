@@ -1,10 +1,10 @@
 import React from 'react';
-import FormField from '../FormField';
 import renderer from 'react-test-renderer';
+import UserProfile from '../UserProfile';
 
-describe('test FormField', () => {
+describe('test UserProfile', () => {
   test(' renders correctly', () => {
-    const component = renderer.create(<FormField/>);
+    const component = renderer.create(<UserProfile/>);
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

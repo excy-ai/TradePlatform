@@ -48,6 +48,7 @@ function OnTradeItem(props) {
 }
 
 OnTradeItem.defaultProps = {
+  Id: '',
   image: '...',
   name: '',
   description: '',
@@ -55,6 +56,7 @@ OnTradeItem.defaultProps = {
 };
 
 OnTradeItem.propTypes = {
+  Id: PropTypes.string,
   image: PropTypes.string,
   name: PropTypes.string,
   category: PropTypes.string,

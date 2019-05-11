@@ -1,10 +1,10 @@
 import React from 'react';
-import FormField from '../FormField';
+import Alert from '../Alert';
 import renderer from 'react-test-renderer';
 
-describe('test FormField', () => {
+describe('test Alert', () => {
   test(' renders correctly', () => {
-    const component = renderer.create(<FormField/>);
+    const component = renderer.create(<Alert>Alert</Alert>);
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

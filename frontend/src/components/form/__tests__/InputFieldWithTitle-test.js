@@ -1,10 +1,10 @@
 import React from 'react';
-import FormField from '../FormField';
 import renderer from 'react-test-renderer';
+import InputFieldWithTitle from '../InputFieldWithTitle';
 
-describe('test FormField', () => {
+describe('test InputFieldWithTitle', () => {
   test(' renders correctly', () => {
-    const component = renderer.create(<FormField/>);
+    const component = renderer.create(<InputFieldWithTitle/>);
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

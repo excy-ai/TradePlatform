@@ -18,10 +18,12 @@ export default function ListItem(props) {
 }
 
 ListItem.defaultProps = {
+  style: {},
   className: '',
 };
 
 ListItem.propTypes = {
+  style: PropTypes.object,
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
 };

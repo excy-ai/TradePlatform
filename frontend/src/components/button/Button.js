@@ -22,6 +22,7 @@ export default class Button extends React.Component {
 Button.defaultProps = {
   style: {},
   className: '',
+  value: '',
   type: 'button',
   disabled: false,
   onButtonClick: () => {
@@ -31,8 +32,8 @@ Button.defaultProps = {
 
 Button.propTypes = {
   style: PropTypes.object,
-  value: PropTypes.string,
   className: PropTypes.string,
+  value: PropTypes.string,
   type: PropTypes.string,
   disabled: PropTypes.bool,
 };
