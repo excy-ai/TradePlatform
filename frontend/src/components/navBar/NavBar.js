@@ -25,6 +25,8 @@ function NavBar(props) {
           return (
             <div key={item.link} style={linkStyle}>
               <NavLink exact to={item.link}>
+                {/* You should use your component here */}
+                {/* --mrurenko 2019-05-10 */}
                 <input className="btn btn-primary mb-2" value={item.value} readOnly/>
               </NavLink>
             </div>

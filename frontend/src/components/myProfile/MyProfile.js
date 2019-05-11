@@ -9,11 +9,19 @@ import Button from '../button/Button';
 import './style.css';
 
 export default function MyProfile(props) {
+  // Just put this 'renderItems' into the main return of this component.
+  // Or extract it into separate component.
+  // --mrurenko 2019-05-10
   let renderItems = () => {
     return (
       <List>
         {props.items.map(el => {
           const tradeStyle = el.onTrade ? 'danger' : 'warning';
+          // 1. I would suggest to create a wrapper component 'TradeButton' and style it,
+          // but not pass style classes as props
+          // 2. Could you replace onButtonClick and onClickBody with next code?
+          // onClick={() => props.onItemClick(el.Id)}
+          // --mrurenko 2019-05-10
           const button = <Button
             type="button"
             className={`btn-${tradeStyle} trade__btn`}

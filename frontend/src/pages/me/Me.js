@@ -27,6 +27,8 @@ class Me extends React.Component {
     if (this.props.userId === '') {
       return <div>"data is loading"</div>;
     }
+    // Why not just return a MyProfile component?
+    // --mrurenko 2019-05-11
     return (
       <React.Fragment>
         <MyProfile

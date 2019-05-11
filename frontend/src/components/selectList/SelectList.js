@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class SelectList extends React.Component {
+  // It should be a component not a method
+  // --mrurenko 2019-05-11
   renderList = () => {
     return this.props.list.map((item, index) => {
       return (

@@ -20,6 +20,9 @@ function Offer(props) {
       return ('Data is loading');
     });
   }, []);
+  // 1. Are there several items in 'offerItems' variable?
+  // 2. Why do you use 'let' instead of const?
+  // --mrurenko 2019-05-11
   let offerItems = props.offers.find((item) => item.id === id);
   //TODO: add buttons after offer: {id} for accept/reject/cancel (depends on offer type)
   //sended: cancel

@@ -33,6 +33,9 @@ class Market extends React.Component {
   handleSubmit = (event) => {
     let category = this.state.category === 'Any'
       ? undefined : this.state.category;
+    // 1. userID.match(....) Should not be a part of a component logic, extract it into utils file.
+    // 2. looks too complex, please simplify this block of code, you have code duplication here.
+    // --mrurenko 2019-05-11
     if (this.state.userID.length !== 0 &&
       this.state.userID.match('[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}')) {
       this.setState({
@@ -91,6 +94,9 @@ class Market extends React.Component {
     }
     return (
       <React.Fragment>
+        {/* 1. If you use css-classes for styling - use them everywhere. Pick one way for styling */}
+        {/* 2. Looks too complex, please split into components */}
+        {/* --mrurenko 2019-05-11 */}
         <div
           style={{
             display: 'inline-block',

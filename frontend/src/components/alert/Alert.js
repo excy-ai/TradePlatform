@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+// Why the name is 'List'?
+// --mrurenko 2019-05-10
 export default function List(props) {
+  // ???
+  // --mrurenko 2019-05-10
   useEffect(() => {
   }, []);
   return (

@@ -8,11 +8,15 @@ import List from '../../components/list/List';
 import setSelected from '../../actions/offers/creatingPhase/setSelected';
 
 function OfferCreate(props) {
+  // Fix usage of 'useEffect'. Here will be extra calls of this effect.
+  // --mrurenko 2019-05-11
   useEffect(() => {
     if (!props.creating) {
       props.history.push('/me');
     }
   });
+  // Extract an item component.
+  // --mrurenko 2019-05-11
   return (<React.Fragment>
     <h2>Now select Item from your inventory:</h2>
     <List>

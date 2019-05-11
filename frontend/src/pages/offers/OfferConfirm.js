@@ -12,14 +12,20 @@ function OfferConfirm(props) {
     //   props.history.push('/me');
     // } TODO: fix bug when creating blinks to false
   });
+  // Consistent styling!
+  // --mrurenko 2019-05-11
   const buttonsBlockStyle = {
     display: 'inline-block',
     float: 'right',
   };
   const btnStyle = { marginTop: '10px' };
   //TODO: create confirm button that creates offer
+  // Too complex, simplify.
+  // --mrurenko 2019-05-11
   return (<React.Fragment>
     <aside style={buttonsBlockStyle}>
+      {/* Do you think that Button component should have 'type="button"' as an argument? */}
+      {/* --mrurenko 2019-05-11 */}
       <Button
         style={btnStyle}
         type="button"

@@ -1,3 +1,5 @@
+// Please move this whole 'reducers' folder into the store folder.
+// --mrurenko 2019-05-10
 import { combineReducers } from 'redux';
 import itemReducer from './itemReducer';
 import authReducer from './authReducer';
@@ -15,6 +17,8 @@ const appReducer = combineReducers({
   meReducer,
 });
 
+// Could you just export appReducer directly?
+// --mrurenko 2019-05-10
 export default (state = {}, action) => {
   return appReducer(state, action);
 };

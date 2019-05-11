@@ -20,10 +20,15 @@ function Offers(props) {
   let onClick = () => {
     setIsSended(!isSended);
   };
+  // Consistent Styles.
+  // --mrurenko 2019-05-11
   const btnStyle = {
     margin: '10px auto 10px auto',
     maxWidth: '160px',
   };
+  // 1. if(!CURRENT_CONDITION) { return null; }
+  // 2. Too complex - simplify, extract components
+  // --mrurenko 2019-05-11
   if (props.sended && props.targeted) {
     return (
       <React.Fragment>

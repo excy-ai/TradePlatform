@@ -3,6 +3,10 @@ import * as types from './actionTypes';
 
 export default function authenticate(body) {
   return dispatch => {
+    // Better to create a separate actionCreator for this action.
+    // It allows to use actions more flexible later.
+    // This comment is actual for all your async actionCreators.
+    // --mrurenko 2019-05-10
     dispatch({
       type: types.AUTH_PENDING,
       authenticated: false,
@@ -10,6 +14,8 @@ export default function authenticate(body) {
     });
     return post(`/api/auth/signin/`, body)
       .then(response => {
+        // Better to create a separate actionCreator for this action.
+        // --mrurenko 2019-05-10
         dispatch({
           type: types.AUTH_SUCCESS,
           authenticated: true,
@@ -17,6 +23,8 @@ export default function authenticate(body) {
         });
       })
       .catch(err => {
+        // Better to create a separate actionCreator for this action.
+        // --mrurenko 2019-05-10
         dispatch({
           type: types.AUTH_ERROR,
           error: err,

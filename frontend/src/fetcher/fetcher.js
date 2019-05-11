@@ -21,6 +21,8 @@ export function get(url) {
       return response.json();
     })
     .catch(err => {
+      // Why do you need this?
+      // --mrurenko 2019-05-10
       throw err;
     });
 }

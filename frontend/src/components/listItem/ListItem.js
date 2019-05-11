@@ -8,6 +8,8 @@ export default function ListItem(props) {
     padding: '0',
     border: 'none',
   };
+  // Don't think that className should be a property. It should be calculated and set here.
+  // --mrurenko 2019-05-10
   return (
     <li className={`list-group-item ${props.className}`} style={style}>
       {props.children}

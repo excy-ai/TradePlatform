@@ -13,6 +13,9 @@ function OnTradeItem(props) {
   const alertStyle = {
     fontSize: '11px',
   };
+  // 1. You have named this variable - button. But it could be an Alert inside.
+  // 2. Use prettier to format code right.
+  // --mrurenko 2019-05-11
   const button =
     props.userId === props.ctxId ? <Alert style={alertStyle}>You can't trade with yourself</Alert> :
       <Button
@@ -35,6 +38,8 @@ function OnTradeItem(props) {
       />;
 
 
+  // Why not just return a Card component? Why wrapping in a Fragment
+  // --mrurenko 2019-05-11
   return (<React.Fragment>
       <Card image={props.image} content={button} name={props.name}
             description={props.description} footer={props.category}/>

@@ -6,6 +6,9 @@ import Alert from '../../components/alert/Alert';
 import Card from '../../components/card/Card';
 
 export default function UserProfile(props) {
+  // 1. It should be a component not a method
+  // 2. Looks too complex. Split into components, use prettier
+  // --mrurenko 2019-05-11
   let renderItems = () => {
     if (props.items.length === 0) {
       return <Alert> This user has no items </Alert>;

@@ -12,6 +12,9 @@ export default (state = initialState, action) => {
       return {
         ...state,
         items: action.items,
+        // I would rather create a separate action to clear or set and error.
+        // It is actual for all reducers you have.
+        // --mrurenko 2019-05-10
         error: null,
       };
     }

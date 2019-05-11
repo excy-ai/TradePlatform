@@ -14,6 +14,8 @@ function UserPage(props) {
   if (props.items === null || props.items === undefined) {
     return <div>"data is loading"</div>;
   }
+  // ???
+  // --mrurenko 2019-05-11
   return (
     <React.Fragment>
       <UserProfile userId={props.match.params.id} items={props.items}/>
