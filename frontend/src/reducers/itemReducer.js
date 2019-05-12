@@ -1,4 +1,4 @@
-import * as types from '../actions/items/actionTypes';
+import * as types from '../store/actions/items/actionTypes';
 
 const initialState = {
   categoryList: [],

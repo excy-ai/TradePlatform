@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import authenticate from '../../actions/auth/authenticate';
+import authenticate from '../../store/actions/auth/authenticate';
 import Form from '../../components/form/Form';
 import FormField from '../../components/form/FormField';
 

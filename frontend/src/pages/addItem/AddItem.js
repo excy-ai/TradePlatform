@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import getCategorys from '../../actions/items/getCategorys';
-import addItem from '../../actions/items/addItem';
+import getCategorys from '../../store/actions/items/getCategorys';
+import addItem from '../../store/actions/items/addItem';
 import SelectList from '../../components/selectList/SelectList';
 import InputFieldWithTitle from '../../components/form/InputFieldWithTitle';
 import FileInputField from '../../components/form/FileInputField';

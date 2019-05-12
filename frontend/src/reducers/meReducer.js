@@ -1,4 +1,4 @@
-import * as types from '../actions/me/actionTypes';
+import * as types from '../store/actions/me/actionTypes';
 
 const initialState = {
   userId: '',

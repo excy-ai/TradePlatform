@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { bindActionCreators } from 'redux';
-import getInfo from '../../actions/users/getInfo';
+import getInfo from '../../store/actions/users/getInfo';
 import { connect } from 'react-redux';
 import UserProfile from '../../components/userProfile/UserProfile';
 

@@ -6,11 +6,11 @@ import Alert from '../../components/alert/Alert';
 import ListItem from '../../components/listItem/ListItem';
 import Button from '../../components/button/Button';
 import { bindActionCreators } from 'redux';
-import getOfferItems from '../../actions/offers/getOfferItems';
-import acceptOffer from '../../actions/offers/acceptOffer';
-import rejectOffer from '../../actions/offers/rejectOffer';
-import cancelOffer from '../../actions/offers/cancelOffer';
-import connect from 'react-redux';
+import getOfferItems from '../../store/actions/offers/getOfferItems';
+import acceptOffer from '../../store/actions/offers/acceptOffer';
+import rejectOffer from '../../store/actions/offers/rejectOffer';
+import cancelOffer from '../../store/actions/offers/cancelOffer';
+import { connect } from 'react-redux';
 
 function Offer(props) {
   const id = props.offer.id;

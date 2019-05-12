@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Button from '../button/Button';
 import Alert from '../alert/Alert';
-import setTarget from '../../actions/offers/creatingPhase/setTarget';
-import startCreatingOffer from '../../actions/offers/creatingPhase/startCreatingOffer';
+import setTarget from '../../store/actions/offers/creatingPhase/setTarget';
+import startCreatingOffer from '../../store/actions/offers/creatingPhase/startCreatingOffer';
 
 function OnTradeItem(props) {
   const alertStyle = {

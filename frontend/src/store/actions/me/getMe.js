@@ -1,4 +1,4 @@
-import { get } from '../../fetcher/fetcher';
+import { get } from '../../../fetcher/fetcher';
 import * as types from './actionTypes';
 import { AUTH_SUCCESS } from '../auth/actionTypes';
 

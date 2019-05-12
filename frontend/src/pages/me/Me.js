@@ -2,8 +2,8 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import getMe from '../../actions/me/getMe';
-import switchTradeStatus from '../../actions/items/switchTradeStatus';
+import getMe from '../../store/actions/me/getMe';
+import switchTradeStatus from '../../store/actions/items/switchTradeStatus';
 import MyProfile from '../../components/myProfile/MyProfile';
 
 class Me extends React.Component {

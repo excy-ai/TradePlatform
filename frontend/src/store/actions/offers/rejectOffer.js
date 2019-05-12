@@ -1,20 +1,20 @@
-import { post } from '../../fetcher/fetcher';
+import { patch } from '../../../fetcher/fetcher';
 import * as types from './actionTypes';
 
-export default function createOffer(body) {
+export default function rejectOffer(id) {
   return (dispatch) => {
-    return post(`/api/offers/create`, body)
+    return patch(`/api/offers/${id}/reject`)
       .then(response => {
         return response.json();
       }).then(response => {
         dispatch({
-          type: types.OFFER_CREATE_SUCCESS,
-          offer: response,
+          type: types.OFFER_REJECT_SUCCESS,
+          id: id,
         });
       })
       .catch(err => {
         dispatch({
-          type: types.OFFER_CREATE_ERROR,
+          type: types.OFFER_REJECT_ERROR,
           error: err,
         });
       });

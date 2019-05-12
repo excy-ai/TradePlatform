@@ -1,4 +1,4 @@
-import { post } from '../../fetcher/fetcher';
+import { post } from '../../../fetcher/fetcher';
 import * as types from '../items/actionTypes';
 
 export default function switchTradeStatus(id) {

@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Card from '../../components/card/Card';
 import Button from '../../components/button/Button';
-import createOffer from '../../actions/offers/createOffer';
-import cancelCreatingOffer from '../../actions/offers/cancelCreatingOffer';
+import createOffer from '../../store/actions/offers/createOffer';
+import cancelCreatingOffer from '../../store/actions/offers/cancelCreatingOffer';
 
 function OfferConfirm(props) {
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { del } from '../../fetcher/fetcher';
+import { del } from '../../../fetcher/fetcher';
 import * as types from './actionTypes';
 
 export default function cancelOffer(id) {

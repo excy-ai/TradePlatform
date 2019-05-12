@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import getTargeted from '../../actions/offers/getTargeted';
-import getSended from '../../actions/offers/getSended';
+import getTargeted from '../../store/actions/offers/getTargeted';
+import getSended from '../../store/actions/offers/getSended';
 import Offer from '../../components/offer/Offer';
 import Alert from '../../components/alert/Alert';
 

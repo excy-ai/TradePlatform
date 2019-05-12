@@ -1,4 +1,4 @@
-import * as types from '../actions/offers/actionTypes';
+import * as types from '../store/actions/offers/actionTypes';
 
 const initialState = {
   sended: [],

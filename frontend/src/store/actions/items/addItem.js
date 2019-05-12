@@ -1,4 +1,4 @@
-import { post, multiPartFormPost } from '../../fetcher/fetcher';
+import { post, multiPartFormPost } from '../../../fetcher/fetcher';
 import * as types from './actionTypes';
 
 export default function addItem(body, file) {

@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-import { get } from '../../fetcher/fetcher';
+import { get } from '../../../fetcher/fetcher';
 
 export default function getOfferItems(id) {
   return (dispatch) => {

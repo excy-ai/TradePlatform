@@ -1,18 +1,18 @@
-import { get } from '../../fetcher/fetcher';
+import { get } from '../../../fetcher/fetcher';
 import * as types from './actionTypes';
 
-export default function getItems() {
+export default function getInfo(id) {
   return dispatch => {
-    return get(`/api/user/me`)
+    return get(`/api/user/info?id=${id}`)
       .then(response => {
         dispatch({
-          type: types.GET_USER_ITEMS_SUCCESS,
+          type: types.GET_INFO_SUCCESS,
           items: response.items,
         });
       })
       .catch(err => {
         dispatch({
-          type: types.GET_USER_ITEMS_ERROR,
+          type: types.GET_INFO_ERROR,
           error: err,
         });
       });

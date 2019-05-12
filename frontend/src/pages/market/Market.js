@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import getOnTrade from '../../actions/items/getOnTrade';
+import getOnTrade from '../../store/actions/items/getOnTrade';
 
 import OnTradeItem from '../../components/onTradeItem/OnTradeItem';
 import Alert from '../../components/alert/Alert';
@@ -10,7 +10,7 @@ import Form from '../../components/form/Form';
 import Button from '../../components/button/Button';
 import InputFieldWithTitle from '../../components/form/InputFieldWithTitle';
 import SelectList from '../../components/selectList/SelectList';
-import getCategorys from '../../actions/items/getCategorys';
+import getCategorys from '../../store/actions/items/getCategorys';
 import './style.css';
 
 class Market extends React.Component {

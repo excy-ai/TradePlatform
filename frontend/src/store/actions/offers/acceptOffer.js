@@ -1,4 +1,4 @@
-import { patch } from '../../fetcher/fetcher';
+import { patch } from '../../../fetcher/fetcher';
 import * as types from './actionTypes';
 
 export default function acceptOffer(id) {

@@ -1,4 +1,4 @@
-import * as types from '../actions/users/actionTypes';
+import * as types from '../store/actions/users/actionTypes';
 
 const initialState = {
   items: [],

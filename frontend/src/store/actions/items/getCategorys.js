@@ -1,4 +1,4 @@
-import { get } from '../../fetcher/fetcher';
+import { get } from '../../../fetcher/fetcher';
 import * as types from './actionTypes';
 
 export default function getCategorys() {

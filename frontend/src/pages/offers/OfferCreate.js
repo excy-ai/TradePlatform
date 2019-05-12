@@ -5,7 +5,7 @@ import Button from '../../components/button/Button';
 import ListItem from '../../components/listItem/ListItem';
 import Card from '../../components/card/Card';
 import List from '../../components/list/List';
-import setSelected from '../../actions/offers/creatingPhase/setSelected';
+import setSelected from '../../store/actions/offers/creatingPhase/setSelected';
 
 function OfferCreate(props) {
   // Fix usage of 'useEffect'. Here will be extra calls of this effect.

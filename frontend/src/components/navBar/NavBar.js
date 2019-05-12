@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
-import getMe from '../../actions/me/getMe';
+import getMe from '../../store/actions/me/getMe';
 import { connect } from 'react-redux';
 
 function NavBar(props) {
