@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function ListItem(props) {
-  useEffect(() => {
-  }, []);
   const style = {
     padding: '0',
     border: 'none',

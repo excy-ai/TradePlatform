@@ -1,26 +1,22 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-// Why the name is 'List'?
-// --mrurenko 2019-05-10
-export default function List(props) {
-  // ???
-  // --mrurenko 2019-05-10
-  useEffect(() => {
-  }, []);
+export default function Alert(props) {
   return (
-    <span style={props.style} className={`alert alert-warning ${props.className}`}>
-            {props.children}
-        </span>
+    <span
+      style={props.style}
+      className={`alert alert-warning ${props.className}`}>
+      {props.children}
+    </span>
   );
 }
 
-List.defaultProps = {
+Alert.defaultProps = {
   style: {},
   className: '',
 };
 
-List.propTypes = {
+Alert.propTypes = {
   style: PropTypes.object,
   children: PropTypes.node.isRequired,
   className: PropTypes.string,

@@ -19,11 +19,6 @@ export function get(url) {
     })
     .then(response => {
       return response.json();
-    })
-    .catch(err => {
-      // Why do you need this?
-      // --mrurenko 2019-05-10
-      throw err;
     });
 }
 
@@ -34,9 +29,6 @@ export function del(url) {
     .then(response => {
       checkStatus(response);
       return response;
-    })
-    .catch(err => {
-      throw err;
     });
 }
 
@@ -47,9 +39,6 @@ export function patch(url) {
     .then(response => {
       checkStatus(response);
       return response;
-    })
-    .catch(err => {
-      throw err;
     });
 }
 
@@ -64,13 +53,9 @@ export function post(url, body) {
     .then(response => {
       checkStatus(response);
       return response;
-    })
-    .catch(err => {
-      throw err;
     });
 }
 
-//new post to add item picture
 export function multiPartFormPost(url, file) {
   let formData = new FormData();
   formData.append('image', file);
@@ -81,8 +66,5 @@ export function multiPartFormPost(url, file) {
     .then(response => {
       checkStatus(response);
       return response;
-    })
-    .catch(err => {
-      throw err;
     });
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import getItems from '../../store/actions/items/getItems';
+import getItems from '../../store/actions/items/get/items/getItems';
 import getMe from '../../store/actions/me/getMe';
 
 import './style.css';

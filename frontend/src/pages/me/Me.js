@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import getMe from '../../store/actions/me/getMe';
-import switchTradeStatus from '../../store/actions/items/switchTradeStatus';
+import switchTradeStatus from '../../store/actions/items/switch/switchTradeStatus';
 import MyProfile from '../../components/myProfile/MyProfile';
 
 class Me extends React.Component {

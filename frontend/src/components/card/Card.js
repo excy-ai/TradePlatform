@@ -6,7 +6,7 @@ export default function Card(props) {
   const { name, description, style, content, image, footer } = props;
   const imgStyle = {
     maxWidth: '480x',
-    maxHeight: '240px'
+    maxHeight: '240px',
   };
   const fullStyle = {
     margin: '10px 0 5px 10px',
@@ -36,7 +36,7 @@ Card.defaultProps = {
   value: '',
   type: 'button',
   content: null,
-  footer: null
+  footer: null,
 };
 
 Card.propTypes = {
@@ -45,5 +45,5 @@ Card.propTypes = {
   value: PropTypes.string,
   type: PropTypes.string,
   content: PropTypes.node,
-  footer: PropTypes.node
+  footer: PropTypes.node,
 };

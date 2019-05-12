@@ -1,26 +1,17 @@
 import { get } from '../../../fetcher/fetcher';
-import * as types from './actionTypes';
-import { AUTH_SUCCESS } from '../auth/actionTypes';
+import authSuccess from '../auth/authenticate/authSuccess';
+import getMeSuccess from './getMeSuccess';
+import getMeError from './getMeError';
 
 export default function getMe() {
   return dispatch => {
     return get(`/api/user/me`)
       .then(response => {
-        dispatch({
-          type: types.GET_USER_DATA_SUCCESS,
-          id: response.user.Id,
-        });
-        dispatch({
-          type: AUTH_SUCCESS,
-          authenticated: true,
-          error: null,
-        });
+        dispatch(getMeSuccess(response.user.Id));
+        dispatch(authSuccess());
       })
       .catch(err => {
-        dispatch({
-          type: types.GET_USER_DATA_ERROR,
-          error: err,
-        });
+        dispatch(getMeError(err));
       });
   };
 }

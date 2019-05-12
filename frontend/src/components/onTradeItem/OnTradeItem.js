@@ -6,18 +6,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Button from '../button/Button';
 import Alert from '../alert/Alert';
-import setTarget from '../../store/actions/offers/creatingPhase/setTarget';
-import startCreatingOffer from '../../store/actions/offers/creatingPhase/startCreatingOffer';
+import setTarget from '../../store/actions/offers/creating/setTarget';
+import startCreatingOffer from '../../store/actions/offers/creating/startCreatingOffer';
 
 function OnTradeItem(props) {
   const alertStyle = {
     fontSize: '11px',
   };
-  // 1. You have named this variable - button. But it could be an Alert inside.
-  // 2. Use prettier to format code right.
-  // --mrurenko 2019-05-11
-  const button =
-    props.userId === props.ctxId ? <Alert style={alertStyle}>You can't trade with yourself</Alert> :
+  const content =
+    props.userId === props.ctxId ?
+      <Alert style={alertStyle}>You can't trade with yourself</Alert> :
       <Button
         type="button"
         className={`btn-secondary`}
@@ -36,15 +34,16 @@ function OnTradeItem(props) {
         }}
         value={'Target for trade'}
       />;
+  const footer = <small className="text-muted">
+    <NavLink to={'/user/' + props.userId}>Handler</NavLink>
+  </small>;
 
-
-  // Why not just return a Card component? Why wrapping in a Fragment
-  // --mrurenko 2019-05-11
-  return (<React.Fragment>
-      <Card image={props.image} content={button} name={props.name}
-            description={props.description} footer={props.category}/>
-    </React.Fragment>
-  );
+  return <Card
+    image={props.image}
+    content={content}
+    name={`${props.name} | ${props.category}`}
+    description={props.description}
+    footer={footer}/>;
 }
 
 OnTradeItem.defaultProps = {

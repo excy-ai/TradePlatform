@@ -5,10 +5,6 @@ export default function Form(props) {
   // Why do you use 'let' instead of 'const'?
   // --mrurenko 2019-05-10
   let subBtnClass = `btn-${props.submitBtnType}`;
-  // ?????
-  // --mrurenko 2019-05-10
-  useEffect(() => {
-  });
   return (
     <form onSubmit={props.handleSubmit} id={props.id} name={props.name}>
       {props.children}

@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Card from '../../components/card/Card';
 import Button from '../../components/button/Button';
-import createOffer from '../../store/actions/offers/createOffer';
-import cancelCreatingOffer from '../../store/actions/offers/cancelCreatingOffer';
+import createOffer from '../../store/actions/offers/create/createOffer';
+import cancelCreatingOffer from '../../store/actions/offers/creating/cancelCreatingOffer';
 
 function OfferConfirm(props) {
   useEffect(() => {
     // if (!props.creating) {
     //   props.history.push('/me');
-    // } TODO: fix bug when creating blinks to false
+    // } TODO: fix bug when props.creating blinks to false
   });
   // Consistent styling!
   // --mrurenko 2019-05-11
@@ -19,16 +19,12 @@ function OfferConfirm(props) {
     float: 'right',
   };
   const btnStyle = { marginTop: '10px' };
-  //TODO: create confirm button that creates offer
   // Too complex, simplify.
   // --mrurenko 2019-05-11
   return (<React.Fragment>
-    <aside style={buttonsBlockStyle}>
-      {/* Do you think that Button component should have 'type="button"' as an argument? */}
-      {/* --mrurenko 2019-05-11 */}
+    <aside style={buttonsBlockStyle}> {/*TODO: make confirm side panel*/}
       <Button
         style={btnStyle}
-        type="button"
         className={`btn-dark`}
         onButtonClick={() => {
           props.createOffer({
@@ -53,12 +49,19 @@ function OfferConfirm(props) {
       />
     </aside>
     <h2>Your item:</h2>
-    <Card image={props.selectedItem.image} content={`Your ID: ${props.selectedItem.userId}`}
-          name={props.selectedItem.sign}
-          description={props.selectedItem.description} footer={props.selectedItem.category}/>
+    <Card
+      image={props.selectedItem.image}
+      content={`Your ID: ${props.selectedItem.userId}`}
+      name={props.selectedItem.sign}
+      description={props.selectedItem.description}
+      footer={props.selectedItem.category}/>
     <h2>For:</h2>
-    <Card image={props.targetItem.image} content={`User ID: ${props.targetItem.userId}`} name={props.targetItem.sign}
-          description={props.targetItem.description} footer={props.targetItem.category}/>
+    <Card
+      image={props.targetItem.image}
+      content={`User ID: ${props.targetItem.userId}`}
+      name={props.targetItem.sign}
+      description={props.targetItem.description}
+      footer={props.targetItem.category}/>
   </React.Fragment>);
 }
 

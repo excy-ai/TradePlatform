@@ -6,30 +6,23 @@ import Alert from '../../components/alert/Alert';
 import ListItem from '../../components/listItem/ListItem';
 import Button from '../../components/button/Button';
 import { bindActionCreators } from 'redux';
-import getOfferItems from '../../store/actions/offers/getOfferItems';
-import acceptOffer from '../../store/actions/offers/acceptOffer';
-import rejectOffer from '../../store/actions/offers/rejectOffer';
-import cancelOffer from '../../store/actions/offers/cancelOffer';
+import getOfferItems from '../../store/actions/offers/get/items/getOfferItems';
+import acceptOffer from '../../store/actions/offers/accept/acceptOffer';
+import rejectOffer from '../../store/actions/offers/reject/rejectOffer';
+import cancelOffer from '../../store/actions/offers/cancel/cancelOffer';
 import { connect } from 'react-redux';
 
 function Offer(props) {
   const id = props.offer.id;
-  const type = props.type;
   useEffect(() => {
     props.getOfferItems(id).catch(() => {
       return ('Data is loading');
     });
   }, []);
-  // 1. Are there several items in 'offerItems' variable?
-  // 2. Why do you use 'let' instead of const?
-  // --mrurenko 2019-05-11
-  let offerItems = props.offers.find((item) => item.id === id);
-  //TODO: add buttons after offer: {id} for accept/reject/cancel (depends on offer type)
-  //sended: cancel
-  //targeted: accept/reject
+  let offerItem = props.offers.find((item) => item.id === id);
   return (
     <div className="card-group">
-      <h5>Offer: {id}</h5>
+      <h5>Offer id: {id}</h5>
       {props.offer.status.toUpperCase() === 'PENDING' ? <List>
           <ListItem>
             {props.type === 'sended' ?
@@ -67,14 +60,20 @@ function Offer(props) {
           </ListItem>
         </List> :
         <Alert>Offer status: {props.offer.status}</Alert>}
-      {offerItems ?
+      {offerItem ?
         <React.Fragment>
           <h6>Offered item:</h6>
-          <Card image={offerItems.offered.image} name={offerItems.offered.sign}
-                description={offerItems.offered.description} footer={offerItems.offered.category}/>
+          <Card
+            image={offerItem.offered.image}
+            name={offerItem.offered.sign}
+            description={offerItem.offered.description}
+            footer={offerItem.offered.category}/>
           <h6>Targeted item:</h6>
-          <Card image={offerItems.target.image} name={offerItems.target.sign}
-                description={offerItems.target.description} footer={offerItems.target.category}/>
+          <Card
+            image={offerItem.target.image}
+            name={offerItem.target.sign}
+            description={offerItem.target.description}
+            footer={offerItem.target.category}/>
         </React.Fragment>
         : 'Data is loading'}
     </div>

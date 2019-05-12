@@ -5,7 +5,7 @@ import Button from '../../components/button/Button';
 import ListItem from '../../components/listItem/ListItem';
 import Card from '../../components/card/Card';
 import List from '../../components/list/List';
-import setSelected from '../../store/actions/offers/creatingPhase/setSelected';
+import setSelected from '../../store/actions/offers/creating/setSelected';
 
 function OfferCreate(props) {
   // Fix usage of 'useEffect'. Here will be extra calls of this effect.
@@ -14,7 +14,7 @@ function OfferCreate(props) {
     if (!props.creating) {
       props.history.push('/me');
     }
-  });
+  }, []);
   // Extract an item component.
   // --mrurenko 2019-05-11
   return (<React.Fragment>
