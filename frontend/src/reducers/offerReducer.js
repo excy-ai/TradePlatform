@@ -88,7 +88,7 @@ export default (state = initialState, action) => {
     }
     case types.OFFER_REJECT_SUCCESS: {
       let offers = state.offers.filter(item => {
-        if (item.id === action.id) {//FIXME: TEST {...item, status:'Rejected'}
+        if (item.id === action.id) {
           return {
             id: item.id,
             target: item.target,

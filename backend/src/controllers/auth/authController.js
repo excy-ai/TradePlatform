@@ -118,8 +118,7 @@ async function signup(ctx) {
   };
   const createdUser = await User.create(newUser);
   if (createdUser) {
-    ctx.response.body = createdUser; //remove body and
-    ctx.response.status = 201;       //TODO: in prod change to 204
+    ctx.response.status = 204;
     return ctx.response;
   }
   ctx.response.status = 404;

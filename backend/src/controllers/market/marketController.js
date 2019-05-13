@@ -17,9 +17,7 @@ async function getAllOnTradeFiltered(ctx) {
     })).count;
     items = await Item.findAll({
       where: { onTrade: true, category: category, user_id: userID },
-      order: [['created_at', order]],
-      limit: PAGINATION_LIMIT,
-      offset: getOffset(count, page),
+      ...getFilter(order, page, count),
     });
   } else if (category) {
     count = (await Item.findAndCountAll({
@@ -27,9 +25,7 @@ async function getAllOnTradeFiltered(ctx) {
     })).count;
     items = await Item.findAll({
       where: { onTrade: true, category: category },
-      order: [['created_at', order]],
-      limit: PAGINATION_LIMIT,
-      offset: getOffset(count, page),
+      ...getFilter(order, page, count),
     });
   } else if (userID) {
     count = (await Item.findAndCountAll({
@@ -37,9 +33,7 @@ async function getAllOnTradeFiltered(ctx) {
     })).count;
     items = await Item.findAll({
       where: { onTrade: true, user_id: userID },
-      order: [['created_at', order]],
-      limit: PAGINATION_LIMIT,
-      offset: getOffset(count, page),
+      ...getFilter(order, page, count),
     });
   } else {
     count = (await Item.findAndCountAll({
@@ -47,9 +41,7 @@ async function getAllOnTradeFiltered(ctx) {
     })).count;
     items = await Item.findAll({
       where: { onTrade: true },
-      order: [['created_at', order]],
-      limit: PAGINATION_LIMIT,
-      offset: getOffset(count, page),
+      ...getFilter(order, page, count),
     });
   }
   let pages = Math.ceil(count / PAGINATION_LIMIT);
@@ -61,6 +53,15 @@ async function getAllOnTradeFiltered(ctx) {
   return ctx.response;
 }
 
+function getFilter(order, page, count) {
+  return {
+    where: { onTrade: true },
+    order: [['created_at', order]],
+    limit: PAGINATION_LIMIT,
+    offset: getOffset(count, page),
+  };
+}
+
 function getOffset(count, page) {
   let pages = Math.ceil(count / PAGINATION_LIMIT);
   if (!page || page <= 0) {
@@ -70,9 +71,6 @@ function getOffset(count, page) {
   } else if (pages === 0) {
     page = 1;
   }
-  let offset = PAGINATION_LIMIT * (page - 1);
-  return offset;
+  return PAGINATION_LIMIT * (page - 1);
 }
-
-//FIXME do function with args ({where}) to make getAllOnTradeFiltered method smaller
 module.exports = { getAllOnTradeFiltered };

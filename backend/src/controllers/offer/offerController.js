@@ -75,7 +75,7 @@ async function acceptOffer(ctx) {
       ctx.response.status = 400;
       return ctx.response;
     }
-    //TODO: integrate this to frontend and check how it works
+
     if (offer.status === types.PENDING) {
       let offerer = await User.findOne({ where: { Id: offer.user_Id } });
       let userItem = (await user.getItems())
