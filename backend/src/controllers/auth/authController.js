@@ -118,7 +118,8 @@ async function signup(ctx) {
   };
   const createdUser = await User.create(newUser);
   if (createdUser) {
-    ctx.response.status = 204;
+    ctx.response.body = createdUser;
+    ctx.response.status = 201;
     return ctx.response;
   }
   ctx.response.status = 404;
