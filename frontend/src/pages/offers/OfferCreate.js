@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Button from '../../components/button/Button';
 import ListItem from '../../components/listItem/ListItem';
-import Card from '../../components/card/Card';
 import List from '../../components/list/List';
 import setSelected from '../../store/actions/offers/creating/setSelected';
+import Item from '../../components/item/Item';
 
 function OfferCreate(props) {
   useEffect(() => {
@@ -13,8 +13,17 @@ function OfferCreate(props) {
       props.history.push('/me');
     }
   }, []);
-  // Extract an item component.
-  // --mrurenko 2019-05-11
+  const itemInfo = (item) => {
+    return {
+      Id: item.Id,
+      image: item.image,
+      sign: item.sign,
+      description: item.description,
+      category: item.category,
+      userId: item.user_Id,
+    };
+  };
+
   return (<React.Fragment>
     <h2>Now select Item from your inventory:</h2>
     <List>
@@ -23,22 +32,14 @@ function OfferCreate(props) {
           type="button"
           className={`btn-dark`}
           onButtonClick={() => {
-            props.setSelected({
-              Id: el.Id,
-              image: el.image,
-              sign: el.sign,
-              description: el.description,
-              category: el.category,
-              userId: el.user_Id,
-            });
+            props.setSelected(itemInfo(el));
             props.history.push('/offers/creating/confirmation');
           }}
           value={'Select'}
         />;
         return (
-          <ListItem className={'inv_item'} key={el.Id}>
-            <Card image={el.image} content={button} name={el.sign}
-                  description={el.description} footer={el.category}/>
+          <ListItem key={el.Id}>
+            <Item item={el} content={button}/>
           </ListItem>
         );
       })}

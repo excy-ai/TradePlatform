@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './style.css';
-
 export default function Button(props) {
   const { style, className, value, type, disabled, onButtonClick } = props;
   return <button

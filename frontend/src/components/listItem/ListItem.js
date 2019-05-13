@@ -1,15 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './style.css';
 
 export default function ListItem(props) {
-  const style = {
-    padding: '0',
-    border: 'none',
-  };
-  // Don't think that className should be a property. It should be calculated and set here.
-  // --mrurenko 2019-05-10
   return (
-    <li className={`list-group-item ${props.className}`} style={style}>
+    <li className={`list-group-item inv_item`}>
       {props.children}
     </li>
   );

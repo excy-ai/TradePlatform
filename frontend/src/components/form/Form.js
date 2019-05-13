@@ -1,16 +1,13 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Button from '../button/Button';
 
 export default function Form(props) {
-  // Why do you use 'let' instead of 'const'?
-  // --mrurenko 2019-05-10
-  let subBtnClass = `btn-${props.submitBtnType}`;
+  const subBtnClass = `btn-${props.submitBtnType}`;
   return (
     <form onSubmit={props.handleSubmit} id={props.id} name={props.name}>
       {props.children}
-      {/* You should use your own component here */}
-      {/* --mrurenko 2019-05-10 */}
-      <button className={`btn ${subBtnClass}`} type={props.type}>{props.submitBtnValue}</button>
+      <Button className={subBtnClass} type={props.type} value={props.submitBtnValue}/>
     </form>
   );
 }

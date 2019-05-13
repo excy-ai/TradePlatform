@@ -22,14 +22,14 @@ export default (state = initialState, action) => {
     case types.AUTH_PENDING: {
       return {
         ...state,
-        authenticated: action.authenticated,
-        error: action.error,
+        authenticated: false,
+        error: null,
       };
     }
     case types.AUTH_SUCCESS: {
       return {
         ...state,
-        authenticated: action.authenticated,
+        authenticated: true,
         error: null,
       };
     }

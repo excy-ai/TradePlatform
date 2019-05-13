@@ -4,12 +4,10 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import getMe from '../../store/actions/me/getMe';
 import { connect } from 'react-redux';
+import Button from '../button/Button';
+import './style.css';
 
 function NavBar(props) {
-  const linkStyle = {
-    display: 'inline-block',
-    margin: '0 8px 0 0',
-  };
   let data = [
     { link: '/', value: 'Sign Up', auth: false },
     { link: '/signin', value: 'Sign In', auth: false },
@@ -23,11 +21,9 @@ function NavBar(props) {
       {data.map(item => {
         if (item.auth === props.authenticated) {
           return (
-            <div key={item.link} style={linkStyle}>
+            <div key={item.link} className={'nav-bar_link'}>
               <NavLink exact to={item.link}>
-                {/* You should use your component here */}
-                {/* --mrurenko 2019-05-10 */}
-                <input className="btn btn-primary mb-2" value={item.value} readOnly/>
+                <Button value={item.value} className={'btn-primary mb-2'}/>
               </NavLink>
             </div>
           );

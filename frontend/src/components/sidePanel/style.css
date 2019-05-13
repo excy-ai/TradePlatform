@@ -1,0 +1,8 @@
+.side-panel {
+    display: inline-block;
+    float: right;
+}
+
+.side-panel_btn {
+    margin-top: 10px;
+}

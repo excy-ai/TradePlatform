@@ -6,10 +6,11 @@ import getOnTrade from '../../store/actions/items/get/onTrade/getOnTrade';
 
 import OnTradeItem from '../../components/onTradeItem/OnTradeItem';
 import Alert from '../../components/alert/Alert';
-import Button from '../../components/button/Button';
-import InputFieldWithTitle from '../../components/form/InputFieldWithTitle';
-import SelectList from '../../components/selectList/SelectList';
+import MarketSideBar from './sidebar/MarketSideBar';
 import getCategorys from '../../store/actions/items/get/categorys/getCategorys';
+
+import { isUUID } from '../../utils/Matcher';
+
 import './style.css';
 
 class Market extends React.Component {
@@ -30,31 +31,27 @@ class Market extends React.Component {
   };
 
   handleSubmit = (event) => {
-    let category = this.state.category === 'Any'
-      ? undefined : this.state.category;
-    // 1. userID.match(....) Should not be a part of a component logic, extract it into utils file.
-    // 2. looks too complex, please simplify this block of code, you have code duplication here.
-    // --mrurenko 2019-05-11
-    if (this.state.userID.length !== 0 &&
-      this.state.userID.match('[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}')) {
+    let category = this.state.category === 'Any' ? undefined : this.state.category;
+    let newStateSearchBlock = {
+      category,
+      order: this.state.newOnTop ? 'DESC' : 'ASC',
+    };
+    let callback = () => {
+      this.props.getOnTrade(this.state.currentSearchBlock);
+    };
+    if (this.state.userID.length !== 0 && isUUID(this.state.userID)) {
       this.setState({
         currentSearchBlock: {
           userID: this.state.userID,
-          category,
-          order: this.state.newOnTop ? 'DESC' : 'ASC',
-        },
-      }, () => {
-        this.props.getOnTrade(this.state.currentSearchBlock);
+          ...newStateSearchBlock,
+        }, callback,
       });
     } else {
       this.setState({
         currentSearchBlock: {
-          category,
-          order: this.state.newOnTop ? 'DESC' : 'ASC',
+          ...newStateSearchBlock,
         },
-      }, () => {
-        this.props.getOnTrade(this.state.currentSearchBlock);
-      });
+      }, callback);
     }
   };
 
@@ -93,43 +90,17 @@ class Market extends React.Component {
     }
     return (
       <React.Fragment>
-        {/* 1. If you use css-classes for styling - use them everywhere. Pick one way for styling */}
-        {/* 2. Looks too complex, please split into components */}
-        {/* --mrurenko 2019-05-11 */}
-        <div
-          style={{
-            display: 'inline-block',
-            float: 'right',
-            marginTop: '15px',
-            marginRight: '15px',
+        <MarketSideBar
+          handleEvent={this.handleEvent}
+          userID={this.state.userID}
+          category={this.state.category}
+          categoryList={this.props.categoryList}
+          newOnTop={this.state.newOnTop}
+          onToggle={() => {
+            this.setState({ newOnTop: !this.state.newOnTop });
           }}
-        >
-          <InputFieldWithTitle
-            value={this.state.userID}
-            name={'userID'}
-            onChange={this.handleEvent}
-            title={'User Id'}
-          />
-          <SelectList
-            currentValue={this.state.category}
-            onChange={this.handleEvent}
-            list={['Any', ...this.props.categoryList]}
-            listLabel={'Category:'}
-            listName={'category'}
-          />
-          <Button
-            className={`fas fa-toggle-${this.state.newOnTop ? 'on' : 'off'} fa-3x`}
-            value={'New on top'}
-            onButtonClick={() => {
-              this.setState({ newOnTop: !this.state.newOnTop });
-            }}
-          />
-          <Button
-            onButtonClick={this.handleSubmit}
-            className={'btn-dark'}
-            value={'Search'}
-          />
-        </div>
+          handleSubmit={this.handleSubmit}
+        />
         {items}
       </React.Fragment>
     );
