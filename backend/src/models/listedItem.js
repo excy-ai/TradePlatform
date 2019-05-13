@@ -20,7 +20,7 @@ module.exports = sequelize => {
         validate: {
           notEmpty: true,
         },
-      }
+      },
     },
     {
       underscored: true,

@@ -55,7 +55,6 @@ async function getAllOnTradeFiltered(ctx) {
 
 function getFilter(order, page, count) {
   return {
-    where: { onTrade: true },
     order: [['created_at', order]],
     limit: PAGINATION_LIMIT,
     offset: getOffset(count, page),
@@ -73,4 +72,5 @@ function getOffset(count, page) {
   }
   return PAGINATION_LIMIT * (page - 1);
 }
+
 module.exports = { getAllOnTradeFiltered };

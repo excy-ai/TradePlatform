@@ -134,7 +134,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: action.error,
-      }
+      };
     }
     case types.OFFER_CLEAR_ERROR : {
       return {
