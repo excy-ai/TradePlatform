@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
+import multi from 'redux-multi';
 
 import itemReducer from '../reducers/itemReducer';
 import authReducer from '../reducers/authReducer';
@@ -20,6 +21,9 @@ const appReducer = combineReducers({
 export const newStore = () => {
   return createStore(
     appReducer,
-    applyMiddleware(thunk),
+    applyMiddleware(
+      thunk,
+      multi,
+    ),
   );
 };

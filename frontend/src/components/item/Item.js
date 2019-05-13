@@ -17,5 +17,5 @@ Item.defaultProps = {
 
 Item.propTypes = {
   item: PropTypes.object,
-  content: PropTypes.object,
+  content: PropTypes.any,
 };

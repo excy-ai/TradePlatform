@@ -1,6 +1,7 @@
 import { post, multiPartFormPost } from '../../../../fetcher/fetcher';
 import addItemSuccess from './addItemSuccess';
-import addItemError from './addItemError';
+import clearItemError from '../error/clearItemError';
+import setItemError from '../error/setItemError';
 
 export default function addItem(body, file) {
   return (dispatch) => {
@@ -14,10 +15,11 @@ export default function addItem(body, file) {
             return response.json();
           }).then(response => {
             dispatch(addItemSuccess(item, response.image));
+            dispatch(clearItemError());
           });
       })
       .catch(err => {
-        dispatch(addItemError(err));
+        dispatch(setItemError(err));
       });
   };
 }

@@ -1,8 +1,8 @@
 import * as types from '../actionTypes';
 
-export default function authError(err) {
+export default function setItemError(err) {
   return {
-    type: types.AUTH_ERROR,
+    type: types.ITEM_ERROR,
     error: err,
   };
 }

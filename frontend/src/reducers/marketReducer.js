@@ -1,4 +1,5 @@
 import * as types from '../store/actions/items/actionTypes';
+import { MARKET_ERROR, CLEAR_MARKET_ERROR } from '../store/actions/market/actionTypes';
 
 const initialState = {
   itemsOnTrade: [],
@@ -14,10 +15,16 @@ export default (state = initialState, action) => {
         error: null,
       };
     }
-    case types.ITEM_ON_TRADE_LIST_ERROR: {
+    case MARKET_ERROR: {
       return {
         ...state,
         error: action.error,
+      };
+    }
+    case CLEAR_MARKET_ERROR: {
+      return {
+        ...state,
+        error: null,
       };
     }
     default: {

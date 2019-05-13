@@ -1,7 +1,7 @@
 import { del } from '../../../../fetcher/fetcher';
 import cancelOfferSuccess from './cancelOfferSuccess';
-import cancelOfferError from './cancelOfferError';
-import * as types from '../actionTypes';
+import setOfferError from '../error/setOfferError';
+import clearOfferError from '../error/clearOfferError';
 
 export default function cancelOffer(id) {
   return (dispatch) => {
@@ -9,13 +9,11 @@ export default function cancelOffer(id) {
       .then(response => {
         return response.json();
       }).then(response => {
-        dispatch();
+        dispatch(cancelOfferSuccess(id));
+        dispatch(clearOfferError());
       })
       .catch(err => {
-        dispatch({
-          type: types.OFFER_CANCEL_ERROR,
-          error: err,
-        });
+        dispatch(setOfferError(err));
       });
   };
 }

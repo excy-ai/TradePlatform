@@ -13,12 +13,6 @@ export default (state = initialState, action) => {
         error: null,
       };
     }
-    case types.REGISTER_ERROR: {
-      return {
-        ...state,
-        error: action.error,
-      };
-    }
     case types.AUTH_PENDING: {
       return {
         ...state,
@@ -33,10 +27,16 @@ export default (state = initialState, action) => {
         error: null,
       };
     }
-    case types.AUTH_ERROR: {
+    case types.SET_AUTH_ERROR: {
       return {
         ...state,
         error: action.error,
+      };
+    }
+    case types.CLEAR_AUTH_ERROR: {
+      return {
+        ...state,
+        error: null,
       };
     }
     default: {

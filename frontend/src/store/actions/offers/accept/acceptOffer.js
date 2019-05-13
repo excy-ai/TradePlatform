@@ -1,6 +1,7 @@
 import { patch } from '../../../../fetcher/fetcher';
 import acceptOfferSuccess from './acceptOfferSuccess';
-import acceptOfferError from './acceptOfferError';
+import setOfferError from '../error/setOfferError';
+import clearOfferError from '../error/clearOfferError';
 
 export default function acceptOffer(id) {
   return (dispatch) => {
@@ -9,9 +10,10 @@ export default function acceptOffer(id) {
         return response.json();
       }).then(response => {
         dispatch(acceptOfferSuccess(id));
+        dispatch(clearOfferError());
       })
       .catch(err => {
-        dispatch(acceptOfferError(err));
+        dispatch(setOfferError(err));
       });
   };
 }

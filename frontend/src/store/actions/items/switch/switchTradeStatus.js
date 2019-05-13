@@ -1,6 +1,7 @@
 import { post } from '../../../../fetcher/fetcher';
 import switchTradeStatusSuccess from './switchTradeStatusSuccess';
-import switchTradeStatusError from './switchTradeStatusError';
+import clearItemError from '../error/clearItemError';
+import setItemError from '../error/setItemError';
 
 export default function switchTradeStatus(id) {
   let body = { id };
@@ -8,10 +9,11 @@ export default function switchTradeStatus(id) {
     return post(`/api/user/items/trade/switchStatus`, body)
       .then(response => {
         dispatch(switchTradeStatusSuccess(id));
+        dispatch(clearItemError());
         return response;
       })
       .catch(err => {
-        dispatch(switchTradeStatusError(err));
+        dispatch(setItemError(err));
       });
   };
 }

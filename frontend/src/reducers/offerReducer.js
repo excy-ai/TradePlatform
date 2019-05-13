@@ -16,28 +16,24 @@ export default (state = initialState, action) => {
       return {
         ...state,
         creating: true,
-        error: null,
       };
     }
     case types.OFFER_CREATE_CANCELED: {
       return {
         ...state,
         creating: false,
-        error: null,
       };
     }
     case types.OFFER_CREATE_SET_TARGET: {
       return {
         ...state,
         targetItem: action.item,
-        error: null,
       };
     }
     case types.OFFER_CREATE_SET_SELECTED: {
       return {
         ...state,
         selectedItem: action.item,
-        error: null,
       };
     }
     case types.OFFER_CREATE_SUCCESS: {
@@ -45,13 +41,6 @@ export default (state = initialState, action) => {
         ...state,
         sended: [action.offer, ...state.sended],
         creating: false,
-        error: null,
-      };
-    }
-    case types.OFFER_CREATE_ERROR: {
-      return {
-        ...state,
-        error: action.error,
       };
     }
     case types.GET_OFFER_INFO_SUCCESS: {
@@ -63,36 +52,16 @@ export default (state = initialState, action) => {
         }, ...state.offers],
       };
     }
-    case types.GET_OFFER_INFO_ERROR: {
-      return {
-        ...state,
-        error: action.error,
-      };
-    }
     case types.GET_SENDED_SUCCESS: {
       return {
         ...state,
         sended: action.sended,
-        error: null,
-      };
-    }
-    case types.GET_SENDED_ERROR: {
-      return {
-        ...state,
-        error: action.error,
       };
     }
     case types.GET_TARGETED_SUCCESS: {
       return {
         ...state,
         targeted: action.targeted,
-        error: null,
-      };
-    }
-    case types.GET_TARGETED_ERROR: {
-      return {
-        ...state,
-        error: action.error,
       };
     }
     case types.OFFER_ACCEPT_SUCCESS: {
@@ -115,13 +84,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         offers: offers,
-        error: null,
-      };
-    }
-    case types.OFFER_ACCEPT_ERROR: {
-      return {
-        ...state,
-        error: action.error,
       };
     }
     case types.OFFER_REJECT_SUCCESS: {
@@ -144,13 +106,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         offers: offers,
-        error: null,
-      };
-    }
-    case types.OFFER_REJECT_ERROR: {
-      return {
-        ...state,
-        error: action.error,
       };
     }
     case types.OFFER_CANCEL_SUCCESS: {
@@ -173,13 +128,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         offers: offers,
-        error: null,
       };
     }
-    case types.OFFER_CANCEL_ERROR: {
+    case types.OFFER_ERROR : {
       return {
         ...state,
         error: action.error,
+      }
+    }
+    case types.OFFER_CLEAR_ERROR : {
+      return {
+        ...state,
+        error: null,
       };
     }
     default: {

@@ -1,15 +1,17 @@
 import { get } from '../../../../../fetcher/fetcher';
 import getUserItemsSuccess from './getUserItemsSuccess';
-import getUserItemsError from './getUserItemsError';
+import clearItemError from '../../error/clearItemError';
+import setItemError from '../../error/setItemError';
 
 export default function getItems() {
   return dispatch => {
     return get(`/api/user/me`)
       .then(response => {
         dispatch(getUserItemsSuccess(response.items));
+        dispatch(clearItemError());
       })
       .catch(err => {
-        dispatch(getUserItemsError(err));
+        dispatch(setItemError(err));
       });
   };
 }

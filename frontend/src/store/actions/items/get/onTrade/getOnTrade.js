@@ -1,6 +1,7 @@
 import { get } from '../../../../../fetcher/fetcher';
 import getOnTradeListSuccess from './getOnTradeListSuccess';
-import getOnTradeListError from './getOnTradeListError';
+import clearMarketError from '../../../market/error/clearMarketError';
+import setMarketError from '../../../market/error/setMarketError';
 
 export default function getOnTrade({ userID = '', category = '', order = '', page = '' }) {
   return (dispatch) => {
@@ -8,9 +9,10 @@ export default function getOnTrade({ userID = '', category = '', order = '', pag
       `&order=${order || ''}&category=${category || ''}&page=${page || ''}`)
       .then(response => {
         dispatch(getOnTradeListSuccess(response.items));
+        dispatch(clearMarketError());
       })
       .catch(err => {
-        dispatch(getOnTradeListError(err));
+        dispatch(setMarketError(err));
       });
   };
 }

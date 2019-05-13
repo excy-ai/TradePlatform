@@ -1,6 +1,7 @@
 import { post } from '../../../../fetcher/fetcher';
 import createOfferSuccess from './createOfferSuccess';
-import createOfferError from './createOfferError';
+import setOfferError from '../error/setOfferError';
+import clearOfferError from '../error/clearOfferError';
 
 export default function createOffer(body) {
   return (dispatch) => {
@@ -9,9 +10,10 @@ export default function createOffer(body) {
         return response.json();
       }).then(response => {
         dispatch(createOfferSuccess(response));
+        dispatch(clearOfferError());
       })
       .catch(err => {
-        dispatch(createOfferError(err));
+        dispatch(setOfferError(err));
       });
   };
 }
