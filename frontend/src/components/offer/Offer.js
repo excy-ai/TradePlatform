@@ -30,10 +30,9 @@ function Offer(props) {
                 <Button
                   type="button"
                   className={`btn-dark`}
-                  onButtonClick={(onClickBody) => {
-                    props.cancelOffer(onClickBody);
+                  onButtonClick={() => {
+                    props.cancelOffer(id);
                   }}
-                  onClickBody={id}
                   value={'Cancel'}
                 />
               </React.Fragment> :
@@ -41,19 +40,17 @@ function Offer(props) {
                 <Button
                   type="button"
                   className={`btn-dark`}
-                  onButtonClick={(onClickBody) => {
-                    props.acceptOffer(onClickBody);
+                  onButtonClick={() => {
+                    props.acceptOffer(id);
                   }}
-                  onClickBody={id}
                   value={'Accept'}
                 />
                 <Button
                   type="button"
                   className={`btn-dark`}
-                  onButtonClick={(onClickBody) => {
-                    props.rejectOffer(onClickBody);
+                  onButtonClick={() => {
+                    props.rejectOffer(id);
                   }}
-                  onClickBody={id}
                   value={'Reject'}
                 />
               </React.Fragment>}

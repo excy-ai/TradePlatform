@@ -8,7 +8,6 @@ import Alert from '../../components/alert/Alert';
 
 function Offers(props) {
   const [isSended, setIsSended] = useState(true);
-  //create button to switch from sended to targeted;
   useEffect(() => {
     if (!props.authenticated) {
       props.history.push('/signin');

@@ -8,8 +8,6 @@ import List from '../../components/list/List';
 import setSelected from '../../store/actions/offers/creating/setSelected';
 
 function OfferCreate(props) {
-  // Fix usage of 'useEffect'. Here will be extra calls of this effect.
-  // --mrurenko 2019-05-11
   useEffect(() => {
     if (!props.creating) {
       props.history.push('/me');
@@ -24,17 +22,16 @@ function OfferCreate(props) {
         const button = <Button
           type="button"
           className={`btn-dark`}
-          onButtonClick={onClickBody => {
-            props.setSelected(onClickBody);
+          onButtonClick={() => {
+            props.setSelected({
+              Id: el.Id,
+              image: el.image,
+              sign: el.sign,
+              description: el.description,
+              category: el.category,
+              userId: el.user_Id,
+            });
             props.history.push('/offers/creating/confirmation');
-          }}
-          onClickBody={{
-            Id: el.Id,
-            image: el.image,
-            sign: el.sign,
-            description: el.description,
-            category: el.category,
-            userId: el.user_Id,
           }}
           value={'Select'}
         />;

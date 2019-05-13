@@ -19,16 +19,13 @@ export default function MyProfile(props) {
           const tradeStyle = el.onTrade ? 'danger' : 'warning';
           // 1. I would suggest to create a wrapper component 'TradeButton' and style it,
           // but not pass style classes as props
-          // 2. Could you replace onButtonClick and onClickBody with next code?
-          // onClick={() => props.onItemClick(el.Id)}
           // --mrurenko 2019-05-10
           const button = <Button
             type="button"
             className={`btn-${tradeStyle} trade__btn`}
-            onButtonClick={onClickBody => {
-              props.onItemClick(onClickBody);
+            onButtonClick={() => {
+              props.onItemClick(el.Id);
             }}
-            onClickBody={el.Id}
             value={el.onTrade ? 'Stop Trading' : 'Trade this'}
           />;
           return (

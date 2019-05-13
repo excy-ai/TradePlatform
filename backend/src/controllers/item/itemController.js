@@ -130,7 +130,9 @@ async function getListed(ctx) {
 }
 
 async function getCategorys(ctx) {
-  await Category.findAll().then(categorys => {
+  await Category.findAll({
+    order: [['uniqueness', 'ASC']],
+  }).then(categorys => {
     ctx.response.body = categorys;
   });
   ctx.response.status = 200;

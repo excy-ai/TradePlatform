@@ -1,36 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class SelectList extends React.Component {
-  // It should be a component not a method
-  // --mrurenko 2019-05-11
-  renderList = () => {
-    return this.props.list.map((item, index) => {
-      return (
-        <option key={index} value={item}>
-          {item}
-        </option>
-      );
-    });
-  };
-
-  render() {
-    return (
-      <div className="input-group mb-2">
-        <div className="input-group-prepend">
-          <label className="input-group-text">{this.props.listLabel}</label>
-        </div>
-        <select
-          className={'custom-select'}
-          name={this.props.listName}
-          value={this.props.currentValue}
-          onChange={this.props.onChange}
-        >
-          {this.renderList()}
-        </select>
+export default function SelectList(props) {
+  return (
+    <div className="input-group mb-2">
+      <div className="input-group-prepend">
+        <label className="input-group-text">{props.listLabel}</label>
       </div>
-    );
-  }
+      <select
+        className={'custom-select'}
+        name={props.listName}
+        value={props.currentValue}
+        onChange={props.onChange}
+      >
+        {props.list.map((item, index) => {
+          return (
+            <option key={index} value={item}>
+              {item}
+            </option>
+          );
+        })}
+      </select>
+    </div>
+  );
 }
 
 SelectList.defaultProps = {

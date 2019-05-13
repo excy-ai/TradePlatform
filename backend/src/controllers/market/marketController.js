@@ -74,5 +74,5 @@ function getOffset(count, page) {
   return offset;
 }
 
-//do function with args ({where}) to make getAllOnTradeFiltered method smaller
+//FIXME do function with args ({where}) to make getAllOnTradeFiltered method smaller
 module.exports = { getAllOnTradeFiltered };

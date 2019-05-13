@@ -11,8 +11,8 @@ const { Category } = require('../models');
 let categorys = JSON.parse(categoryList).data;
 
 async function insertCategorys() {
-  await categorys.map(category => {
-    Category.create({ title: category });
+  await categorys.map((category, i) => {
+    Category.create({ title: category, uniqueness: i });
   });
 }
 

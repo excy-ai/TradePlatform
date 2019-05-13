@@ -19,18 +19,17 @@ function OnTradeItem(props) {
       <Button
         type="button"
         className={`btn-secondary`}
-        onButtonClick={onClickBody => {
+        onButtonClick={() => {
           props.startCreatingOffer();
-          props.setTarget(onClickBody);
+          props.setTarget({
+            Id: props.Id,
+            image: props.image,
+            sign: props.name,
+            description: props.description,
+            category: props.category,
+            userId: props.userId,
+          });
           props.history.push('/offers/creating');
-        }}
-        onClickBody={{
-          Id: props.Id,
-          image: props.image,
-          sign: props.name,
-          description: props.description,
-          category: props.category,
-          userId: props.userId,
         }}
         value={'Target for trade'}
       />;

@@ -7,10 +7,17 @@ module.exports = sequelize => {
     'Category',
     {
       title: {
+        type: Sequelize.STRING,
         allowNull: false,
         unique: true,
-        type: Sequelize.STRING,
         primaryKey: true,
+        validate: {
+          notEmpty: true,
+        },
+      },
+      uniqueness: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
         validate: {
           notEmpty: true,
         },
